@@ -8,8 +8,9 @@
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <script src="node_modules/axios/dist/axios.js"></script>
     <script src='script.js'></script>
-    <script src='item.js'></script>
+    <!-- <script src='item.js'></script>
     <script src='itemView.js'></script>
+    <script src='SearchView.js'></script> -->
 </head>
 
 
@@ -26,15 +27,23 @@
             <img src="./icons/Item_hub icon.PNG" alt='logo' class='logo'>
             <nav>
                 <ul>
-                    <li><a id='itemsButton'>Items</a></li>
-                    <li><a id='managementButton'>management</a></li>
-                    <li><a id='userButton'>User</a></li>
+                    <li><a id='itemsButton' href='./item'>Items</a></li>
+                    <li><a id='managementButton' href='./management'>management</a></li>
+                    <li><a id='userButton' href='./user'>User</a></li>
                     <li><a id='aboutButton'>About</a></li>
+                    <li><a id='searchButton' href='./search'>search</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-    <div id='root'></div>
+    <h1 class='title'>ItemHub</h1>
+    <h1 class='subtitle'>Author:</h1>
+    <ul>
+        <li>Han Gao</li>
+        <li>YuFan Liu</li>
+        <li>Yunzhou Liu</li>
+        <li>Yuanzheng Zhao</li>
+    <ul>
 </body>
 
 </html>
