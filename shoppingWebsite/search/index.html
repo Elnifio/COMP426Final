@@ -8,8 +8,6 @@
     <script src="../node_modules/jquery/dist/jquery.js"></script>
     <script src="../node_modules/axios/dist/axios.js"></script>
     <script src='script.js'></script>
-    <script src='item.js'></script>
-    <script src='itemView.js'></script>
     <!-- <script src='SearchView.js'></script> -->
 </head>
 
@@ -36,7 +34,14 @@
             </nav>
         </div>
     </header>
-    <div id='root'></div>
+    <form class='searchForm'>
+        <div class='autocomplete'>
+            <input type='text' placeholder="item.." name="search">
+        </div>
+        <button type="submit">search</button>
+    </form>
+    <div class='dialog'></div>
+    <div id='root'><div>
 </body>
 
 </html>
