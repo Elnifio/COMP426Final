@@ -111,17 +111,16 @@ div.autocomplete input {
   /* next section for autocomplete code */
   div.dialog{
       width: 100%;
-      display: none;
+      display: block;
       min-height: 40px;
       max-height: 330px;
-      overflow: scroll;
       border-top: 1px solid #f4f4f4;
 
   }
 
-  div.dialog.open{
+  /* div.dialog.open{
       display: block;
-  }
+  } */
 
   div.dialog div{
       padding: 20px 10px;

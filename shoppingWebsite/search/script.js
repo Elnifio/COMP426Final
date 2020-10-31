@@ -2,55 +2,33 @@ $(function() {
     $('.searchForm').on('submit', (e)=>{
         searchSubmit(e)
     })
-    let items = loadItems()
-    console.log(items)
-    let alreadyFilled = false
-    $('.autocomplete input').on('click', (e)=> {
-        if(!alreadyFilled){
-            $('.dialog').addClass('open')
-        }
-    })
-    $('body').on('click', 'dialog>div', (e)=> {
-        $('.autocomplete input').val($(this).text()).focus()
-        alreadyFilled = true
-    })
+    const items = loadItems()
     $('.autocomplete input').on('input', (e)=>{
-        $('.dialog').addClass('open');
-        alreadyFilled = false
-        match($(this).val, items)
-    })
-    $('body').click(function(e){
-        if (!$(e.target).is("input .close")){
-            $('.dialog').removeClass('open')
+        const input = $('.autocomplete input').val()
+        $('.dialog').empty()
+        const dialog = items.filter((item)=>{return item.name.toLowerCase().startsWith(input.toLowerCase())})
+        dialog.forEach((item)=>{
+            const div = $(`<div>${item.name}</div>`)
+            div.on('click', (e) => {
+                console.log(item.name)
+                $('.autocomplete input').val(item.name)
+            })
+            $('.dialog').append(div)
+        })
+        if (input == ''){
+            $('.dialog').empty()
         }
     })
-    initDialog(items)
 })
 
-const initDialog = function(items) {
-    console.log(items)
-    clearDialog();
-    items.forEach((item) => {
-        $('.dialog').append(`<div>${item.name}</dov>`)
-   })       
-}
-const clearDialog = function(){
-   $('.dialog').empty();
+const match = function(){
+    
 }
 
 const searchSubmit= async function(e){
     e.preventDefault()
     $('.dialog').empty()
     console.log($('.autocomplete input').val())
-}
- const match = function(str, items){
-    str = str.toString().toLowerCase();
-    clearDialog()
-    items.forEach((item) => {
-        if (item.name.toString().toLowerCase().startsWith(str)){
-            $('.dialog').append(`<div>${item.name}</div>`)
-        }
-    })
 }
 
 const loadItems = function(){
