@@ -9,6 +9,7 @@ let Item = class{
         this.isMine = obj.isMine
         this.createdAt = obj.createdAt
         this.updatedAt = obj.updatedAt
+        this.rating = obj.rating
     }
 
     async sync(){
@@ -23,6 +24,7 @@ let Item = class{
         this.isMine = result.isMine
         this.createdAt = result.createdAt
         this.updatedAt = result.updatedAt
+        this.rating = result.rating
     }
 
     async update(name, description, price, stock){

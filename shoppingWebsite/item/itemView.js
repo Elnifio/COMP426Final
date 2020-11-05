@@ -11,38 +11,75 @@ let ItemView = class{
         }
     }
     createViewDiv(){
-        let div = $(`<div class = 'itemView card'>
-                            <div class='card-content'>
-                                <div class='content has-text-centered'>
-                                    <p class='title is-4'>Name: ${this.item.name}</p>
-                                    <p class='title is-6'>Publisher: ${this.item.publisher}</p>
-                                    <div class ='extraInfo'>
-                                        <p class='subtitle is-7'>Stock: ${this.item.stock}</p>
-                                        <p class='subtitle is-7'>Price: ${this.item.price}</p>
-                                        <p class='subtitle is-7'>Description ${this.item.description}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`)
-        let purchaseDiv = $(`<form class='purchaseForm'>
-                                <label for='amount'>Choose an amount:</label>
+        let div = $(`<div class = 'itemView'>
+                        <img src='./icons/426.4.PNG' class='itemImg'/>
+                        <div class='itemText'>
+                            <p class='itemName'><strong>${this.item.name}</strong></p>
+                            <div class='itemRating'></div>
+                            <p class='itemPublisher'>By: ${this.item.publisher}</p>
+                            <p class='itemPrice'>&#36;${this.item.price}</p>
+                        </div>
+                    </div>`);
+        // add rating stars to the simple itemView page
+        let ratingDiv = div.find('.itemRating')
+        let rating = this.item.rating;
+        for (let i = 0; i<5; i++){
+            if (i<rating){
+                $(ratingDiv).append('&#9733;');
+            } else {
+                $(ratingDiv).append('&#9734;');
+            }
+        }
+        div.find('.itemImg').on('click', (e) => {
+            let newDiv = this.createDetailedView();
+            this.curDiv.replaceWith(newDiv);
+            this.curDiv = newDiv;
+        })
+        return div;
+    }
+
+    createDetailedView(){
+        let div = $(`<div class = 'itemDetailView'>
+                        <img src='./icons/426.4.PNG' class='itemDetailImg'/>
+                        <div class='itemDetailText'>
+                            <p class='itemDetailName'><strong>${this.item.name}</strong></p>
+                                <div class='itemDetailRating'></div>
+                            <p class='itemDetailPublisher'>By: ${this.item.publisher}</p>
+                            <p class='itemDetailPrice'>&#36;${this.item.price}</p>
+                            <p class='itemDetailDescription'>${this.item.description}</p>
+                            <br>
+                            <form class='purchaseForm'>
+                                <label for='amount'>Amount:</label>
                                 <select name='amount' class='amount'>
                                 </select>
-                                <br>
-                                <button type = 'submit' class ="purchaseButton button is-medium">purchase</button>
-                            </form>`)
+                                <button type = 'submit' class ='purchaseButton'>purchase</button>
+                            </form>
+                        </div>
+                    </div>`)
+        // fill in the rating stars
+        let ratingDiv = div.find('.itemDetailRating')
+        let rating = this.item.rating;
+        for (let i = 0; i<5; i++){
+            if (i<rating){
+                $(ratingDiv).append('&#9733;');
+            } else {
+                $(ratingDiv).append('&#9734;');
+            }
+        }
+        // fill in the options for the purchase form
         let stock = this.item.stock
         for (let i = 1; i <= stock; i++){
-            purchaseDiv.find('.amount').append(`<option value="${i}">${i}</option>`)
+            div.find('.amount').append(`<option value="${i}">${i}</option>`)
         }
-        purchaseDiv.on('submit', (event) => {
+        div.find('form').on('submit', (event) => {
             event.preventDefault()
             this.item.purchase(purchaseDiv.find(`select[name='amount']`).val())
-            // let newDiv = this.createViewDiv()
-            // this.curDiv.replaceWith(newDiv)
-            // this.curDiv = newDiv
         })
-        div.find('.extraInfo').append(purchaseDiv)
+        div.find('.itemDetailImg').on('click', (e)=> {
+            let newDiv = this.createViewDiv()
+            this.curDiv.replaceWith(newDiv)
+            this.curDiv = newDiv
+        })
         return div
     }
 

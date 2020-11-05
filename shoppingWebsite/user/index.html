@@ -33,15 +33,26 @@
                 </ul>
             </nav>
         </div>
-    </header>
-    <form class='searchForm'>
-        <div class='autocomplete'>
-            <input class='searchInput' type='text' placeholder="item.." name="search">
-        </div>
-        <button type="submit">search</button>
-    </form>
-    <div class='dialog'></div>
-    <div id='root'></div>
+    </header>   
+    <div class="login has-text-centered">  
+        <h2>Login Page</h2><br>   
+        <form id="login" method="get" action="login.php">    
+            <label>User Name</label>
+            <br>    
+            <input type="text" name="Uname" id="Uname" placeholder="Username">    
+            <br>  
+            <label>Password</label>  
+            <br>  
+            <input type="Password" name="Pass" id="Pass" placeholder="Password">    
+            <br>    
+            <button type='button'>login</button>     
+            <br>    
+            <input type="checkbox" id="check">    
+            <span>Remember me</span>    
+            <br>    
+            Forgot <a>Password</a>    
+        </form>     
+    </div>    
 </body>
 
 </html>

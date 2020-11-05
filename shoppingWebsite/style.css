@@ -133,3 +133,8 @@ div.autoComplete>input {
   div.dialog div:hover {
       background: #f2f2f2;
   }
+
+  .introduction{
+      position: relative;
+      top: 100px
+  }
