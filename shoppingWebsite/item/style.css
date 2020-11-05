@@ -123,13 +123,8 @@ nav a:hover::before{
 }
 
 .itemDetailImg{
-    float: left;
     width: 300px;
     height: 300px;
-    margin-left: 20%;
-    margin-top: 40px;
-    margin-right: 40px;
-    margin-bottom: 40px;
 }
 
 .itemDetailText{
@@ -151,5 +146,20 @@ nav a:hover::before{
 }
 
 .purchaseButton:hover{
-    background-color: gray;
+    background-color: rgb(184, 179, 179);
 }
+
+.img-zoom{
+    float: left;
+    width: 300px;
+    height: 300px;
+    margin-left: 20%;
+    margin-top: 40px;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    overflow: hidden;
+}
+/* 
+.img-zoom:hover img {
+    transform: scale(2.5);
+  } */
