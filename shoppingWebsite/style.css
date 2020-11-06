@@ -138,6 +138,7 @@ div.autoComplete>input {
       position: relative;
       top: 100px;
       text-align: center;
+      color: darkturquoise;
   }
 
   .introTitle{

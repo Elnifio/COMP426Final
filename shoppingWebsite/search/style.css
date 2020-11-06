@@ -75,84 +75,28 @@ nav a:hover::before{
 }
 
 /* next section for search box */
-/* div.autocomplete input {
-    padding: 10px;
-    font-size: 17px;
-    height: 50px;
-    border: 1px solid grey;
-    float: left;
-    width: 80%;
-    background: #f1f1f1;
-  }
-  
-  form.searchForm button {
-    float: left;
-    width: 20%;
-    height: 50px;
-    padding: 10px;
-    background: #2196F3;
-    color: white;
-    font-size: 17px;
-    border: 1px solid grey;
-    border-left: none;
-    cursor: pointer;
-  }
-  
-  form.searchForm button:hover {
-    background: #0b7dda;
-  }
-  
-  form.searchForm::after {
-    content: "";
-    clear: both;
-    display: table;
-  } */
 
-  /* next section for autocomplete code */
-  /* div.dialog{
-      width: 100%;
-      display: block;
-      min-height: 40px;
-      max-height: 330px;
-      border-top: 1px solid #f4f4f4;
-
-  }
-
-  /* div.dialog.open{
-      display: block;
-  } */
-
-  /* div.dialog div{
-      padding: 20px 10px;
-      font-size: 13px;
-      cursor: pointer;
-      transition: all 200ms;
-  }
-
-  div.dialog div:hover {
-      background: #f2f2f2;
-  } */ 
-
-  
-/* for search form */
 .searchForm{
     text-align: center;
     margin-top: 70px;
 }
 
 .searchIcon{
-    font-size: 20px;
     display: inline;
     width: 40px;
     height: 40px;
+    transition: all 0.25s;
+}
+
+.searchIcon:hover{
+    color: darkturquoise;
 }
 
 .searchInput{
     height:40px;
     width: 600px;
-    font-size: 15px;
     border: thin solid gray;
-    transition: all 0.25s
+    transition: all 0.25s;
 
 }
 
@@ -173,10 +117,11 @@ nav a:hover::before{
 }
 
 .dialog{
+    float: left;
     text-align: left;
     width: 600px;
     max-height: 600px;
-    margin-left: 370px;
+    margin-left: 368px;
     border-left: solid gray;
     border-right: solid gray;
     overflow-y:auto;
@@ -191,6 +136,19 @@ nav a:hover::before{
     background-color:darkturquoise;
 }
 
+.resultNumber{
+    display: inline-block;
+    margin-right: 20px;
+    cursor: default;
+}
+
+.resultNumber span{
+    color: darkturquoise;
+}
+
+.resultSort{
+    display: inline-block;
+}
 /* for itemView */
 .itemImg{
     float: left;
@@ -286,13 +244,25 @@ nav a:hover::before{
     transform: scale(2.5);
   } */
 
-.dropUpButton{
+
+  .dropUpButton{
     float:left;
     margin-top: 140px;
+    transition: all 0.25s;
 }
+
+.dropUpButton:hover{
+    color: darkturquoise;
+}
+
+
 
 .dropDownButton{
     float:left;
     margin-top: 80px;
- 
+    transition: all 0.25s;
+}
+
+.dropDownButton:hover{
+    color: darkturquoise;
 }

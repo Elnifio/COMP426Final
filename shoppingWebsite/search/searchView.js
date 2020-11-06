@@ -9,16 +9,130 @@ SearchView = class{
         let div = $(`<div class='searchForm'>
                         <form>
                             <div class='searchIcon'><i class="fas fa-search-plus"></i></div>
-                            <input class='searchInput' type='text' placeholder="search here..." name="search">
+                            <input class='searchInput' type='text' placeholder="search here..." name="search"></input>
                             <button class='searchSubmit' type="submit">search</button>
                         </form>
                         <div class='dialog'></div>
+                        <div class='result'></div>
                     </div>`)
         div.find('form').on('submit', (e)=>{
             e.preventDefault()
-            // let newDiv = this.createSearchResultView()
-            // this.curDiv.replaceWith(newDiv)
-            // this.curDiv = newDiv
+            let newDiv = this.createSearchResultView(this.curdiv.find('.searchInput').val())
+            this.curdiv.replaceWith(newDiv)
+            this.curdiv = newDiv
+        })
+
+        div.find('.searchInput').on('input', (e)=>{
+            const input = this.curdiv.find('.searchInput').val()
+            this.curdiv.find('.dialog').empty()
+            const dialog = this.arr.filter((item)=> {
+                return item.name.toLowerCase().startsWith(input.toLowerCase())
+            })
+            dialog.forEach(
+                (item) => {
+                    let div = $(`<div class = 'dialogItemView'>${item.name}</div>`)
+                    div.on('click',(e)=>{
+                        this.curdiv.find('.searchInput').val(item.name)
+                    })
+                    this.curdiv.find('.dialog').append(div)
+                }
+            )
+            if (input == ''){
+                this.curdiv.find('.dialog').empty()
+            }
+        })
+        return div
+    }
+
+    createSearchResultView(searchVal){
+        let div = $(`<div class='searchForm'>
+                        <form>
+                            <div class='searchIcon'><i class="fas fa-search-plus"></i></div>
+                            <input class='searchInput' type='text' name="search" placeholder="search here..."></input>
+                            <button class='searchSubmit' type="submit">search</button>
+                        </form>
+                        <div class='dialog'></div>
+                        <br>
+                        <div class='resultStatistics'></div>
+                        <br>
+                        <div class='result'></div>
+                    </div>`)
+        div.find('.searchInput').val(searchVal)
+        let searchResult = this.arr.filter((item) => {
+            return item.name.toLowerCase().startsWith(searchVal.toLowerCase())
+        })
+        searchResult.sort((a, b) => {
+            if (a.name.length <= b.name.length){
+                return 1
+            } else {
+                return -1
+            }
+        })
+        searchResult.forEach((item) => {
+            new ItemView(item, div.find('.result'))
+        })
+        div.find('.resultStatistics').append($(`<p class='resultNumber'>Found <span>${searchResult.length}</span> Results</p>
+        <label for="resultSort">Order By:</label>
+        <select name="resultSort" class="resultSort">
+            <option value='Default'>Default</option>
+            <option value="Price Ascending">Price Ascending</option>
+            <option value="Price Descending">Price Descending</option>
+            <option value="Ratings Ascending">Ratings Ascending</option>
+            <option value="Ratings Descending">Ratings Descending</option>
+        </select>`))
+        div.find('.resultSort').on('input', (e) => {
+            if (div.find('.resultSort').val()== 'Price Ascending'){
+                searchResult.sort((a, b) => {
+                    if (a.price >= b.price){
+                        return 1
+                    } else {
+                        return -1
+                    }
+                })
+            } else if (div.find('.resultSort').val()== 'Price Descending'){
+                searchResult.sort((a, b) => {
+                    if (a.price <= b.price){
+                        return 1
+                    } else {
+                        return -1
+                    }
+                })
+            } else if (div.find('.resultSort').val()== 'Ratings Ascending'){
+                searchResult.sort((a, b) => {
+                    if (a.rating >= b.rating){
+                        return 1
+                    } else {
+                        return -1
+                    }
+                })
+            } else if (div.find('.resultSort').val()== 'Ratings Descending'){
+                searchResult.sort((a, b) => {
+                    if (a.rating <= b.rating){
+                        return 1
+                    } else {
+                        return -1
+                    }
+                })
+            }
+            else if (div.find('.resultSort').val()== 'Default'){
+                searchResult.sort((a, b) => {
+                    if (a.name.length <= b.name.length){
+                        return 1
+                    } else {
+                        return -1
+                    }
+                })
+            }
+            this.curdiv.find('.result').empty()
+            searchResult.forEach((item) => {
+                new ItemView(item, this.curdiv.find('.result'))
+            })
+        })
+        div.find('form').on('submit', (e)=>{
+            e.preventDefault()
+            let newDiv = this.createSearchResultView(this.curdiv.find('.searchInput').val())
+            this.curdiv.replaceWith(newDiv)
+            this.curdiv = newDiv
         })
         div.find('.searchInput').on('input', (e)=>{
             const input = this.curdiv.find('.searchInput').val()
@@ -39,23 +153,7 @@ SearchView = class{
                 this.curdiv.find('.dialog').empty()
             }
         })
-        // const items = loadItems()
-        // $('.autocomplete input').on('input', (e)=>{
-        //     const input = $('.autocomplete input').val()
-        //     $('.dialog').empty()
-        //     const dialog = items.filter((item)=>{return item.name.toLowerCase().startsWith(input.toLowerCase())})
-        //     dialog.forEach((item)=>{
-        //         const div = $(`<div>${item.name}</div>`)
-        //         div.on('click', (e) => {
-        //             console.log(item.name)
-        //             $('.autocomplete input').val(item.name)
-        //         })
-        //         $('.dialog').append(div)
-        //     })
-        //     if (input == ''){
-        //      $('.dialog').empty()
-        //     }
-        //    })
         return div
+
     }
 }

@@ -12,7 +12,7 @@ let ItemView = class{
     }
     createViewDiv(){
         let div = $(`<div class = 'itemView'>
-                        <img src='./icons/item1/426.4.PNG' class='itemImg'/>
+                        <img src='../icons/item1/426.4.PNG' class='itemImg'/>
                         <div class='itemText clickZone'>
                             <p class='itemName'><strong>${this.item.name}</strong></p>
                             <div class='itemRating'></div>
@@ -42,7 +42,7 @@ let ItemView = class{
     createDetailedView(){
         let div = $(`<div class = 'itemDetailView'>
                         <div class='img-zoom'>
-                            <img src='./icons/item1/426.4.PNG' class='itemDetailImg'/>
+                            <img src='../icons/item1/426.4.PNG' class='itemDetailImg'/>
                         </div>
                         <div class='itemDetailText'>
                             <div class= 'clickZone'>

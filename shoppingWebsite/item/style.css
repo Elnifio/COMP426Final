@@ -172,10 +172,21 @@ nav a:hover::before{
 .dropUpButton{
     float:left;
     margin-top: 140px;
+    transition: all 0.25s;
 }
+
+.dropUpButton:hover{
+    color: darkturquoise;
+}
+
+
 
 .dropDownButton{
     float:left;
     margin-top: 80px;
- 
+    transition: all 0.25s;
+}
+
+.dropDownButton:hover{
+    color: darkturquoise;
 }
