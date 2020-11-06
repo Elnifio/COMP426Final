@@ -1,24 +1,26 @@
 $(function() {
-    $('.searchForm').on('submit', (e)=>{
-        searchSubmit(e)
-    })
+    // $('.searchForm').on('submit', (e)=>{
+    //     searchSubmit(e)
+    // })
+    // const items = loadItems()
+    // $('.autocomplete input').on('input', (e)=>{
+    //     const input = $('.autocomplete input').val()
+    //     $('.dialog').empty()
+    //     const dialog = items.filter((item)=>{return item.name.toLowerCase().startsWith(input.toLowerCase())})
+    //     dialog.forEach((item)=>{
+    //         const div = $(`<div>${item.name}</div>`)
+    //         div.on('click', (e) => {
+    //             console.log(item.name)
+    //             $('.autocomplete input').val(item.name)
+    //         })
+    //         $('.dialog').append(div)
+    //     })
+    //     if (input == ''){
+    //         $('.dialog').empty()
+    //     }
+    // })
     const items = loadItems()
-    $('.autocomplete input').on('input', (e)=>{
-        const input = $('.autocomplete input').val()
-        $('.dialog').empty()
-        const dialog = items.filter((item)=>{return item.name.toLowerCase().startsWith(input.toLowerCase())})
-        dialog.forEach((item)=>{
-            const div = $(`<div>${item.name}</div>`)
-            div.on('click', (e) => {
-                console.log(item.name)
-                $('.autocomplete input').val(item.name)
-            })
-            $('.dialog').append(div)
-        })
-        if (input == ''){
-            $('.dialog').empty()
-        }
-    })
+    new SearchView(items, $('#root'))
 })
 
 const match = function(){

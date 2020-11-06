@@ -7,7 +7,12 @@
     <link rel="stylesheet" href="../node_modules/bulma/css/bulma.css" />
     <script src="../node_modules/jquery/dist/jquery.js"></script>
     <script src="../node_modules/axios/dist/axios.js"></script>
+    <script src="https://kit.fontawesome.com/3b0ed6553a.js" crossorigin="anonymous"></script>
     <script src='script.js'></script>
+    <script src='itemView.js'></script>
+    <script src='item.js'></script>
+    <script src='searchView.js'></script>
+
     <!-- <script src='SearchView.js'></script> -->
 </head>
 
@@ -34,21 +39,13 @@
             </nav>
         </div>
     </header>
-    <form class='searchForm'>
-        <div class='autocomplete'>
-            <input class='searchInput' type='text' placeholder="item.." name="search">
-        </div>
-        <button type="submit">search</button>
-        <br>
-        <label for="sort">Order By:</label>
-        <select name="sort" class="sort">
-            <option value="Price Ascending">Price Ascending</option>
-            <option value="Price Descending">Price Descending</option>
-            <option value="Ratings Ascending">Ratings Ascending</option>
-            <option value="Ratings Descending">Ratings Descending</option>
-        </select>
-    </form>
-    <div class='dialog'></div>
+    <!-- <label for="sort">Order By:</label>
+    <select name="sort" class="sort">
+    <option value="Price Ascending">Price Ascending</option>
+    <option value="Price Descending">Price Descending</option>
+    <option value="Ratings Ascending">Ratings Ascending</option>
+    <option value="Ratings Descending">Ratings Descending</option>
+    </select> -->
     <div id='root'></div>
 </body>
 

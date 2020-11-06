@@ -75,7 +75,7 @@ nav a:hover::before{
 }
 
 /* next section for search box */
-div.autocomplete input {
+/* div.autocomplete input {
     padding: 10px;
     font-size: 17px;
     height: 50px;
@@ -106,10 +106,10 @@ div.autocomplete input {
     content: "";
     clear: both;
     display: table;
-  }
+  } */
 
   /* next section for autocomplete code */
-  div.dialog{
+  /* div.dialog{
       width: 100%;
       display: block;
       min-height: 40px;
@@ -122,7 +122,7 @@ div.autocomplete input {
       display: block;
   } */
 
-  div.dialog div{
+  /* div.dialog div{
       padding: 20px 10px;
       font-size: 13px;
       cursor: pointer;
@@ -131,4 +131,168 @@ div.autocomplete input {
 
   div.dialog div:hover {
       background: #f2f2f2;
-  }
+  } */ 
+
+  
+/* for search form */
+.searchForm{
+    text-align: center;
+    margin-top: 70px;
+}
+
+.searchIcon{
+    font-size: 20px;
+    display: inline;
+    width: 40px;
+    height: 40px;
+}
+
+.searchInput{
+    height:40px;
+    width: 600px;
+    font-size: 15px;
+    border: thin solid gray;
+    transition: all 0.25s
+
+}
+
+.searchInput:hover{
+    border: thin solid darkturquoise;
+}
+
+.searchSubmit{
+    background-color: white;
+    border: thin solid gray;
+    height:40px;
+    width: 60px;
+    transition: all 0.25s
+}
+
+.searchSubmit:hover{
+    background-color: darkturquoise;
+}
+
+.dialog{
+    text-align: left;
+    width: 600px;
+    max-height: 600px;
+    margin-left: 370px;
+    border-left: solid gray;
+    border-right: solid gray;
+    overflow-y:auto;
+}
+
+.dialogItemView{
+    cursor: default;
+    border-bottom: solid gray;
+}
+
+.dialogItemView:hover{
+    background-color:darkturquoise;
+}
+
+/* for itemView */
+.itemImg{
+    float: left;
+    width: 180px;
+    height: 180px;
+    margin-left: 30%;
+    margin-top: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
+
+.itemView{
+    position: relative;
+    height: 240px;
+    border-radius: 15px;
+    border: thin solid white;
+    transition: all ease-in-out 250ms;
+    cursor: default;
+}
+
+.itemView:hover{
+    border: thin solid gray;
+}
+
+.itemText{
+    float: left;
+    width: 180px;
+    height: 180px;
+    margin: 30px
+}
+
+.itemName{
+    font-size: 150%;
+}
+
+/* for itemDetailView */
+
+.itemDetailView{
+    height: 380px;
+    border-radius: 15px;
+    border: thin solid white;
+    transition: all ease-in-out 250ms;
+    display: block;
+    cursor: default;
+}
+
+.itemDetailView:hover{
+    border: thin solid gray;
+}
+
+.itemDetailImg{
+    width: 300px;
+    height: 300px;
+}
+
+.itemDetailText{
+    float: left;
+    width: 300px;
+    height: 300px;
+    margin: 40px
+}
+
+.itemDetailName{
+    font-size: 150%;
+}
+
+.purchaseButton{
+    background-color: white; /* Green */
+    text-align: center;
+    display: inline-block;
+    border: none;
+    height: 40px;
+    width: 60x
+}
+
+.purchaseButton:hover{
+    background-color: rgb(184, 179, 179);
+}
+
+.img-zoom{
+    float: left;
+    width: 300px;
+    height: 300px;
+    margin-left: 20%;
+    margin-top: 40px;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    overflow: hidden;
+    cursor: zoom-in;
+}
+/* 
+.img-zoom:hover img {
+    transform: scale(2.5);
+  } */
+
+.dropUpButton{
+    float:left;
+    margin-top: 140px;
+}
+
+.dropDownButton{
+    float:left;
+    margin-top: 80px;
+ 
+}

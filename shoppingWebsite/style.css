@@ -136,8 +136,8 @@ div.autoComplete>input {
 
   .introduction{
       position: relative;
-      left: 40%;
-      top: 100px
+      top: 100px;
+      text-align: center;
   }
 
   .introTitle{

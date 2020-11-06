@@ -91,6 +91,7 @@ nav a:hover::before{
     border-radius: 15px;
     border: thin solid white;
     transition: all ease-in-out 250ms;
+    cursor: default;
 }
 
 .itemView:hover{
@@ -115,7 +116,8 @@ nav a:hover::before{
     border-radius: 15px;
     border: thin solid white;
     transition: all ease-in-out 250ms;
-    display: block
+    display: block;
+    cursor: default;
 }
 
 .itemDetailView:hover{
@@ -140,9 +142,11 @@ nav a:hover::before{
 
 .purchaseButton{
     background-color: white; /* Green */
-    border: thin solid gray;
     text-align: center;
     display: inline-block;
+    border: none;
+    height: 40px;
+    width: 60x
 }
 
 .purchaseButton:hover{
@@ -158,8 +162,20 @@ nav a:hover::before{
     margin-right: 40px;
     margin-bottom: 40px;
     overflow: hidden;
+    cursor: zoom-in;
 }
 /* 
 .img-zoom:hover img {
     transform: scale(2.5);
   } */
+
+.dropUpButton{
+    float:left;
+    margin-top: 140px;
+}
+
+.dropDownButton{
+    float:left;
+    margin-top: 80px;
+ 
+}
