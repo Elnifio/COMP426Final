@@ -5,21 +5,17 @@
     <title>itemHub</title>
     <link href="./style.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="../node_modules/bulma/css/bulma.css" />
+    <script src="https://kit.fontawesome.com/3b0ed6553a.js" crossorigin="anonymous"></script>
     <script src="../node_modules/jquery/dist/jquery.js"></script>
     <script src="../node_modules/axios/dist/axios.js"></script>
     <script src='script.js'></script>
+    <script src='user.js'></script>
+    <script src='userView.js'></script>
     <!-- <script src='SearchView.js'></script> -->
 </head>
 
 
 <body>
-    <!-- <div id = 'navigation' class = 'card has-text-centered'>
-        <h1 class='title is-1 has-text-centered'>Item Hub</h1>
-        <button class ="itemsButton button is-medium">items</button>
-        <button class ="managementButton button is-medium">management</button>
-        <button class ="userButton button is-medium">user</button>
-    </div>
-    <div id='root'></div> -->
     <header>
         <div class='container'>
             <img src="../icons/Item_hub icon.PNG" alt='logo' class='logo'>
@@ -34,25 +30,7 @@
             </nav>
         </div>
     </header>   
-    <div class="login has-text-centered">  
-        <h2>Login Page</h2><br>   
-        <form id="login" method="get" action="login.php">    
-            <label>User Name</label>
-            <br>    
-            <input type="text" name="Uname" id="Uname" placeholder="Username">    
-            <br>  
-            <label>Password</label>  
-            <br>  
-            <input type="Password" name="Pass" id="Pass" placeholder="Password">    
-            <br>    
-            <button type='button'>login</button>     
-            <br>    
-            <input type="checkbox" id="check">    
-            <span>Remember me</span>    
-            <br>    
-            Forgot <a>Password</a>    
-        </form>     
-    </div>    
+    <div id='root'></div>
 </body>
 
 </html>

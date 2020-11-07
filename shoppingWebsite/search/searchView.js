@@ -6,9 +6,9 @@ SearchView = class{
     }
 
     createSearchViewDiv(){
-        let div = $(`<div class='searchForm'>
-                        <form>
-                            <div class='searchIcon'><i class="fas fa-search-plus"></i></div>
+        let div = $(`<div class='searchFormDiv'>
+                        <form class='searchForm'>
+                            <i class="fas fa-search-plus searchIcon"></i> 
                             <input class='searchInput' type='text' placeholder="search here..." name="search"></input>
                             <button class='searchSubmit' type="submit">search</button>
                         </form>
@@ -45,9 +45,9 @@ SearchView = class{
     }
 
     createSearchResultView(searchVal){
-        let div = $(`<div class='searchForm'>
-                        <form>
-                            <div class='searchIcon'><i class="fas fa-search-plus"></i></div>
+        let div = $(`<div class='searchFormDiv'>
+                        <form class='searchForm'>
+                            <i class="fas fa-search-plus searchIcon"></i>
                             <input class='searchInput' type='text' name="search" placeholder="search here..."></input>
                             <button class='searchSubmit' type="submit">search</button>
                         </form>
@@ -75,10 +75,10 @@ SearchView = class{
         <label for="resultSort">Order By:</label>
         <select name="resultSort" class="resultSort">
             <option value='Default'>Default</option>
-            <option value="Price Ascending">Price Ascending</option>
-            <option value="Price Descending">Price Descending</option>
-            <option value="Ratings Ascending">Ratings Ascending</option>
-            <option value="Ratings Descending">Ratings Descending</option>
+            <option value="Price Ascending">Price &#36;&#36;-&#36;&#36;&#36;</option>
+            <option value="Price Descending">Price &#36;&#36;&#36;-&#36;&#36;</option>
+            <option value="Ratings Ascending">Ratings &#9733;&#9733;-&#9733;&#9733;&#9733;</option>
+            <option value="Ratings Descending">Ratings &#9733;&#9733;&#9733;-&#9733;&#9733;</option>
         </select>`))
         div.find('.resultSort').on('input', (e) => {
             if (div.find('.resultSort').val()== 'Price Ascending'){

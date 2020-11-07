@@ -73,3 +73,65 @@ nav a::before{
 nav a:hover::before{
     width: 100%;
 }
+
+
+/* for user UI */
+.loginView{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 400px;
+    margin-right: 400px;
+    height: 400px;
+    text-align: center;
+    border: solid gray;
+}
+
+.loginTitle{
+    margin: 30px;
+    font-size: 200%;
+    cursor: default;
+}
+
+.loginTitle span{
+    color: darkturquoise;
+}
+
+.loginSubtitle{
+    font-size: 150%;
+    transition: all 0.25s;
+    cursor: default
+}
+
+.loginForm{
+    margin: 20px;
+}
+
+.usernameInput{
+    margin: 10px;
+}
+
+.passwordInput{
+    margin: 10px;
+}
+
+.loginButton{
+    background-color: white;
+    border: thin solid gray;
+    transition: all 0.25s
+}
+
+.loginButton:hover {
+    background-color: darkturquoise;
+}
+
+.registerButton{
+    background-color: white;
+    border: thin solid gray;
+    transition: all 0.25s
+
+}
+
+.registerButton:hover{
+    background-color: darkturquoise;
+}
+

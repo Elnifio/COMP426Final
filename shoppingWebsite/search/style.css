@@ -76,7 +76,7 @@ nav a:hover::before{
 
 /* next section for search box */
 
-.searchForm{
+.searchFormDiv{
     text-align: center;
     margin-top: 70px;
 }
@@ -88,9 +88,6 @@ nav a:hover::before{
     transition: all 0.25s;
 }
 
-.searchIcon:hover{
-    color: darkturquoise;
-}
 
 .searchInput{
     height:40px;
@@ -100,9 +97,14 @@ nav a:hover::before{
 
 }
 
-.searchInput:hover{
+.searchForm:hover .searchInput{
     border: thin solid darkturquoise;
 }
+
+.searchForm:hover .searchIcon{
+    color: darkturquoise;
+}
+
 
 .searchSubmit{
     background-color: white;
@@ -117,19 +119,19 @@ nav a:hover::before{
 }
 
 .dialog{
-    float: left;
-    text-align: left;
-    width: 600px;
+    margin-left: 26%;
     max-height: 600px;
-    margin-left: 368px;
     border-left: solid gray;
     border-right: solid gray;
     overflow-y:auto;
+    align-items: center;
 }
 
 .dialogItemView{
+    width: 600px;
     cursor: default;
     border-bottom: solid gray;
+    text-align: left;
 }
 
 .dialogItemView:hover{
@@ -137,6 +139,7 @@ nav a:hover::before{
 }
 
 .resultNumber{
+    position: relative;
     display: inline-block;
     margin-right: 20px;
     cursor: default;
@@ -147,8 +150,11 @@ nav a:hover::before{
 }
 
 .resultSort{
+    position: relative;
     display: inline-block;
+    color: darkturquoise;
 }
+
 /* for itemView */
 .itemImg{
     float: left;
