@@ -1,33 +1,117 @@
 from django.db import models
 
 # Create your models here.
+import json
+
 class User(models.Model):
-    userid = models.AutoField(primary_key=True)
-    username = models.TextField()
-    useremail = models.EmailField()
+    userid = models.AutoField(primary_key=True, db_index=True)
+    username = models.TextField(db_index=True)
+    useremail = models.EmailField(db_index=True)
+    userimage = models.ImageField(upload_to="images/Users")
     userpassword = models.TextField()
 
+    # Throw Error: 
+    #           User.DoesNotExist
+    def findUser(queryid):
+        user = User.objects.get(userid=queryid)
+        return json.dumps({
+            "id": user.userid,
+            "name": user.username,
+            "email": user.useremail,
+            "image": user.userimage.url
+        })
+
+    # Throws: 
+    #           User.DoesNotExist
+    #           Item.DoesNotExist
+    # Returns: JSON formatted User Info
+    def queryInfo(queryid):
+        user = User.objects.get(userid=queryid)
+        published = [Item.objects.get(x.id).getJSON() for x in PublishedItem.objects.filter(uesrid=queryid)]
+        purchased = [Item.objects.get(x.id).getJSON() for x in PurchasedItem.objects.filter(userid=queryid)]
+        saved = [Item.objects.get(x.id).getJSON() for x in SavedItem.objects.filter(userid=queryid)]
+        out = {
+            "userinfo": User.findUser(queryid),
+            "publishedItems": json.dumps(published),
+            "purchasedItems": json.dumps(purchased),
+            "savedItems": json.dumps(saved)
+        }
+        return out
+
 class Item(models.Model):
-    itemid = models.AutoField(primary_key=True)
-    stock = models.IntegerField()
-    price = models.FloatField()
-    picture = models.ImageField()
-    publisher = models.IntegerField()
+    itemid = models.AutoField(primary_key=True)                                 # item id
+    itemname = models.CharField(max_length=100, db_index=True) # item name
+    itemdescription = models.CharField(max_length=300)                  # item description
+    stock = models.IntegerField()                                                            # Stock of this item
+    price = models.FloatField()                                                                # Price of this item
+    picture = models.ImageField(upload_to="images/Items")            # An image of this item
+    publisher = models.IntegerField(db_index=True)                          # Publisher (user who published this item)
+    categoryid = models.IntegerField()                                                 # Category of an item
+
+    # Throw Error: Item.DoesNotExist; User.DoesNotExist
+    def findItem(queryid):
+        item = Item.objects.get(itemid=queryid)
+        return item.getJSON()
+
+    # Throw Error: User.DoesNotExist
+    def getJSON(self):
+        publisher = User.findUser(self.publisher)
+        ratings = [x.rating for x in Rating.objects.filter(itemid=self.itemid)]
+        rating_response = None
+        if len(ratings) == 0:
+            rating_response = -1
+        else: 
+            rating_response = sum(ratings) / len(ratings)
+        return json.dumps({
+            "name": self.itemname,
+            "description": self.itemdescription,
+            "stock": self.stock,
+            "price": self.price,
+            "picture": self.picture.url,
+            "publisher": publisher,
+            "category": self.categoryid,
+            "rating": rating_response
+        })
+        
 
 class PublishedItem(models.Model):
-    itemid = models.IntegerField()
-    userid = models.IntegerField()
+    itemid = models.IntegerField(db_index=True)
+    userid = models.IntegerField(db_index=True)
     date = models.DateField(auto_now = True)
     
 class PurchasedItem(models.Model):
-    itemid = models.IntegerField()
-    userid = models.IntegerField()
+    itemid = models.IntegerField(db_index=True)
+    userid = models.IntegerField(db_index=True)
+    purchaseCount = models.IntegerField()
     date = models.DateField(auto_now=True)
 
 class SavedItem(models.Model):
-    itemid = models.IntegerField()
-    userid = models.IntegerField()
+    itemid = models.IntegerField(db_index=True)
+    userid = models.IntegerField(db_index=True)
     date = models.DateField(auto_now = True)
 
+class Category(models.Model):
+    categoryid = models.IntegerField(primary_key=True)
+    categoryname = models.CharField(max_length=100)
+    categoryimage = models.ImageField(upload_to="images/Categories")
+    def toJSON(self):
+        return {
+            "id": self.categoryid,
+            "name": self.categoryname,
+            "image": self.categoryimage.url
+        }
 
+    def getCategory(categoryid, skip=0, limit=50):
+        items = [x.getJSON() for x in Item.objects.filter(categoryid=categoryid).order_by(itemid).all()[skip:skip+limit]]
+        return json.dumps(items)
+
+    def getAllCategories():
+        categories = [x.toJSON() for x in Category.objects.all()]
+        return categories
+        
+
+class Rating(models.Model):
+    userid = models.IntegerField(db_index=True)
+    itemid = models.IntegerField(db_index=True)
+    rating=models.IntegerField()
 
