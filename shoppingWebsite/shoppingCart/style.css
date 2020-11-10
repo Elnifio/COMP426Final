@@ -73,3 +73,61 @@ nav a::before{
 nav a:hover::before{
     width: 100%;
 }
+
+/* next section for shopping cart */
+.checkOutButton{
+    background-color: white;
+    border: thin solid gray;
+    transition: all 0.25s;
+}
+
+.checkOutButton:hover{
+    background-color:  darkturquoise;
+}
+
+.emptyCartButton{
+    background-color: white;
+    border: thin solid gray;
+    transition: all 0.25s;
+}
+
+.emptyCartButton:hover {
+    background-color: darkturquoise;
+}
+
+.removeFromCartButton{
+    background-color: white;
+    border: thin solid gray;
+    transition: all 0.25s;
+}
+
+.removeFromCartButton:hover{
+    background-color: darkturquoise;
+}
+
+.shoppingCartItem{
+    text-align: center;
+    margin: 15px;
+    transition: 0.25s;
+    border: thin solid white
+}
+
+.shoppingCartItem:hover{
+    border: thin solid gray;
+    background-color: darkturquoise;
+}
+
+.cartItems{
+    text-align: center;
+    cursor: default;
+}
+
+.cart{
+    text-align: center;
+}
+
+.itemImg{
+    width: 20px;
+    height: 20px;
+}
+

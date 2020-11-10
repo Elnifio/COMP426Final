@@ -19,7 +19,7 @@ let ItemView = class{
                             <p class='itemPublisher'>By: ${this.item.publisher}</p>
                             <p class='itemPrice'>&#36;${this.item.price}</p>
                         </div>
-                        <div class='dropDownButton'><i class="fas fa-arrow-circle-down fa-2x"></i></div>
+                        <i class="fas fa-arrow-circle-down fa-2x dropDownButton"></i>
                     </div>`);
         // add rating stars to the simple itemView page
         let ratingDiv = div.find('.itemRating')
@@ -79,7 +79,7 @@ let ItemView = class{
         }
         div.find('form').on('submit', (event) => {
             event.preventDefault()
-            this.item.purchase(purchaseDiv.find(`select[name='amount']`).val())
+            this.item.purchase(this.curDiv.find(`select[name='amount']`).val())
         })
         div.find('.dropUpButton').on('click', (e)=> {
             let newDiv = this.createViewDiv()
@@ -98,14 +98,4 @@ let ItemView = class{
         return div
     }
 
-    createEditDiv(){
-        let div = $()
-        return div
-
-    }
-
-    createManagementDiv(){
-        let div = $()
-        return div
-    }
 }

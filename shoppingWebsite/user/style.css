@@ -77,17 +77,17 @@ nav a:hover::before{
 
 /* for user UI */
 .loginView{
-    margin-top: 50px;
-    margin-bottom: 50px;
-    margin-left: 400px;
-    margin-right: 400px;
-    height: 400px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 25%;
+    margin-right: 25%;
+    height: 50%;
     text-align: center;
     border: solid gray;
 }
 
 .loginTitle{
-    margin: 30px;
+    margin: 5%;
     font-size: 200%;
     cursor: default;
 }
@@ -103,15 +103,15 @@ nav a:hover::before{
 }
 
 .loginForm{
-    margin: 20px;
+    margin: 2%;
 }
 
 .usernameInput{
-    margin: 10px;
+    margin: 2%;
 }
 
 .passwordInput{
-    margin: 10px;
+    margin: 2%;
 }
 
 .loginButton{
@@ -135,3 +135,26 @@ nav a:hover::before{
     background-color: darkturquoise;
 }
 
+.errorMessage{
+    color: red;
+}
+
+.createAccountButton{
+    background-color: white;
+    border: thin solid gray;
+    transition: all 0.25s
+}
+
+.createAccountButton:hover{
+    background-color: darkturquoise;
+}
+
+.cancelButton{
+    background-color: white;
+    border: thin solid gray;
+    transition: all 0.25s
+}
+
+.cancelButton:hover{
+    background-color: darkturquoise;
+}
