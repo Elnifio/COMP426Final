@@ -79,6 +79,8 @@ nav a:hover::before{
     background-color: white;
     border: thin solid gray;
     transition: all 0.25s;
+    font-size: 150%;
+    border-radius: 5px;
 }
 
 .checkOutButton:hover{
@@ -89,6 +91,8 @@ nav a:hover::before{
     background-color: white;
     border: thin solid gray;
     transition: all 0.25s;
+    font-size: 150%;
+    border-radius: 5px;
 }
 
 .emptyCartButton:hover {
@@ -99,6 +103,7 @@ nav a:hover::before{
     background-color: white;
     border: thin solid gray;
     transition: all 0.25s;
+    border-radius: 5px;
 }
 
 .removeFromCartButton:hover{
@@ -107,9 +112,11 @@ nav a:hover::before{
 
 .shoppingCartItem{
     text-align: center;
-    margin: 15px;
+    height: 90%;
+    width: 33.3%;
+    padding: 1%;
     transition: 0.25s;
-    border: thin solid white
+    border: thin solid white;
 }
 
 .shoppingCartItem:hover{
@@ -118,8 +125,17 @@ nav a:hover::before{
 }
 
 .cartItems{
-    text-align: center;
+    display: flex;
     cursor: default;
+    justify-items: center;
+    align-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: thin solid white;
+    border-radius: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    overflow: hidden;
 }
 
 .cart{
@@ -131,3 +147,7 @@ nav a:hover::before{
     height: 20px;
 }
 
+.shoppingCartTitle{
+    font-size: 200%;
+    color: darkturquoise;
+}

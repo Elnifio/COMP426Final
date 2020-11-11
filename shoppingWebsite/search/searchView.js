@@ -8,7 +8,7 @@ SearchView = class{
     createSearchViewDiv(){
         let div = $(`<div class='searchFormDiv'>
                         <form class='searchForm'>
-                            <i class="fas fa-search-plus searchIcon"></i> 
+                            <i class="fas fa-search-plus searchIcon"></i>
                             <input class='searchInput' type='text' placeholder="search here..." name="search"></input>
                             <button class='searchSubmit' type="submit">search</button>
                         </form>

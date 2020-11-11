@@ -138,7 +138,8 @@ nav a:hover::before{
 
 .itemDetailText{
     height: 75%;
-    max-width: 35%;
+    min-width: 20%;
+    max-width: 25%;
 }
 
 .itemDetailName{

@@ -8,7 +8,9 @@ ShoppingCartView = class{
 
     createViewDiv(){
         let div = $(`<div class='cart'>
+                        <h1 class='shoppingCartTitle'>Shopping Cart<h1>
                         <div class='cartItems'></div>
+                        <div class='cartSummary'></div>
                         <button class='checkOutButton' type='button'>Check Out</button>
                         <button class='emptyCartButton' type='button'>Empty Cart</button>
                     <div>`)

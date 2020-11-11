@@ -77,11 +77,12 @@ nav a:hover::before{
 
 /* for user UI */
 .loginView{
-    margin-top: 5%;
-    margin-bottom: 5%;
-    margin-left: 25%;
-    margin-right: 25%;
     height: 50%;
+    width: 30%;
+   margin-left: 35%;
+   margin-right: 35%;
+   margin-top: 10%;
+   margin-bottom: 10%;
     text-align: center;
     border: solid gray;
 }

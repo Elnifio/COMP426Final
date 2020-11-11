@@ -77,21 +77,27 @@ nav a:hover::before{
 /* next section for search box */
 
 .searchFormDiv{
+    width: 100%;
+    margin-top: 5%;
     text-align: center;
-    margin-top: 70px;
+    justify-content: center;
+}
+
+.searchForm{
+    margin: 0 auto;
 }
 
 .searchIcon{
-    display: inline;
-    width: 40px;
-    height: 40px;
+    display: inline-block;
+    width: 60px;
     transition: all 0.25s;
 }
 
 
 .searchInput{
+    display: inline-block;
     height:40px;
-    width: 600px;
+    width: 60%;
     border: thin solid gray;
     transition: all 0.25s;
 
@@ -107,6 +113,7 @@ nav a:hover::before{
 
 
 .searchSubmit{
+    display: inline-block;
     background-color: white;
     border: thin solid gray;
     height:40px;
@@ -119,19 +126,17 @@ nav a:hover::before{
 }
 
 .dialog{
-    margin-left: 26%;
     max-height: 600px;
-    border-left: solid gray;
-    border-right: solid gray;
+    width: 100%;
     overflow-y:auto;
-    align-items: center;
 }
 
 .dialogItemView{
-    width: 600px;
+    width: 60%;
     cursor: default;
-    border-bottom: solid gray;
+    border: solid gray;
     text-align: left;
+    margin: 0 auto;
 }
 
 .dialogItemView:hover{
@@ -176,7 +181,7 @@ nav a:hover::before{
 }
 
 .itemText{
-    width: height;
+    width: 20%;
     height: 75%;
 }
 
@@ -217,7 +222,8 @@ nav a:hover::before{
 
 .itemDetailText{
     height: 75%;
-    max-width: 35%;
+    min-width: 20%;
+    max-width: 25%;
 }
 
 .itemDetailName{
