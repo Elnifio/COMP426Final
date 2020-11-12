@@ -1,5 +1,5 @@
 let Item = class{
-    // Item support 3 kinds of operations
+    // Item support 4 kinds of operations
     // to remove item from shopping cart
     // to save the item to shopping cart
     // to purchase the item
@@ -14,6 +14,7 @@ let Item = class{
         this.category = obj.category
         this.rating = obj.rating
         this.picture = obj.picture
+        this.amount = obj.amount
     }
 
     async sync(){
@@ -28,23 +29,35 @@ let Item = class{
         this.category = obj.category
         this.rating = obj.rating
         this.picture = obj.picture
+        this.amount = obj.amount
     }
 
     async saveToCart(amount){
         //  save item to shopping cart
         // provide the amount of items user desired to add to shopping cart
     }
+
+    async updateAmount(amount){
+        // a unique property to items in the shopping cart
+        // update the amount of items in the front end
+        // when purchase the item, 
+        this.amount = amount
+    }
     
-    async purchase(amount){
+    async purchase(){
         // purchase the items
         // provide the amount of items user want to purchase
+        // note that in the shopping cart section we encapsulate information
+        // of how much item are in the cart in the front end
+        // to reduce the communications with the backend
+        // when we make the final purchase
+        // we just send the request to backend with the amount encapsulated in the object
+
 
         // let result = await axios({
 
         // })
-        console.log(amount)
         // await this.sync()
-        return this
     }
 
     async removeFromCart(){

@@ -2,4 +2,43 @@ let ShoppingCart = class{
     constructor(items){
         this.items = items
     }
+
+    summary(){
+        // return the summary information of the cart
+        // how many items are currently saved in the cart
+        // how much netWorth is the cart
+        let p = 0;
+        let q = 0;
+        this.items.forEach((item)=>{
+            p = p + item.amount*item.price
+            q = q + item.amount
+        })
+        return {quantity: q, price: p}
+    }
+
+    remove(item){
+        // remove a specific item from cart
+        const index = this.items.indexOf(item)
+        this.items.splice(index, 1)
+    }
+
+    empty(){
+        // remove all items from cart
+        this.items.forEach((item) => {
+            item.removeFromCart()
+        })
+        // empty the shopping cart
+        this.items = []
+        
+    }
+
+    purchase(){
+        // purchase all items saved in cart
+        this.items.forEach((item) => {
+            item.purchase()
+        })
+        // note that after we purchase every item in the cart
+        // we also need to empty the cart
+        this.empty()
+    }
 }

@@ -1,5 +1,8 @@
 $(function() {
     const items = loadItems()
+    // load an array of Item objects for test purposes
+    // in real implementation should use the Item.fetchall()
+    // function to fetch the items in a JSON file
     new SearchView(items, $('#root'))
 })
 
@@ -11,10 +14,9 @@ const loadItems = function(){
         price: 1000,
         description: 'Iphone 12 adfgauyduagduavdas asdgjasgd asdasjd asdasjhdasd adgasgdjasd adgasjgdas asjdasjd asdj',
         stock: 106,
-        isMine: true,
-        createdAt: 606,
-        updatedAt: 218,
-        rating: 3
+        rating: 3,
+        category: 'electronics',
+        picture: '../icons/item1/426.4.PNG'
     },
     {
         id: 2,
@@ -23,10 +25,9 @@ const loadItems = function(){
         price: 799,
         description: 'ddd',
         stock: 76,
-        isMine: true,
-        createdAt: 606,
-        updatedAt: 218,
-        rating: 3
+        rating: 3,
+        category: 'electronics',
+        picture: '../icons/item1/426.4.PNG'
     },{
         id: 3,
         name: 'the big lobowski',
@@ -34,10 +35,9 @@ const loadItems = function(){
         price: 16,
         description: 'ddd',
         stock: 99,
-        isMine: true,
-        createdAt: 606,
-        updatedAt: 218,
-        rating: 4
+        rating: 4,
+        category: 'movie',
+        picture: '../icons/item1/426.4.PNG'
     },{
         id: 4,
         name: 'sony x950h',
@@ -45,10 +45,9 @@ const loadItems = function(){
         price: 1199,
         description: 'ddd',
         stock: 16,
-        isMine: true,
-        createdAt: 606,
-        updatedAt: 679,
-        rating: 4
+        rating: 4,
+        category: 'electronics',
+        picture: '../icons/item1/426.4.PNG'
     },{
         id: 5,
         name: 'bmx x5',
@@ -56,10 +55,9 @@ const loadItems = function(){
         price: 60000,
         description: 'ddd',
         stock: 46,
-        isMine: true,
-        createdAt: 606,
-        updatedAt: 218,
-        rating: 5
+        rating: 5,
+        category: 'car',
+        picture: '../icons/item1/426.4.PNG'
     },{
         id: 6,
         name: 'dell xps15',
@@ -67,10 +65,9 @@ const loadItems = function(){
         price: 1499,
         description: 'ddd',
         stock: 43,
-        isMine: true,
-        createdAt: 606,
-        updatedAt: 218,
-        rating: 4
+        rating: 4,
+        category: 'electronics',
+        picture: '../icons/item1/426.4.PNG'
     },{
         id: 7,
         name: 'corvette c8',
@@ -78,21 +75,19 @@ const loadItems = function(){
         price: 90000,
         description: 'ddd',
         stock: 22,
-        isMine: true,
-        createdAt: 606,
-        updatedAt: 218,
-        rating: 3
+        rating: 3,
+        category: 'car',
+        picture: '../icons/item1/426.4.PNG'
     },{
         id: 8,
-        name: 'lindsburg',
+        name: 'apple macbook pro',
         publisher: 'xxx',
         price: 560,
         description: 'ddd',
         stock: 31,
-        isMine: true,
-        createdAt: 606,
-        updatedAt: 218,
-        rating: 2
+        rating: 2,
+        category: 'electronics',
+        picture: '../icons/item1/426.4.PNG'
     },{
         id: 9,
         name: 'pop',
@@ -100,10 +95,9 @@ const loadItems = function(){
         price: 320,
         description: 'ddd',
         stock: 14,
-        isMine: true,
-        createdAt: 606,
-        updatedAt: 218,
-        rating: 0
+        rating: 0,
+        category: 'music',
+        picture: '../icons/item1/426.4.PNG'
     },{
         id: 10,
         name: 'nomin pack',
@@ -111,10 +105,9 @@ const loadItems = function(){
         price: 800,
         description: 'ddd',
         stock: 58,
-        isMine: true,
-        createdAt: 606,
-        updatedAt: 218,
-        rating: 5
+        rating: 5,
+        category: 'clothing',
+        picture: '../icons/item1/426.4.PNG'
     }]
     let items = testItems.map((item) => {
         return new Item(item)})

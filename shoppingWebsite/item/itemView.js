@@ -1,5 +1,8 @@
 let ItemView = class{
     constructor(item, parentDiv, startInEdit){
+        // startInEdit is essentially useless now because 
+        // we no longer plan to let user do their modify 
+        // or publish items
         this.item = item
         this.parentDiv = $(parentDiv)
         if(!startInEdit){
@@ -11,8 +14,9 @@ let ItemView = class{
         }
     }
     createViewDiv(){
+        // the normal view div for each item
         let div = $(`<div class = 'itemView'>
-                        <img src='../icons/item1/426.4.PNG' class='itemImg'/>
+                        <img src=${this.item.picture} class='itemImg'/>
                         <div class='itemText clickZone'>
                             <p class='itemName'><strong>${this.item.name}</strong></p>
                             <div class='itemRating'></div>
@@ -31,6 +35,7 @@ let ItemView = class{
                 $(ratingDiv).append('&#9734;');
             }
         }
+        // click on the drop down button reveals more details in the item
         div.find('.dropDownButton').on('click', (e) => {
             let newDiv = this.createDetailedView();
             this.curDiv.replaceWith(newDiv);
@@ -40,9 +45,10 @@ let ItemView = class{
     }
 
     createDetailedView(){
+        // the detailed view div for each item
         let div = $(`<div class = 'itemDetailView'>
                         <div class='img-zoom'>
-                            <img src='../icons/item1/426.4.PNG' class='itemDetailImg'/>
+                            <img src=${this.item.picture} class='itemDetailImg'/>
                         </div>
                         <div class='itemDetailText'>
                             <div class= 'clickZone'>
@@ -78,14 +84,23 @@ let ItemView = class{
             div.find('.amount').append(`<option value="${i}">${i}</option>`)
         }
         div.find('form').on('submit', (event) => {
+            // when user add item to shoppingcart
             event.preventDefault()
-            this.item.purchase(this.curDiv.find(`select[name='amount']`).val())
+            this.item.saveToCart(this.curDiv.find(`select[name='amount']`).val())
+            // grab newest version of item from backend
+            // rerender the itemView Div so that the updated information is reflected
+            this.item.sync()
+            let newDiv = this.createDetailedView()
+            this.curDiv.replaceWith(newDiv)
+            this.curDiv=newDiv
         })
+        // click on the drop up button switch back to the simplifies item view
         div.find('.dropUpButton').on('click', (e)=> {
             let newDiv = this.createViewDiv()
             this.curDiv.replaceWith(newDiv)
             this.curDiv = newDiv
         })
+        // here is the code to implement image zoom in function using css
         div.find('.itemDetailImg').on('mousemove', function(event) {
                 let offset = div.find('.img-zoom').offset();
                 let x = (event.pageX- offset.left) / div.find('.itemDetailImg').width() *100

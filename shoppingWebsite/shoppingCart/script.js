@@ -5,6 +5,8 @@ $(function() {
 })
 
 const loadItems = function(){
+    // return items for test purposes
+    // should be fetched from backend in real example
     let testItems = [{
         id: 1,
         name: 'Iphone 12 Pro',
@@ -15,7 +17,8 @@ const loadItems = function(){
         isMine: true,
         createdAt: 606,
         updatedAt: 218,
-        rating: 3
+        rating: 3,
+        amount: 12
     },
     {
         id: 2,
@@ -27,7 +30,8 @@ const loadItems = function(){
         isMine: true,
         createdAt: 606,
         updatedAt: 218,
-        rating: 3
+        rating: 3,
+        amount: 24
     },{
         id: 3,
         name: 'the big lobowski',
@@ -38,7 +42,8 @@ const loadItems = function(){
         isMine: true,
         createdAt: 606,
         updatedAt: 218,
-        rating: 4
+        rating: 4,
+        amount: 2
     },{
         id: 4,
         name: 'sony x950h',
@@ -49,7 +54,8 @@ const loadItems = function(){
         isMine: true,
         createdAt: 606,
         updatedAt: 679,
-        rating: 4
+        rating: 4,
+        amount: 4
     },{
         id: 5,
         name: 'bmx x5',
@@ -60,7 +66,8 @@ const loadItems = function(){
         isMine: true,
         createdAt: 606,
         updatedAt: 218,
-        rating: 5
+        rating: 5,
+        amount: 9
     },{
         id: 6,
         name: 'dell xps15',
@@ -71,7 +78,8 @@ const loadItems = function(){
         isMine: true,
         createdAt: 606,
         updatedAt: 218,
-        rating: 4
+        rating: 4,
+        amount: 15
     },{
         id: 7,
         name: 'corvette c8',
@@ -82,7 +90,8 @@ const loadItems = function(){
         isMine: true,
         createdAt: 606,
         updatedAt: 218,
-        rating: 3
+        rating: 3,
+        amount: 7
     },{
         id: 8,
         name: 'lindsburg',
@@ -93,7 +102,8 @@ const loadItems = function(){
         isMine: true,
         createdAt: 606,
         updatedAt: 218,
-        rating: 2
+        rating: 2,
+        amount: 1
     },{
         id: 9,
         name: 'pop',
@@ -104,7 +114,8 @@ const loadItems = function(){
         isMine: true,
         createdAt: 606,
         updatedAt: 218,
-        rating: 0
+        rating: 0,
+        amount: 9
     },{
         id: 10,
         name: 'nomin pack',
@@ -115,7 +126,9 @@ const loadItems = function(){
         isMine: true,
         createdAt: 606,
         updatedAt: 218,
-        rating: 5
+        rating: 5,
+        amount: 33
     }]
-    return testItems
+    let items = testItems.map((i) => new Item(i))
+    return items
 }

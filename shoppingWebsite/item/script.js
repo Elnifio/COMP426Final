@@ -3,28 +3,27 @@ $(function() {
 })
 
 const loadItems = async function(){
+    // load two imagined items for test purposes
     let obj = {
         id: 1,
+        picture: '../icons/item1/426.4.PNG',
         name: 'Iphone 12 Pro',
         publisher: 'Apple Inc.',
         price: 960,
         description: 'Iphone 12 adfgauyduagduavdas asdgjasgd asdasjd asdasjhdasd adgasgdjasd adgasjgdas asjdasjd asdj',
         stock: 106,
-        isMine: true,
-        createdAt: 606,
-        updatedAt: 218,
+        category: 'electronics',
         rating: 3
     }
     let obj2 = {
+        picture: '../icons/item1/426.4.PNG',
         id: 1,
         name: 'Iphone 12 Pro',
         publisher: 'Apple Inc.',
         price: 960,
+        category: 'electronics',
         description: 'Iphone 12 adfgauyduagduavdas asdgjasgd asdasjd asdasjhdasd adgasgdjasd adgasjgdas asjdasjd asdj',
         stock: 106,
-        isMine: true,
-        createdAt: 606,
-        updatedAt: 218,
         rating: 3
     }
     let item = new Item(obj)

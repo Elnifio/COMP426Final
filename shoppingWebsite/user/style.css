@@ -78,11 +78,11 @@ nav a:hover::before{
 /* for user UI */
 .loginView{
     height: 50%;
+    min-height: 250px;
     width: 30%;
    margin-left: 35%;
    margin-right: 35%;
    margin-top: 10%;
-   margin-bottom: 10%;
     text-align: center;
     border: solid gray;
 }
@@ -108,10 +108,12 @@ nav a:hover::before{
 }
 
 .usernameInput{
+    width: 70%;
     margin: 2%;
 }
 
 .passwordInput{
+    width: 70%;
     margin: 2%;
 }
 

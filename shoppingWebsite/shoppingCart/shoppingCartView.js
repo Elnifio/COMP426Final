@@ -6,9 +6,9 @@ ShoppingCartView = class{
         this.parentDiv.append(this.curDiv)
     }
 
+
     createViewDiv(){
         let div = $(`<div class='cart'>
-                        <h1 class='shoppingCartTitle'>Shopping Cart<h1>
                         <div class='cartItems'></div>
                         <div class='cartSummary'></div>
                         <button class='checkOutButton' type='button'>Check Out</button>
@@ -26,18 +26,52 @@ ShoppingCartView = class{
                                 </div>
                              </div>`)
             for (let i = 0; i < item.stock; i ++){
-                detailDiv.find('.quantity').append(`<option value="${i+1}">${i+1}</option>`)
+                // need to add all the options to let user select which amount of 
+                // item they would eventually purchase
+                if (i == item.amount-1){
+                    // note here that the default value is the amount that
+                    // is encapsulated in the item, which means how many items
+                    // has the user put in the cart. We depend on the BackEnd to
+                    // remember that value and provide it for us here
+                    detailDiv.find('.quantity').append(`<option selected='true' value="${i+1}">${i+1}</option>`)
+                } else {
+                    detailDiv.find('.quantity').append(`<option value='${i+1}'>${i+1}</option>`)
+                }
             }
-            detailDiv.find('.quantity').append(`<option value="11" selected='selected'>test11</option>`)
-            div.find('.cartItems').append(detailDiv)
-            detailDiv.find('.removeFromCartButton').on('click', (e)=>{
-                detailDiv.remove()
-                this.shoppingCart.items = this.shoppingCart.items.filter((i) => {
-                    return i != item})
+            detailDiv.find('.quantity').on('input', (e)=>{
+                // when user change the number of items in the cart
+                item.updateAmount(parseInt(detailDiv.find('.quantity').val()))
+                const summary = this.shoppingCart.summary()
+                this.curDiv.find('.cartSummary').empty().append(`<p>Total Quantity: ${summary.quantity} <strong>&#124;</strong> Total Price: &#36;${summary.price}</p>`)
+
             })
+            detailDiv.find('.removeFromCartButton').on('click', (e)=>{
+                // when user delete an item from the cart
+                const index = this.shoppingCart.remove(item)
+                detailDiv.remove()
+                const summary = this.shoppingCart.summary()
+                this.curDiv.find('.cartSummary').empty().append(`<p>Total Quantity: ${summary.quantity} <strong>&#124;</strong> Total Price: &#36;${summary.price}</p>`)
+            })
+            div.find('.cartItems').append(detailDiv)
         })
-        div.find('.emptyCartButton').on('click', (e)=>{})
-        div.find('checkOutButton').on('click', (e)=>{})
+        const summary = this.shoppingCart.summary()
+        div.find('.cartSummary').empty().append(`<p>Total Quantity: ${summary.quantity} <strong>&#124;</strong> Total Price: &#36;${summary.price}</p>`)
+        div.find('.emptyCartButton').on('click', (e)=>{
+            // to discard all items in the shopping cart
+            // update the shopping cart div
+            this.shoppingCart.empty()
+            let newDiv = this.createViewDiv()
+            this.curDiv.replaceWith(newDiv)
+            this.curDiv = newDiv
+        })
+        div.find('.checkOutButton').on('click', (e)=>{
+            // to purchase all the things in the shopping cart
+            // update the shopping cart div
+            this.shoppingCart.purchase()
+            let newDiv = this.createViewDiv()
+            this.curDiv.replaceWith(newDiv)
+            this.curDiv = newDiv
+        })
         return div
     }
 }

@@ -79,12 +79,14 @@ nav a:hover::before{
 .searchFormDiv{
     width: 100%;
     margin-top: 5%;
-    text-align: center;
     justify-content: center;
+    align-items: center;
 }
 
 .searchForm{
+    width: 100%;
     margin: 0 auto;
+    text-align: center;
 }
 
 .searchIcon{
@@ -154,6 +156,10 @@ nav a:hover::before{
     color: darkturquoise;
 }
 
+.resultStatistics{
+    text-align: center;
+}
+
 .resultSort{
     position: relative;
     display: inline-block;
@@ -181,7 +187,8 @@ nav a:hover::before{
 }
 
 .itemText{
-    width: 20%;
+    min-width: 20%;
+    max-width: 25%;
     height: 75%;
 }
 

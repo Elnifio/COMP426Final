@@ -97,7 +97,8 @@ nav a:hover::before{
 }
 
 .itemText{
-    width: height;
+    min-width: 20%;
+    max-width: 25%;
     height: 75%;
 }
 

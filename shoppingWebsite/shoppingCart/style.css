@@ -133,7 +133,6 @@ nav a:hover::before{
     flex-wrap: wrap;
     border: thin solid white;
     border-radius: 15px;
-    margin-top: 15px;
     margin-bottom: 15px;
     overflow: hidden;
 }
