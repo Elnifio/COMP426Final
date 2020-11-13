@@ -64,11 +64,11 @@ password
 
 ### Still not finished: 
 
- - [ ] User Log-in front-end functionality - for createuser and verifyUser
+ - [ ] User Log-in front-end functionality - for createuser and verifyUser(Front End Model Finished)
  - [ ] Communication between Front-back end
  - [ ] Back-end APIs - Yunzhou Liu: Not finished backend for HTTP request
- - [ ] Third-party API usage
- - [ ] Front-end: Shopping Cart
- - [ ] Front-end: beautification using bulma (optional)
+ - [x] Third-party API usage
+ - [x] Front-end: Shopping Cart
+ - [x] Front-end: beautification using bulma (optional)(many CSS fixed)
  - [ ] Ratings POST to backend, handling in database and functions
  - [ ] Upload items to database

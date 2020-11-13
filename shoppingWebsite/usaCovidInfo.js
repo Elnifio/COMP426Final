@@ -15,9 +15,9 @@ UsaCovidInfo = class{
         let div = $(`<div>
                 <p><strong>Untill <em>${date.toString().substring(0,4)+'/'+date.toString().substring(4,6)+'/'+date.toString().substring(6,8)}</em> In USA</strong><p>
                 <p><strong>Covid-19 Case: <em>${cases}</em></strong></p>
-                <p><strong>Case Increase: <em>${caseIncrease}</em></strong></p>
+                <p><strong>Daily Case Increase: <em>${caseIncrease}</em></strong></p>
                 <p><strong>Covid-19 Death: <em>${death}</em></strong></p>
-                <p><strong>Death Increase: <em>${deathIncrease}</em></strong></p>
+                <p><strong>Daily Death Increase: <em>${deathIncrease}</em></strong></p>
                 <i class="fas fa-plus stateInfoButton"></i>
                 </div>`)
         div.find('.stateInfoButton').on('click', async(e)=>{

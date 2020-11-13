@@ -15,9 +15,9 @@ StateCovidInfo = class{
         let div = $(`<div class='stateCovidInfo'>
                         <p><strong>${state}</strong><p>
                         <p><strong>Covid-19 Case: <em>${cases}</em></strong></p>
-                        <p><strong>Case Increase: <em>${caseIncrease}</em></strong></p>
+                        <p><strong>Daily Case Increase: <em>${caseIncrease}</em></strong></p>
                         <p><strong>Covid-19 Death: <em>${death}</em></strong></p>
-                        <p><strong>Death Increase: <em>${deathIncrease}</em></strong></p>
+                        <p><strong>Daily Death Increase: <em>${deathIncrease}</em></strong></p>
                         <i class="fas fa-minus stateInfoButton"></i>
                     </div> `)
         div.find('.stateInfoButton').on('click', (e)=>{
