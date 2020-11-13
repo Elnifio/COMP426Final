@@ -1,0 +1,180 @@
+<html>
+    <head>
+    {% comment %} 
+        导入Axios，jQuery和jQuery Cookie插件 
+    {% endcomment %}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script> <!-- 一定要记得带这个！ -->
+    </head>
+    <body>
+
+        <h1>用于测试获取所有物品的按钮</h1>
+        <p><strong>GET ./allitems</strong> with params: skip & limit (类似a09的skip和limit，可用于翻页)。Skip取值范围是非负整数，limit取值范围是50～100</p>
+        <p>返回JSON格式，物品列表在 result.data['result'] 中</p>
+        <p>skip和limit出现错误的时候返回404</p>
+        <!-- 代码在第113行 -->
+        <button id="testAllItems">getAllItems</button>
+        <hr />
+
+        <h1>用于测试获取特定ID物品的按钮</h1>
+        <p><strong>GET ./item/${itemid}</strong>，用itemid来填充括号内内容</p>
+        <p>返回JSON格式，物品列表在 result.data 中</p>
+        <button id="testGetItem">getItem</button>
+        <hr />
+
+        <h1>用于测试获取所有分类的按钮</h1>
+        <p><strong>GET ./categories</strong> with params: skip & limit</p>
+        <p>返回JSON格式，物品列表在 result.data['result'] 中</p>
+        <button id="testAllCategories">getAllCategories</button>
+        <hr />
+        <h1>用于测试创建新用户的表单</h1>
+        <p>一定要阅读这一部分 HTML & jQuery 的源代码</p>
+        <!-- 代码在第77行 -->
+        <form id="registerForm">
+            {% csrf_token %} <!-- 如果是直接通过form来submit的话就一定要这个（参考下面 发布物品 的设置），如果jQuery就不要 -->
+            <!-- 这部分内容随意更改 -->
+            Name:<input id="name" type="text"><br />
+            Password:<input id="password" type="text"><br />
+            Email:<input type="email" id="email"><br />
+            <input type="submit">
+        </form>
+        <hr />
+        <h1>用于测试登陆用户的表单</h1>
+        <p>一定要阅读这一部分 HTML & jQuery 的源代码</p>
+        <!-- 代码在第105行 -->
+        <form id="LoginForm">
+            {% csrf_token %}<!-- 如果是直接通过form来submit的话就一定要这个，如果jQuery就不要 -->
+            <!-- 这部分内容随意更改 -->
+            Email:<input type="email" id="loginemail"><br />
+            Password:<input id="loginpassword" type="text"><br />
+            <input type="submit">
+        </form>
+
+        <hr />
+        <h1>用于测试用户登出的按钮</h1>
+        <p><strong>get ./logout</strong></p>
+        <p>如果没有登陆则返回 status code 404</p>
+        <p>否则返回 status code 200并且删除对应cookie的login key</p>
+        <button id="logout">Logout</button>
+        <hr />
+        <h1>用于测试发布物品的表单</h1>
+        <p>一定要阅读这一部分 HTML 的源代码</p>
+        <p>post ./postitem</p>
+        <p>如果属性出现问题则返回 403</p>
+        <p>否则返回 200 + data里面保存对应的item id</p>
+        <!-- 千万不要用jQuery写handler！需要直接用 form 自带的 action 和 method 属性来 post -->
+        <!-- 一定要对应这些名字！！！不能改每个 input 的 name 属性 -->
+        <form id="postitem" enctype="multipart/form-data" action="/postitem" method="post">
+            <!-- 必须要有这个 csrf token -->
+            {% csrf_token %}
+            Item name: <input id="itemname" name="name"><br />
+            Item description: <textarea id="itemdescription" name="description"></textarea><br />
+            Item price: <input id="itemprice" type="number" name="price"><br />
+            Item stock: <input id="itemstock" type="number" name="stock"><br />
+            Item image: <input id="itemimage" type="file" name="image"><hr />
+            <button type="submit">Submit</button>
+        </form>
+        <script>
+            // useless
+            /**
+            $("#postitem").submit(async function(e) {
+                e.preventDefault();
+                const result = await axios({
+                    method:"post",
+                    url:"./postitem",
+                    data: $("#postitem").serialize()
+                });
+                console.log(result);
+            });
+            */
+
+            // logout 按钮的 event handler
+            $("#logout").on("click", async function(e) {
+                e.preventDefault();
+                const result = await axios({
+                    method:"get",
+                    url: "./logout",
+                });
+                console.log(result);
+            });
+
+            // 注册用户的 handler
+            $("#registerForm").on("submit", async function(e) {
+                e.preventDefault();
+
+                let name = e.target.name.value;
+                let pwd = e.target.password.value;
+                let email = e.target.email.value;
+
+                const result = await axios({
+                    method: "post",
+                    url: "./createuser",
+                    // 注意 data 里面一定要有 name，password 和 email 这三个 key
+                    data: {
+                        name,
+                        "password": pwd,
+                        email
+                    },
+                    // 注意 headers 里面一定要有这个 CSRFToken
+                    headers:{"X-CSRFToken":$.cookie('csrftoken')}
+                });
+                console.log(result);
+            });
+
+            $("#LoginForm").on("submit", async function(e) {
+                e.preventDefault();
+                console.log(e);
+                let email = e.target.loginemail.value;
+                let pwd = e.target.loginpassword.value;
+                const result = await axios({
+                    method: "post",
+                    url: "./verifyuser",
+                    // 注意 data 里面一定要有 email 和 password 这两个 key
+                    data: {
+                        email,
+                        "password": pwd
+                    },
+                    // 注意 headers 里面一定要有这个 CSRFToken
+                    headers:{"X-CSRFToken":$.cookie('csrftoken')}
+                });
+                console.log(result);
+            });
+
+            $("#testAllItems").on("click", async function(e) {
+                e.preventDefault();
+                console.log("querying..");
+                let skip = 0;
+                let limit = 50;
+                const request = await axios({
+                    method: "get",
+                    url: "./allitems",
+                    params: { skip, limit },
+                })
+                console.log(request);
+            });
+
+            $("#testGetItem").on("click", async function(e) {
+                e.preventDefault();
+                console.log("querying items...");
+                const result = await axios({
+                    method: "get",
+                    url: "./item/1",
+                });
+                console.log(result);
+                console.log(result.data);
+            });
+
+            $("#testAllCategories").on("click", async function(e) {
+                e.preventDefault();
+                console.log("querying items...");
+                const result = await axios({
+                    method: "get",
+                    url: "./categories",
+                });
+                console.log(result);
+                console.log(result.data);
+            });
+        </script>
+    </body>
+</html>
