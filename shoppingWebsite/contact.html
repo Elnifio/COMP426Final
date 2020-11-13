@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>itemHub</title>
+    <title>Covid Info</title>
     <link rel="icon" href="./icons/Item_hub icon.PNG" type="image/PNG">
-<!--        <link href="./style.css" type="text/css" rel="stylesheet">-->
+    <!--            <link href="./style.css" type="text/css" rel="stylesheet">-->
+
     <link rel="stylesheet" href="node_modules/bulma/css/bulma.css" />
+
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <script src="node_modules/axios/dist/axios.js"></script>
     <script src="https://kit.fontawesome.com/3b0ed6553a.js" crossorigin="anonymous"></script>
@@ -16,6 +18,7 @@
 
 <body>
 
+<!--This is the Nav bar-->
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="./">
@@ -52,12 +55,44 @@
         </div>
     </div>
 </nav>
+<!--Nav Bar ends-->
 
-
-<!--index content-->
 <section class="hero is-fullheight">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <div class="columns is-12 is-variable ">
+                <div class="column is-two-thirds has-text-left">
+                    <h1 class="title is-1">Contact Us</h1>
+                    <p class="is-size-5">We aim to provide great customer service. Leave your message here and we will be in touch with you within 24 hours.</p>
+                </div>
+                <div class="column is-one-third has-text-left">
+                    <div class="field">
+                        <label class="label">Your Name</label>
+                        <div class="control">
+                            <input class="input is-medium" type="text">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Your Email</label>
+                        <div class="control">
+                            <input class="input is-medium" type="text">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Your Message</label>
+                        <div class="control">
+                            <textarea class="textarea is-medium" placeholder="Type your question here!"></textarea>
+                        </div>
+                    </div>
+                    <div class="control">
+                        <button type="submit" class="button is-link is-fullwidth has-text-weight-medium is-medium">Send Message</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
-</body>
 
+</body>
 </html>
