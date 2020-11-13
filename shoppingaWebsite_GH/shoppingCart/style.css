@@ -1,0 +1,152 @@
+.itemView.card{
+    background-color: white;
+}
+
+div.extraInfo{
+    display: none;
+}
+
+.itemView.card:hover div.extraInfo{
+    display: block;
+}
+
+
+.container{
+    width: 80%
+}
+
+header {
+    background-color: darkturquoise;
+}
+
+header::after{
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.logo{
+    float: left;
+    width: 80px;
+    height: 80px;
+    margin: 10px
+}
+
+nav{
+    float: left;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    display: inline-block;
+    margin-left: 100px;
+    padding-top: 40px;
+    position: relative;
+}
+
+nav a{
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px
+}
+
+nav a:hover{
+    color: black
+}
+
+nav a::before{
+    content: '';
+    display: block;
+    height: 5px;
+    width: 0%;
+    background-color: black;
+    top: 0;
+    position: absolute;
+    transition: all ease-in-out 250ms;
+}
+
+nav a:hover::before{
+    width: 100%;
+}
+
+/* next section for shopping cart */
+.checkOutButton{
+    background-color: white;
+    border: thin solid gray;
+    transition: all 0.25s;
+    font-size: 150%;
+    border-radius: 5px;
+}
+
+.checkOutButton:hover{
+    background-color:  darkturquoise;
+}
+
+.emptyCartButton{
+    background-color: white;
+    border: thin solid gray;
+    transition: all 0.25s;
+    font-size: 150%;
+    border-radius: 5px;
+}
+
+.emptyCartButton:hover {
+    background-color: darkturquoise;
+}
+
+.removeFromCartButton{
+    background-color: white;
+    border: thin solid gray;
+    transition: all 0.25s;
+    border-radius: 5px;
+}
+
+.removeFromCartButton:hover{
+    background-color: darkturquoise;
+}
+
+.shoppingCartItem{
+    text-align: center;
+    height: 90%;
+    width: 33.3%;
+    padding: 1%;
+    transition: 0.25s;
+    border: thin solid white;
+}
+
+.shoppingCartItem:hover{
+    border: thin solid gray;
+    background-color: darkturquoise;
+}
+
+.cartItems{
+    display: flex;
+    cursor: default;
+    justify-items: center;
+    align-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: thin solid white;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.cart{
+    text-align: center;
+}
+
+.itemImg{
+    width: 20px;
+    height: 20px;
+}
+
+.shoppingCartTitle{
+    font-size: 200%;
+    color: darkturquoise;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>itemHub</title>
+    <link rel="icon" href="../icons/Item_hub icon.PNG" type="image/PNG">
+    <link href="./style.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="../node_modules/bulma/css/bulma.css" />
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/axios/dist/axios.js"></script>
+    <script src="https://kit.fontawesome.com/3b0ed6553a.js" crossorigin="anonymous"></script>
+    <script src='script.js'></script>
+    <script src='itemView.js'></script>
+    <script src='item.js'></script>
+    <script src='searchView.js'></script>
+
+    <!-- <script src='SearchView.js'></script> -->
+</head>
+
+
+<body>
+    <header>
+        <div class='container'>
+            <img src="../icons/Item_hub icon.PNG" alt='logo' class='logo'>
+            <nav>
+                <ul>
+                    <li><a id='itemsButton' href='../item'>Items</a></li>
+                    <li><a id='searchButton' href='../search'>search</a></li>
+                    <li><a id='managementButton' href='../shoppingCart'>Shopping Cart</a></li>
+                    <li><a id='userButton' href='../user'>User</a></li>
+                    <li><a id='aboutButton' href='../'>About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div id='root'></div>
+</body>
+
+</html>
