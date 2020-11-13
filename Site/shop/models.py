@@ -12,26 +12,27 @@ class User(models.Model):
 
     # Throw Error: 
     #           User.DoesNotExist
-    def findUser(queryid):
-        user = User.objects.get(userid=queryid)
-        return json.dumps({
+    @classmethod
+    def findUser(cls, queryid):
+        user = cls.objects.get(userid=queryid)
+        return {
             "id": user.userid,
             "name": user.username,
             "email": user.useremail,
             "image": user.userimage.url
-        })
+        }
 
     # Throws: 
     #           User.DoesNotExist
     #           Item.DoesNotExist
     # Returns: JSON formatted User Info
-    def queryInfo(queryid):
-        user = User.objects.get(userid=queryid)
+    @classmethod
+    def queryInfo(cls, queryid):
         published = [Item.objects.get(x.id).getJSON() for x in PublishedItem.objects.filter(uesrid=queryid)]
         purchased = [Item.objects.get(x.id).getJSON() for x in PurchasedItem.objects.filter(userid=queryid)]
         saved = [Item.objects.get(x.id).getJSON() for x in SavedItem.objects.filter(userid=queryid)]
         out = {
-            "userinfo": User.findUser(queryid),
+            "userinfo": cls.findUser(queryid),
             "publishedItems": json.dumps(published),
             "purchasedItems": json.dumps(purchased),
             "savedItems": json.dumps(saved)
@@ -49,8 +50,9 @@ class Item(models.Model):
     categoryid = models.IntegerField()                                                 # Category of an item
 
     # Throw Error: Item.DoesNotExist; User.DoesNotExist
-    def findItem(queryid):
-        item = Item.objects.get(itemid=queryid)
+    @classmethod
+    def findItem(cls, queryid):
+        item = cls.objects.get(itemid=queryid)
         return item.getJSON()
 
     # Throw Error: User.DoesNotExist
@@ -62,7 +64,7 @@ class Item(models.Model):
             rating_response = -1
         else: 
             rating_response = sum(ratings) / len(ratings)
-        return json.dumps({
+        return {
             "name": self.itemname,
             "description": self.itemdescription,
             "stock": self.stock,
@@ -71,7 +73,7 @@ class Item(models.Model):
             "publisher": publisher,
             "category": self.categoryid,
             "rating": rating_response
-        })
+        }
         
 
 class PublishedItem(models.Model):
@@ -101,13 +103,15 @@ class Category(models.Model):
             "image": self.categoryimage.url
         }
 
-    def getCategory(categoryid, skip=0, limit=50):
+    @classmethod
+    def getCategory(cls, categoryid, skip=0, limit=50):
         items = [x.getJSON() for x in Item.objects.filter(categoryid=categoryid).order_by(itemid).all()[skip:skip+limit]]
-        return json.dumps(items)
+        return {"result":items}
 
-    def getAllCategories():
-        categories = [x.toJSON() for x in Category.objects.all()]
-        return categories
+    @classmethod
+    def getAllCategories(cls):
+        categories = [x.toJSON() for x in cls.objects.all()]
+        return {"result":categories}
         
 
 class Rating(models.Model):
