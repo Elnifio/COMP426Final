@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>itemHub</title>
     <link rel="icon" href="./icons/Item_hub icon.PNG" type="image/PNG">
-<!--        <link href="./style.css" type="text/css" rel="stylesheet">-->
+    <link href="./style.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="node_modules/bulma/css/bulma.css" />
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <script src="node_modules/axios/dist/axios.js"></script>
@@ -14,50 +14,43 @@
     <script src='usaCovidInfo.js'></script>
 </head>
 
+
 <body>
-
-<nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-        <a class="navbar-item" href="./">
+    <header>
+        <div class='container'>
             <img src="./icons/Item_hub icon.PNG" alt='logo' class='logo'>
-        </a>
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-        </a>
-    </div>
-
-    <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-            <a class="navbar-item" id='itemsButton' href='item'>Items</a>
-            <a class="navbar-item" id='searchButton' href='search'>Search</a>
-            <a class="navbar-item" id='managementButton' href='shoppingCart'>Shopping Cart</a>
-            <a class="navbar-item" id='aboutButton' href='about.html'>About</a></li>
-            <a class="navbar-item" id='contactButton' href='contact.html'>Contact</a></li>
-            <a class="navbar-item" id='covidButton' href='covid.html'>Covid19</a></li>
+            <nav>
+                <ul>
+                    <li><a id='itemsButton' href='./item'>Items</a></li>
+                    <li><a id='searchButton' href='./search'>search</a></li>
+                    <li><a id='managementButton' href='./shoppingCart'>Shopping Cart</a></li>
+                    <li><a id='userButton' href='./user'>User</a></li>
+                    <li><a id='aboutButton'>About</a></li>
+                </ul>
+            </nav>
         </div>
-
-        <div class="navbar-end">
-            <div class="navbar-item">
-                <div class="buttons">
-                    <a class="button is-primary">
-                        <strong>Sign up</strong>
-                    </a>
-                    <a class="button is-light">
-                        Log in
-                    </a>
-                </div>
-            </div>
+    </header>
+    <div class='introduction'>
+        <p class = 'introTitle'><strong>ItemHub</strong></p>
+        <div class='authors'>
+            <p><strong>Han Gao: <em>Front End</em></strong></p>
+            <p><strong>YuFan Liu: </strong></p>
+            <p><strong>Yunzhou Liu: <em>Back End</em></strong></p>
+            <p><strong>Yuanzheng Zhao: </strong></p>
+        </div>
+        <br>
+        <div id='covid19'></div>
+        <div id='stateCovid19'></div>
+        <br>
+        <div id='fun'>
+            <p><strong>Wear Your <span>Mask</span> <i class="fas fa-head-side-mask fa-2x"></i></strong></p>
+            <p><strong>Keep Your Social <i class="fas fa-male fa-2x"></i> <span>Distance</span> <i class="fas fa-female fa-2x"></i></strong></p>
+            <p><strong>Wash Your <span>Hands</span><i class="fas fa-hands-wash fa-2x"></i></strong></p>
         </div>
     </div>
-</nav>
-
-
-<!--index content-->
-<section class="hero is-fullheight">
-</section>
-
+    <footer>
+        <p>**All Covid-19 Data Comes From https://covidtracking.com/</p>
+    </footer>
 </body>
 
 </html>
