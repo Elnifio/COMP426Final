@@ -12,7 +12,7 @@ UsaCovidInfo = class{
         const caseIncrease = this.data.positiveIncrease
         const death = this.data.death
         const deathIncrease = this.data.deathIncrease
-        let div = $(`<div>
+        let div = $(`<div class='usaCovidInfo'>
                 <p><strong>Untill <em>${date.toString().substring(0,4)+'/'+date.toString().substring(4,6)+'/'+date.toString().substring(6,8)}</em> In USA</strong><p>
                 <p><strong>Covid-19 Case: <em>${cases}</em></strong></p>
                 <p><strong>Daily Case Increase: <em>${caseIncrease}</em></strong></p>

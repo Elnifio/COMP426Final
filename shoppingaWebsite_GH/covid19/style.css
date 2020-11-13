@@ -74,41 +74,7 @@ nav a:hover::before{
     width: 100%;
 }
 
-/* next section for search box */
-div.autoComplete>input {
-    padding: 10px;
-    font-size: 17px;
-    height: 50px;
-    border: 1px solid grey;
-    float: left;
-    width: 80%;
-    background: #f1f1f1;
-  }
-  
-  form.searchForm button {
-    float: left;
-    width: 20%;
-    height: 50px;
-    padding: 10px;
-    background: #2196F3;
-    color: white;
-    font-size: 17px;
-    border: 1px solid grey;
-    border-left: none;
-    cursor: pointer;
-  }
-  
-  form.searchForm button:hover {
-    background: #0b7dda;
-  }
-  
-  form.searchForm::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
 
- 
 /* next section for page */
   
 
@@ -170,44 +136,15 @@ div.autoComplete>input {
       border: solid darkturquoise;
   }
 
-  /* next section for contact View */
+  .usaCovidInfo{
+      margin-top: 1%;
+      margin-bottom: 1%;
+      margin-left:40%;
+      margin-right: 40%;
+      transition: all 0.25s;
+      border: solid white
+  }
 
-.contactView{
-    padding: 2%;
-    margin-left: 40%;
-    margin-right:40%;
-    border: thin solid gray;
-}
-
-#name{
-    width: 100%;
-}
-
-#email{
-    width: 100%;
-}
-
-#question{
-    width: 100%;
-}
-
-.errorMessage{
-    color: red;
-}
-
-.back{
-    border: thin solid gray;
-    transition: all 0.25s;
-}
-.back:hover{
-    background-color: darkturquoise;
-}
-
-.submit{
-    border: thin solid gray;
-    transition: all 0.25s;
-}
-
-.submit:hover{
-    background-color: darkturquoise;
-}
+  .usaCovidInfo:hover{
+      border: solid darkturquoise;
+  }
