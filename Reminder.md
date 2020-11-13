@@ -4,13 +4,12 @@
  - find_item - given an id, find a particular item - **Finished**
  - find_all - find all items under a category - *Partly finished*, need to add {csrf_token} to the template
  - find_all_category - find all categories - **Finished**
- - upload_item - POST item to the website - 
- - log-in - log into a user account
+ - upload_item - POST item to the website - **Finished**
  - user_info: { customer:  purchased_items, account balance; merchants: merchandises{stock, price}, income }
  - Purchase_item - POST <item, userid> to website, (stock <= 0)?404:200
- - Send message to Merchant
- - Normal Message sent by customer
- - Purchase_item message sent by system
+ - Send message to Merchant - optional
+ - Normal Message sent by customer - optional
+ - Purchase_item message sent by system - optional
  - Add & Remove & Edit Saved items
  - Post & Delete & Edit Published items
  - CreateUser - *Partly finished*, need to handle images
