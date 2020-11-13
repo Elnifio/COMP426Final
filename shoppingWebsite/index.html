@@ -10,9 +10,8 @@
     <script src="node_modules/axios/dist/axios.js"></script>
     <script src="https://kit.fontawesome.com/3b0ed6553a.js" crossorigin="anonymous"></script>
     <script src='script.js'></script>
-    <!-- <script src='item.js'></script>
-    <script src='itemView.js'></script>
-    <script src='SearchView.js'></script> -->
+    <script src='stateCovidInfo.js'></script>
+    <script src='usaCovidInfo.js'></script>
 </head>
 
 
@@ -23,23 +22,35 @@
             <nav>
                 <ul>
                     <li><a id='itemsButton' href='./item'>Items</a></li>
+                    <li><a id='searchButton' href='./search'>search</a></li>
                     <li><a id='managementButton' href='./shoppingCart'>Shopping Cart</a></li>
                     <li><a id='userButton' href='./user'>User</a></li>
                     <li><a id='aboutButton'>About</a></li>
-                    <li><a id='searchButton' href='./search'>search</a></li>
                 </ul>
             </nav>
         </div>
     </header>
     <div class='introduction'>
-    <p class = 'introTitle'><strong>ItemHub</strong></p>
+        <p class = 'introTitle'><strong>ItemHub</strong></p>
+        <div class='authors'>
+            <p><strong>Han Gao: <em>Front End</em></strong></p>
+            <p><strong>YuFan Liu: </strong></p>
+            <p><strong>Yunzhou Liu: <em>Back End</em></strong></p>
+            <p><strong>Yuanzheng Zhao: </strong></p>
+        </div>
         <br>
-        <p>Authors:</p>
-        <p>Han Gao(ghflow): Front End</p>
-        <p>YuFan Liu(yufan):</p>
-        <p>Yunzhou Liu(yunzhou): Back End</p>
-        <p>Yuanzheng Zhao(zyz703):</p>
+        <div id='covid19'></div>
+        <div id='stateCovid19'></div>
+        <br>
+        <div id='fun'>
+            <p><strong>Wear Your <span>Mask</span> <i class="fas fa-head-side-mask fa-2x"></i></strong></p>
+            <p><strong>Keep Your Social <i class="fas fa-male fa-2x"></i> <span>Distance</span> <i class="fas fa-female fa-2x"></i></strong></p>
+            <p><strong>Wash Your <span>Hands</span><i class="fas fa-hands-wash fa-2x"></i></strong></p>
+        </div>
     </div>
+    <footer>
+        <p>**All Covid-19 Data Comes From https://covidtracking.com/</p>
+    </footer>
 </body>
 
 </html>

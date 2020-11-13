@@ -1,6 +1,9 @@
 let UserView = class{
     constructor(user, parentDiv){
         this.user = user
+        // we need to first confirm with server if we have logged in
+        // the loggedIn state of user will reflect that
+        // this part of functionality will be implemented in script.js / user.js
         if (this.user.loggedIn == true){
             this.curDiv = this.createUserViewDiv()
         } else {
@@ -45,11 +48,13 @@ let UserView = class{
             }
         })
         div.find('.registerButton').on('click', (e)=>{
+            // click on the register button, switch to registration page
             let newDiv = this.createRegisterDiv()
             this.curDiv.replaceWith(newDiv)
             this.curDiv = newDiv
         })
         div.find('a').on('click', (e)=>{
+            // click on password reset link, switch to password reset page
             let newDiv = this.createPasswordResetDiv()
             this.curDiv.replaceWith(newDiv)
             this.curDiv = newDiv
@@ -62,9 +67,10 @@ let UserView = class{
                         <p class='loginTitle'>Welcome to <span>Item Hub<span></p>
                         <p class='loginSubtitle'><i class="fas fa-user"></i>${this.user.username}</p> 
                         <br>
+                        <div class='orderHistoryDiv'></div>
                         <button class='logOut'>Log Out</button>
                         <button class='changePassword'>changePassword</button>
-                        <button class='orderHistory'>Order History</button>     
+                        <button class='orderHistory'>Order History</button>
                     </div>`) 
         div.find('.logOut').on('click', (e)=>{
             // user logout request
@@ -80,7 +86,19 @@ let UserView = class{
             this.curDiv = newDiv
         })
         div.find('.orderHistory').on('click', (e)=>{
-            let order = this.user.getOrder()
+            // user click on order history button
+            this.curDiv.find('.buttons').css('display', 'none')
+            let orders = this.user.getOrders()
+            this.curDiv.find('.orderHistoryDiv').empty
+            orders.forEach((order) => {
+                new OrderView(order, this.curDiv.find('.orderHistoryDiv'))
+            })
+            let closeButton = $('<button>close</button>')
+            closeButton.on('click', (e) =>{
+                this.curDiv.find('.orderHistoryDiv').empty()
+                this.curDiv.find('.buttons').css('display', 'inline')
+            })
+            this.curDiv.find('.orderHistoryDiv').append(closeButton)
             // render div to show order information
         })
         return div  
@@ -108,10 +126,13 @@ let UserView = class{
             div.find('.usernameInput').val(this.user.username)
         }
         div.find('.cancelButton').on('click', (e)=>{
+            // if user is already logged in, go to the main user view
+            // else, go to the login page
+            let newDiv = null
             if (this.user.loggedIn == true){
-                let newDiv = this.createLoginDiv()
+                newDiv = this.createUserViewDiv()
             } else {
-                let newDiv = this.createUserViewDiv
+                newDiv = this.createLoginDiv()
             }
             this.curDiv.replaceWith(newDiv)
             this.curDiv = newDiv
@@ -122,7 +143,7 @@ let UserView = class{
             } else if (this.curDiv.find('.firstPassword').val() != this.curDiv.find('.confirmPassword').val()){
                 this.curDiv.find('.errorMessage').empty().append('<p>Password does not match!</p>')
             } else {
-                this.user.changePassword(this.curDiv.find('.usernameInput').val(), this.curDiv.find('.passwordInput').val())
+                this.user.changePassword(this.curDiv.find('.usernameInput').val(), this.curDiv.find('.firstPassword').val())
                 if (this.user.loggedIn == true){
                     let newDiv = this.createUserViewDiv()
                     this.curDiv.replaceWith(newDiv)
@@ -159,11 +180,15 @@ let UserView = class{
             this.curDiv = newDiv
         })
         div.find('.createAccountButton').on('click', (e)=>{
+            // create account
+            // first check if user has entered username and password, and if password matches
             if (this.curDiv.find('.usernameInput').val() == '' || this.curDiv.find('.firstPassword').val() == '' || this.curDiv.find('.confirmPassword').val() == ''){
                 this.curDiv.find('.errorMessage').empty().append('<p>You need to fill in both Username and Password!</p>')
             } else if (this.curDiv.find('.firstPassword').val() != this.curDiv.find('.confirmPassword').val()){
                 this.curDiv.find('.errorMessage').empty().append('<p>Password does not match!</p>')
             } else {
+                // if all good, create user and switch to login page
+                this.user.register(this.curDiv.find('.usernameInput').val(), this.curDiv.find('.firstPassword').val())
                 let newDiv = this.createLoginDiv()
                 this.curDiv.replaceWith(newDiv)
                 this.curDiv = newDiv

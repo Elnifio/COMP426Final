@@ -161,3 +161,9 @@ nav a:hover::before{
 .cancelButton:hover{
     background-color: darkturquoise;
 }
+
+.orderDiv{
+    border: thin solid gray;
+    border-radius: 5px;
+    margin: 1%;
+}

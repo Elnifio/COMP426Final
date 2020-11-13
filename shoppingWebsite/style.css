@@ -108,39 +108,64 @@ div.autoComplete>input {
     display: table;
   }
 
-  /* next section for autocomplete code */
-  div.dialog{
-      width: 100%;
-      display: none;
-      min-height: 40px;
-      max-height: 330px;
-      overflow: scroll;
-      border-top: 1px solid #f4f4f4;
-
-  }
-
-  div.dialog.open{
-      display: block;
-  }
-
-  div.dialog div{
-      padding: 20px 10px;
-      font-size: 13px;
-      cursor: pointer;
-      transition: all 200ms;
-  }
-
-  div.dialog div:hover {
-      background: #f2f2f2;
-  }
+ 
+/* next section for page */
+  
 
   .introduction{
-      position: relative;
-      top: 100px;
+      margin-top: 2%;
       text-align: center;
+      cursor: default;
+  }
+
+
+  .introTitle strong{
+      font-size: 300%;
       color: darkturquoise;
   }
 
-  .introTitle{
-      font-size: 200%;
+  #fun span{
+    color: darkturquoise;
+  }
+
+  #covid19 em{
+    color: darkturquoise;
+  }
+
+  #stateCovid19 em{
+      color: darkturquoise;
+  }
+
+  .stateInfoButton{
+      transition: all 0.25s
+  }
+
+  .stateInfoButton:hover{
+      color: darkturquoise;
+  }
+
+  footer{
+      text-align: center;
+  }
+
+  #stateCovid19{
+    display: flex;
+    cursor: default;
+    justify-items: center;
+    align-content: center;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    overflow: hidden;
+  }
+
+  .stateCovidInfo{
+      padding: 1%;
+      width: 20%;
+      transition: all 0.25s;
+      border: solid white
+  }
+
+  .stateCovidInfo:hover{
+      border: solid darkturquoise;
   }

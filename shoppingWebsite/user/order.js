@@ -1,5 +1,8 @@
 let Order = class{
-    constructor(Order){
-        this.order = this.order
+    constructor(order){
+        this.items = order.items
+        this.id = order.id
     }
+
+    // have not really thought about what can be done with order object
 }

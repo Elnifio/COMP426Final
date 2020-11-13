@@ -13,6 +13,41 @@ let User = class{
         }
     }
 
+    getOrders(){
+        // fetch history order of current user from backend
+        // for testing purporses pre-defined orders are returned
+        let orders = [
+         {  id: 0,
+            items: [{
+            id: 1,
+            name: 'Iphone 12 Pro',
+            publisher: 'Apple Inc.',
+            price: 1000,
+            description: 'Iphone 12 adfgauyduagduavdas asdgjasgd asdasjd asdasjhdasd adgasgdjasd adgasjgdas asjdasjd asdj',
+            stock: 106,
+            isMine: true,
+            createdAt: 606,
+            updatedAt: 218,
+            rating: 3,
+            amount: 12
+        },
+        {
+            id: 2,
+            name: 'arc',
+            publisher: 'xxx',
+            price: 799,
+            description: 'ddd',
+            stock: 76,
+            isMine: true,
+            createdAt: 606,
+            updatedAt: 218,
+            rating: 3,
+            amount: 24
+        }] }
+        ]
+        return orders.map((o)=>new Order(o))
+    }
+
     async login(username, passWord){
         // when the user desire to log in, send log in request to backend
         // depend on the backend's response, set loggedIn
@@ -43,10 +78,6 @@ let User = class{
         this.username = 'ghflow'
         this.id = 1
         this.loggedIn = true
-    }
-
-    async getOrder(){
-        // fetch history order of current user from backend
     }
 
 

@@ -1,26 +1,28 @@
 let OrderView = class{
-    constructor(order, root){
+    constructor(order, parent){
         this.order = order
-        this.root = root
+        this.parent = parent
         this.curDiv = this.createViewDiv()
-        this.root.empty().append(this.curDiv)
+        this.parent.append(this.curDiv)
     }
 
     createViewDiv = function(){
         let div = $(`<div class='orderDiv'>
                         <div class='info'></div>
-                        <button>view details</button>
                     </div>`)
-        let number = this.order.items.length()
-        let totalPrice = 0
-        this.order.items.forEach((item)=> {totalPrice + item.number*item.price})
-        div.find('info').append(`<p>Order No.${this.order.id}</p>
+        let number = 0;
+        let price = 0;
+        this.order.items.forEach((item)=> {price += item.amount*item.price; number +=item.amount})
+        div.find('.info').append(`<p>Order No.${this.order.id}</p>
                                 <p>number of items purchased: ${number}</p>
-                                <p>total price: ${totalPrice}</p>`)
+                                <p>total price: ${price}</p>`)
+        // probably going to add a archieve order button
         return div
     }
 
     createDetailViewDiv = function(){
+        // under my thoughts
+        // on what level to present the order's content
         let div = $(`<div class='orderDetailDiv'>
                         <div></div>
                         <button>hide details</button>
