@@ -4,6 +4,12 @@ import shop.views
 
 urlpatterns = [
     path('', shop.views.test_homepage),
-    path("test", shop.views.get_all_items),
-    path("item/<int:itemid>", shop.views.get_item)
+    path("allitems", shop.views.get_all_items),
+    path("item/<int:itemid>", shop.views.get_item),
+    path("categories", shop.views.get_all_categories),
+    path("category/<int:categoryid>", shop.views.get_categories),
+    path("createuser", shop.views.create_user),
+    path("verifyuser", shop.views.verify_user),
+    path("logout", shop.views.logout),
+    path("postitem", shop.views.post_item)
 ]

@@ -21,6 +21,28 @@ class User(models.Model):
             "email": user.useremail,
             "image": user.userimage.url
         }
+    
+    # Check if a user with username and email already registered. 
+    # Returns True if not registered
+    # False otherwise
+    @classmethod
+    def identifyRegister(cls, email):
+        count = cls.objects.filter(useremail=email).count()
+        return count == 0
+
+    @classmethod
+    def findUserID(cls, email):
+        userid = cls.objects.get(useremail=email).userid
+        return userid
+
+    @classmethod
+    def check_login(cls,email, password):
+        try:
+            usr = cls.objects.get(useremail=email)
+            return password == usr.userpassword
+        except User.DoesNotExist as e:
+            return False
+
 
     # Throws: 
     #           User.DoesNotExist
@@ -51,9 +73,14 @@ class Item(models.Model):
 
     # Throw Error: Item.DoesNotExist; User.DoesNotExist
     @classmethod
-    def findItem(cls, queryid):
+    def find_item(cls, queryid):
         item = cls.objects.get(itemid=queryid)
         return item.getJSON()
+
+    @classmethod
+    def get_all(cls, limit, skip):
+        items = cls.objects.all()[skip:skip+limit]
+        return items
 
     # Throw Error: User.DoesNotExist
     def getJSON(self):

@@ -1,10 +1,10 @@
 # Backend
 
 ### API
- - find_item - given an id, find a particular item - Partly finished
- - find_all - find all items under a category - Partly finished
- - find_all_category - find all categories - Partly finished
- - upload_item - POST item to the website
+ - find_item - given an id, find a particular item - **Finished**
+ - find_all - find all items under a category - *Partly finished*, need to add {csrf_token} to the template
+ - find_all_category - find all categories - **Finished**
+ - upload_item - POST item to the website - 
  - log-in - log into a user account
  - user_info: { customer:  purchased_items, account balance; merchants: merchandises{stock, price}, income }
  - Purchase_item - POST <item, userid> to website, (stock <= 0)?404:200
@@ -13,6 +13,9 @@
  - Purchase_item message sent by system
  - Add & Remove & Edit Saved items
  - Post & Delete & Edit Published items
+ - CreateUser - *Partly finished*, need to handle images
+ - Log-in - **Finished**
+ - Log-out - **Finished**
 
 ### Model
  - User model: - finished
