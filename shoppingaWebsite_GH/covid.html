@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Covid Info</title>
+    <link rel="icon" href="./icons/Item_hub icon.PNG" type="image/PNG">
+<!--            <link href="./style.css" type="text/css" rel="stylesheet">-->
+
+    <link rel="stylesheet" href="node_modules/bulma/css/bulma.css" />
+
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/axios/dist/axios.js"></script>
+    <script src="https://kit.fontawesome.com/3b0ed6553a.js" crossorigin="anonymous"></script>
+    <script src='script.js'></script>
+    <script src='stateCovidInfo.js'></script>
+    <script src='usaCovidInfo.js'></script>
+</head>
+
+<body>
+
+<!--This is the Nav bar-->
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="./">
+            <img src="./icons/Item_hub icon.PNG" alt='logo' class='logo'>
+        </a>
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" id='itemsButton' href='item'>Items</a>
+            <a class="navbar-item" id='searchButton' href='search'>Search</a>
+            <a class="navbar-item" id='managementButton' href='shoppingCart'>Shopping Cart</a>
+            <a class="navbar-item" id='aboutButton' href='about.html'>About</a></li>
+            <a class="navbar-item" id='contactButton' href='contact.html'>Contact</a></li>
+            <a class="navbar-item" id='covidButton' href='covid.html'>Covid19</a></li>
+        </div>
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-primary">
+                        <strong>Sign up</strong>
+                    </a>
+                    <a class="button is-light">
+                        Log in
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<!--Nav Bar ends-->
+
+<section class="hero is-fullheight">
+
+    <div class="hero-body">
+
+
+        <div class="container has-text-centered" id='covid19'>
+<!--            <div>-->
+<!--                <p><strong>Untill <em>${date.toString().substring(0,4)+'/'+date.toString().substring(4,6)+'/'+date.toString().substring(6,8)}</em> In USA</strong><p>-->
+<!--                <p><strong>Covid-19 Case: <em>${cases}</em></strong></p>-->
+<!--                <p><strong>Daily Case Increase: <em>${caseIncrease}</em></strong></p>-->
+<!--                <p><strong>Covid-19 Death: <em>${death}</em></strong></p>-->
+<!--                <p><strong>Daily Death Increase: <em>${deathIncrease}</em></strong></p>-->
+<!--                <i class="fas fa-plus stateInfoButton"></i>-->
+<!--            </div>-->
+        </div>
+<!--        <div class="container has-text-centered" id='stateCovid19'></div>-->
+
+    </div>
+
+    <div class="container has-text-centered" id="fun">
+            <p><strong>Wear Your <span>Mask</span> <i class="fas fa-head-side-mask fa-2x"></i></strong></p>
+            <p><strong>Keep Your Social <i class="fas fa-male fa-2x"></i> <span>Distance</span> <i class="fas fa-female fa-2x"></i></strong></p>
+            <p><strong>Wash Your <span>Hands</span><i class="fas fa-hands-wash fa-2x"></i></strong></p>
+        <br>
+        <p>**All Covid-19 Data Comes From https://covidtracking.com/</p>
+    </div>
+</section>
+
+</body>
+</html>
