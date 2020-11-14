@@ -11,5 +11,8 @@ urlpatterns = [
     path("createuser", shop.views.create_user),
     path("verifyuser", shop.views.verify_user),
     path("logout", shop.views.logout),
-    path("postitem", shop.views.post_item)
+    path("postitem", shop.views.post_item),
+    path("verifylogin", shop.views.verify_login),
+    path("save", shop.views.save_item),
+    path("user", shop.views.get_complete_info)
 ]

@@ -50,9 +50,9 @@ class User(models.Model):
     # Returns: JSON formatted User Info
     @classmethod
     def queryInfo(cls, queryid):
-        published = [Item.objects.get(x.id).getJSON() for x in PublishedItem.objects.filter(uesrid=queryid)]
-        purchased = [Item.objects.get(x.id).getJSON() for x in PurchasedItem.objects.filter(userid=queryid)]
-        saved = [Item.objects.get(x.id).getJSON() for x in SavedItem.objects.filter(userid=queryid)]
+        published = [Item.find_item(x.itemid) for x in PublishedItem.objects.filter(userid=queryid)]
+        purchased = [Item.find_item(x.itemid) for x in PurchasedItem.objects.filter(userid=queryid)]
+        saved = [Item.find_item(x.itemid) for x in SavedItem.objects.filter(userid=queryid)]
         out = {
             "userinfo": cls.findUser(queryid),
             "publishedItems": json.dumps(published),
@@ -78,8 +78,12 @@ class Item(models.Model):
         return item.getJSON()
 
     @classmethod
+    def exists(cls, itemid):
+        return cls.objects.filter(itemid=itemid).count() != 0
+
+    @classmethod
     def get_all(cls, limit, skip):
-        items = cls.objects.all()[skip:skip+limit]
+        items = cls.objects.all().order_by('-itemid')[skip:skip+limit]
         return items
 
     # Throw Error: User.DoesNotExist
@@ -92,6 +96,7 @@ class Item(models.Model):
         else: 
             rating_response = sum(ratings) / len(ratings)
         return {
+            "id": self.itemid,
             "name": self.itemname,
             "description": self.itemdescription,
             "stock": self.stock,
@@ -102,11 +107,16 @@ class Item(models.Model):
             "rating": rating_response
         }
         
+    def __str__(self):
+        return "Item id: %s; Publisher id: %s" % (self.itemid, self.publisher)
 
 class PublishedItem(models.Model):
     itemid = models.IntegerField(db_index=True)
     userid = models.IntegerField(db_index=True)
     date = models.DateField(auto_now = True)
+
+    def __str__(self):
+        return "Item id: %s, User id: %s, Date: %s" % (self.itemid, self.userid, self.date)
     
 class PurchasedItem(models.Model):
     itemid = models.IntegerField(db_index=True)
@@ -119,6 +129,11 @@ class SavedItem(models.Model):
     userid = models.IntegerField(db_index=True)
     count = models.IntegerField(default=0)
     date = models.DateField(auto_now = True)
+
+    @classmethod
+    def query_all_saved(cls, itemid, userid):
+        query_result = cls.objects.filter(itemid=itemid).filter(userid=userid)
+        return query_result
 
 class Category(models.Model):
     categoryid = models.IntegerField(primary_key=True)
