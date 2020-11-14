@@ -74,3 +74,11 @@ password
  - [x] Front-end: beautification using bulma (optional)(many CSS fixed)
  - [ ] Ratings POST to backend, handling in database and functions
  - [ ] Upload items to database
+
+
+### After Migrating Front End To Django Framework
+
+ - [ ] Async functions in item.py (under folder item, search, and shoppingCart)
+ - [ ] Async functions in User.py (under folder user)
+ - [ ] user / userView model change to accomadate email address (under folder user)
+ - [ ] Page for posting new items (presumably under folder user)

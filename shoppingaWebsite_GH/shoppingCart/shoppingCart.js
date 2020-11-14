@@ -16,29 +16,30 @@ let ShoppingCart = class{
         return {quantity: q, price: p}
     }
 
-    remove(item){
+    async remove(item){
         // remove a specific item from cart
         const index = this.items.indexOf(item)
+        await item.removeFromCart()
         this.items.splice(index, 1)
     }
 
-    empty(){
+    async empty(){
         // remove all items from cart
-        this.items.forEach((item) => {
-            item.removeFromCart()
+        this.items.forEach(async (item) => {
+            await item.removeFromCart()
         })
         // empty the shopping cart
         this.items = []
         
     }
 
-    purchase(){
+    async purchase(){
         // purchase all items saved in cart
-        this.items.forEach((item) => {
-            item.purchase()
+        this.items.forEach(async (item) => {
+           await item.purchase()
         })
         // note that after we purchase every item in the cart
         // we also need to empty the cart
-        this.empty()
+        await this.empty()
     }
 }

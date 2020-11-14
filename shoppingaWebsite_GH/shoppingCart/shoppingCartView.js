@@ -38,16 +38,16 @@ ShoppingCartView = class{
                     detailDiv.find('.quantity').append(`<option value='${i+1}'>${i+1}</option>`)
                 }
             }
-            detailDiv.find('.quantity').on('input', (e)=>{
+            detailDiv.find('.quantity').on('input', async (e)=>{
                 // when user change the number of items in the cart
-                item.updateAmount(parseInt(detailDiv.find('.quantity').val()))
+                await item.updateAmount(parseInt(detailDiv.find('.quantity').val()))
                 const summary = this.shoppingCart.summary()
                 this.curDiv.find('.cartSummary').empty().append(`<p>Total Quantity: ${summary.quantity} <strong>&#124;</strong> Total Price: &#36;${summary.price}</p>`)
 
             })
-            detailDiv.find('.removeFromCartButton').on('click', (e)=>{
+            detailDiv.find('.removeFromCartButton').on('click', async (e)=>{
                 // when user delete an item from the cart
-                const index = this.shoppingCart.remove(item)
+                await this.shoppingCart.remove(item)
                 detailDiv.remove()
                 const summary = this.shoppingCart.summary()
                 this.curDiv.find('.cartSummary').empty().append(`<p>Total Quantity: ${summary.quantity} <strong>&#124;</strong> Total Price: &#36;${summary.price}</p>`)
@@ -56,18 +56,18 @@ ShoppingCartView = class{
         })
         const summary = this.shoppingCart.summary()
         div.find('.cartSummary').empty().append(`<p>Total Quantity: ${summary.quantity} <strong>&#124;</strong> Total Price: &#36;${summary.price}</p>`)
-        div.find('.emptyCartButton').on('click', (e)=>{
+        div.find('.emptyCartButton').on('click', async (e)=>{
             // to discard all items in the shopping cart
             // update the shopping cart div
-            this.shoppingCart.empty()
+            await this.shoppingCart.empty()
             let newDiv = this.createViewDiv()
             this.curDiv.replaceWith(newDiv)
             this.curDiv = newDiv
         })
-        div.find('.checkOutButton').on('click', (e)=>{
+        div.find('.checkOutButton').on('click', async (e)=>{
             // to purchase all the things in the shopping cart
             // update the shopping cart div
-            this.shoppingCart.purchase()
+            await this.shoppingCart.purchase()
             let newDiv = this.createViewDiv()
             this.curDiv.replaceWith(newDiv)
             this.curDiv = newDiv
