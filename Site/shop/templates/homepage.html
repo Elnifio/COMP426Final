@@ -1,14 +1,16 @@
 <html>
     <head>
-    {% comment %} 
-        导入Axios，jQuery和jQuery Cookie插件 
-    {% endcomment %}
+        {% comment %} 
+            导入Axios，jQuery和jQuery Cookie插件 
+        {% endcomment %}
 
-    {% load static %}
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script> <!-- 一定要记得带这个！ -->
-    <script src={% static 'homepage-js.js' %}></script>
+        <!-- 用于加载 Static 文件的 tab -->
+        {% load static %}
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script> <!-- 一定要记得带这个！ -->
+        <!-- 加载在 static 目录底下的 homepage-js.js 文件 -->
+        <script src={% static 'homepage-js.js' %}></script>
     </head>
     <body>
 
@@ -79,21 +81,6 @@
             <button type="submit">Submit</button>
         </form>
         <script>
-            // useless
-            /**
-            $("#postitem").submit(async function(e) {
-                e.preventDefault();
-                const result = await axios({
-                    method:"post",
-                    url:"./postitem",
-                    data: $("#postitem").serialize()
-                });
-                console.log(result);
-            });
-            */
-
-            // logout 按钮的 event handler
-            
         </script>
     </body>
 </html>

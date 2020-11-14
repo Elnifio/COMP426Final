@@ -117,6 +117,7 @@ class PurchasedItem(models.Model):
 class SavedItem(models.Model):
     itemid = models.IntegerField(db_index=True)
     userid = models.IntegerField(db_index=True)
+    count = models.IntegerField(default=0)
     date = models.DateField(auto_now = True)
 
 class Category(models.Model):

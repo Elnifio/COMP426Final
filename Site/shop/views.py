@@ -205,11 +205,5 @@ def post_item(request):
     response = JsonResponse(returndict)
     return response
 
-    
-
-
-
-    
-
 
 
