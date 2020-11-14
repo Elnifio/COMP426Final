@@ -74,9 +74,8 @@ def create_user(request):
     username = values['name']
     password = values['password']
     useremail = values['email']
+    userimage = "images/Users/default.jpeg"
 
-    # TODO: MODIFY THIS
-    # userimage = values['image']
     if not User.identifyRegister(useremail):
         return JsonResponse({"success":False})
 
@@ -84,6 +83,7 @@ def create_user(request):
     user.username = username
     user.userpassword = password
     user.useremail = useremail
+    user.userimage = userimage
     user.save()
     response = JsonResponse({"success": True})
     response.set_cookie("login", useremail)
@@ -96,7 +96,7 @@ def create_user(request):
 # Return status:
 #       200: Login success
 #       404: Login fail
-@csrf_exempt
+# @csrf_exempt
 def verify_user(request):
     values = json.loads(request.body)
 
@@ -153,15 +153,11 @@ def post_item(request):
     
     returndict = {}
     useremail = request.COOKIES.get("login")
-    print(request.POST)
-    print(request.FILES)
-    print(request.FILES['image'])
-    print(request.FILES['image'].chunks())
 
     values = request.POST
-    name = values['name'][0][:100]
-    description = values['description'][0][:300]
-    stock = values['stock'][0]
+    name = values['name'][:100]
+    description = values['description'][:300]
+    stock = values['stock']
 
     try:
         stock = int(stock)
@@ -173,15 +169,15 @@ def post_item(request):
     except ValueError:
         return return_bad_request()
     
-    if not "image" in request.FILES:
-        return return_bad_request()
-    
     item = Item()
     item.itemname = name
     item.itemdescription = description
     item.stock = stock
     item.price = price
-    item.picture = request.FILES['image']
+    if not "image" in request.FILES:
+        item.picture = "images/Items/Missing.png"
+    else:
+        item.picture = request.FILES['image']
 
     userid = User.findUserID(useremail)
     item.publisher = userid
@@ -190,10 +186,11 @@ def post_item(request):
     item.categoryid = 0
     item.save()
 
-    with open(item.picture.path, "wb+") as f:
-        img = request.FILES['image'].chunks()
-        for chunk in img:
-            f.write(chunk)
+    if "image" in request.FILES:
+        with open(item.picture.path, "wb+") as f:
+            img = request.FILES['image'].chunks()
+            for chunk in img:
+                f.write(chunk)
 
     pitem = PublishedItem()
     pitem.itemid = item.itemid
@@ -206,4 +203,74 @@ def post_item(request):
     return response
 
 
+# GET ./verifylogin
+# Verify if a person is logged in
+def verify_login(request):
+    return JsonResponse({"login":("login" in request.COOKIES)})
+
+# POST ./
+# 
+def purchase_item(request):
+
+    pass
+
+# POST ./save
+# Can use Axios
+# data: 
+#     itemid
+#     amount
+def save_item(request):
+    if not "login" in request.COOKIES:
+        return Http404("Not Logged in")
+    userid = -1
+    try:
+        userid = User.findUserID(request.COOKIES.get("login"))
+    except User.DoesNotExist:
+        return Http404("User does not exist")
+
+    print(request.POST)
+    values = json.loads(request.body)
+
+    itemid = values['itemid']
+    try:
+        itemid = int(itemid)
+    except ValueError:
+        return Http404("Item id error")
+    
+    if not Item.exists(itemid):
+        return Http404("Item does not exist")
+
+    amount = values['amount']
+    try:
+        amount = int(amount)
+    except ValueError:
+        return Http404("Amount error")
+    
+    if amount <= 0:
+        return Http404("Amount error")
+
+    query_result = SavedItem.query_all_saved(itemid, userid)
+    if (len(query_result) == 0):
+        sitem = SavedItem()
+        sitem.userid = userid
+        sitem.itemid = itemid
+        sitem.count = amount
+        sitem.save()
+    else:
+        sitem = query_result[0]
+        sitem.count = sitem.count + amount
+        sitem.save()
+    
+    return JsonResponse({"success":True})
+    
+# GET ./user
+def get_complete_info(request):
+    if not "login" in request.COOKIES:
+        return Http404("Not Logged in")
+    userid = -1
+    try:
+        userid = User.findUserID(request.COOKIES.get("login"))
+    except User.DoesNotExist:
+        return Http404("User does not exist")
+    return JsonResponse(User.queryInfo(userid))
 

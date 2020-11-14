@@ -5,7 +5,7 @@
  - find_all - find all items under a category - *Partly finished*, need to add {csrf_token} to the template
  - find_all_category - find all categories - **Finished**
  - upload_item - POST item to the website - **Finished**
- - user_info: { customer:  purchased_items, account balance; merchants: merchandises{stock, price}, income }
+ - user_info: { customer:  purchased_items, account balance; merchants: merchandises{stock, price}, income } - **Finished**
  - Purchase_item - POST <item, userid> to website, (stock <= 0)?404:200
  - Send message to Merchant - optional
  - Normal Message sent by customer - optional
