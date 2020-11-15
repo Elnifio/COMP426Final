@@ -6,10 +6,11 @@ from django.views.decorators.csrf import csrf_exempt,csrf_protect #Add this
 import json
 from django.http import Http404
 
+
 # Create your views here.
 
 def test_homepage(request):
-    return render(request, "./homepage.html", {})
+    return render(request, "./index.html", {})
 
 # GET ./item/${itemid}
 def get_item(request, itemid):
@@ -273,4 +274,3 @@ def get_complete_info(request):
     except User.DoesNotExist:
         return Http404("User does not exist")
     return JsonResponse(User.queryInfo(userid))
-
