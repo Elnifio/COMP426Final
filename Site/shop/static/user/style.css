@@ -1,0 +1,174 @@
+.itemView.card{
+    background-color: white;
+}
+
+div.extraInfo{
+    display: none;
+}
+
+.itemView.card:hover div.extraInfo{
+    display: block;
+}
+
+
+.container{
+    width: 80%
+}
+
+header {
+    background-color: darkturquoise;
+}
+
+header::after{
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.logo{
+    float: left;
+    width: 80px;
+    height: 80px;
+    margin: 10px
+}
+
+nav{
+    float: left;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    display: inline-block;
+    margin-left: 100px;
+    padding-top: 40px;
+    position: relative;
+}
+
+nav a{
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px
+}
+
+nav a:hover{
+    color: black
+}
+
+nav a::before{
+    content: '';
+    display: block;
+    height: 5px;
+    width: 0%;
+    background-color: black;
+    top: 0;
+    position: absolute;
+    transition: all ease-in-out 250ms;
+}
+
+nav a:hover::before{
+    width: 100%;
+}
+
+
+/* for user UI */
+.loginView{
+    height: 50%;
+    min-height: 250px;
+    width: 30%;
+   margin-left: 35%;
+   margin-right: 35%;
+   margin-top: 10%;
+    text-align: center;
+    border: solid gray;
+}
+
+.loginTitle{
+    margin: 5%;
+    font-size: 200%;
+    cursor: default;
+}
+
+.loginTitle span{
+    color: darkturquoise;
+}
+
+.loginSubtitle{
+    font-size: 150%;
+    transition: all 0.25s;
+    cursor: default
+}
+
+.loginForm{
+    margin: 2%;
+}
+
+.usernameInput{
+    width: 70%;
+    margin: 2%;
+}
+
+.emailInput{
+    width: 70%;
+    margin: 2%;
+}
+
+.passwordInput{
+    width: 70%;
+    margin: 2%;
+}
+
+.loginButton{
+    background-color: white;
+    border: thin solid gray;
+    transition: all 0.25s
+}
+
+.loginButton:hover {
+    background-color: darkturquoise;
+}
+
+.registerButton{
+    background-color: white;
+    border: thin solid gray;
+    transition: all 0.25s
+
+}
+
+.registerButton:hover{
+    background-color: darkturquoise;
+}
+
+.errorMessage{
+    color: red;
+}
+
+.createAccountButton{
+    background-color: white;
+    border: thin solid gray;
+    transition: all 0.25s
+}
+
+.createAccountButton:hover{
+    background-color: darkturquoise;
+}
+
+.cancelButton{
+    background-color: white;
+    border: thin solid gray;
+    transition: all 0.25s
+}
+
+.cancelButton:hover{
+    background-color: darkturquoise;
+}
+
+.orderDiv{
+    border: thin solid gray;
+    border-radius: 5px;
+    margin: 1%;
+}
