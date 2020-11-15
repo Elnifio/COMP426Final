@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>itemHub</title>
+    <link rel="icon" href="/static/Item_hub_icon.PNG" type="image/PNG">
+    <link href="/static/shoppingCart/style.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/node_modules/bulma/css/bulma.css" />
+    <script src="/static/node_modules/jquery/dist/jquery.js"></script>
+    <script src="/static/node_modules/axios/dist/axios.js"></script>
+
+    <script src='/static/shoppingCart/script.js'></script>
+    <script src='/static/shoppingCart/shoppingCart.js'></script>
+    <script src='/static/shoppingCart/shoppingCartView.js'></script>
+    <script src='/static/shoppingCart/item.js'></script>
+</head>
+
+
+<body>
+    <header>
+        <div class='container'>
+            <img src="/static/Item_hub_icon.PNG" alt='logo' class='logo'>
+            <nav>
+                <ul>
+                     <li><a id='homeButton' href='../index'>Home</a></li>
+                    <li><a id='itemsButton' href='../item'>Items</a></li>
+                    <li><a id='searchButton' href='../search'>search</a></li>
+                    <li><a id='managementButton' href='../shoppingCart'>Shopping Cart</a></li>
+                    <li><a id='userButton' href='../user'>User</a></li>
+                    <li><a id='aboutButton' href='../about'>About</a></li>
+                    <li><a id='covidButton' href='../covid19'>Covid-19</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div id='root'></div>
+</body>
+
+</html>
