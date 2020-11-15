@@ -1,0 +1,150 @@
+.itemView.card{
+    background-color: white;
+}
+
+div.extraInfo{
+    display: none;
+}
+
+.itemView.card:hover div.extraInfo{
+    display: block;
+}
+
+
+.container{
+    width: 80%
+}
+
+header {
+    background-color: darkturquoise;
+}
+
+header::after{
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.logo{
+    float: left;
+    width: 80px;
+    height: 80px;
+    margin: 10px
+}
+
+nav{
+    float: left;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    display: inline-block;
+    margin-left: 100px;
+    padding-top: 40px;
+    position: relative;
+}
+
+nav a{
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px
+}
+
+nav a:hover{
+    color: black
+}
+
+nav a::before{
+    content: '';
+    display: block;
+    height: 5px;
+    width: 0%;
+    background-color: black;
+    top: 0;
+    position: absolute;
+    transition: all ease-in-out 250ms;
+}
+
+nav a:hover::before{
+    width: 100%;
+}
+
+
+/* next section for page */
+  
+
+  .introduction{
+      margin-top: 2%;
+      text-align: center;
+      cursor: default;
+  }
+
+
+  .introTitle strong{
+      font-size: 300%;
+      color: darkturquoise;
+  }
+
+  #fun span{
+    color: darkturquoise;
+  }
+
+  #covid19 em{
+    color: darkturquoise;
+  }
+
+  #stateCovid19 em{
+      color: darkturquoise;
+  }
+
+  .stateInfoButton{
+      transition: all 0.25s
+  }
+
+  .stateInfoButton:hover{
+      color: darkturquoise;
+  }
+
+  footer{
+      text-align: center;
+  }
+
+  #stateCovid19{
+    display: flex;
+    cursor: default;
+    justify-items: center;
+    align-content: center;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    overflow: hidden;
+  }
+
+  .stateCovidInfo{
+      padding: 1%;
+      width: 20%;
+      transition: all 0.25s;
+      border: solid white
+  }
+
+  .stateCovidInfo:hover{
+      border: solid darkturquoise;
+  }
+
+  .usaCovidInfo{
+      margin-top: 1%;
+      margin-bottom: 1%;
+      margin-left:40%;
+      margin-right: 40%;
+      transition: all 0.25s;
+      border: solid white
+  }
+
+  .usaCovidInfo:hover{
+      border: solid darkturquoise;
+  }

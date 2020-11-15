@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>itemHub</title>
+    <link rel="icon" href="/static/Item_hub_icon.PNG" type="image/PNG">
+    <link href="/static/covid19/style.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/node_modules/bulma/css/bulma.css" />
+    <script src="/static/node_modules/jquery/dist/jquery.js"></script>
+    <script src="/static/node_modules/axios/dist/axios.js"></script>
+    <script src="https://kit.fontawesome.com/3b0ed6553a.js" crossorigin="anonymous"></script>
+    <script src='/static/covid19/script.js'></script>
+    <script src='/static/covid19/stateCovidInfo.js'></script>
+    <script src='/static/covid19/usaCovidInfo.js'></script>
+</head>
+
+
+<body>
+    <header>
+        <div class='container'>
+            <img src="/static/Item_hub_icon.PNG" alt='logo' class='logo'>
+            <nav>
+                <ul>
+                    <li><a id='homeButton' href='../index'>Home</a></li>
+                    <li><a id='itemsButton' href='../item'>Items</a></li>
+                    <li><a id='searchButton' href='../search'>search</a></li>
+                    <li><a id='managementButton' href='../shoppingCart'>Shopping Cart</a></li>
+                    <li><a id='userButton' href='../user'>User</a></li>
+                    <li><a id='aboutButton' href='../''>About</a></li>
+                    <li><a id='covidButton' href='../covid19'>Covid-19</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class='introduction'>
+        <h class='introTitle'><strong>Covid-19 Information</strong></h>
+        <br>
+        <div id='covid19'></div>
+        <div id='stateCovid19'></div>
+        <br>
+        <div id='fun'>
+            <p><strong>Wear Your <span>Mask</span> <i class="fas fa-head-side-mask fa-2x"></i></strong></p>
+            <p><strong>Keep Your Social <i class="fas fa-male fa-2x"></i> <span>Distance</span> <i class="fas fa-female fa-2x"></i></strong></p>
+            <p><strong>Wash Your <span>Hands</span><i class="fas fa-hands-wash fa-2x"></i></strong></p>
+        </div>
+    </div>
+    <footer>
+        <p>**All Covid-19 Data Comes From https://covidtracking.com/</p>
+    </footer>
+</body>
+
+</html>

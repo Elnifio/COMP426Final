@@ -4,6 +4,8 @@ import shop.views
 
 urlpatterns = [
     path('', shop.views.test_homepage),
+    path('index', shop.views.test_homepage),
+    path('covid19', shop.views.test_covid19page),
     path("allitems", shop.views.get_all_items),
     path("item/<int:itemid>", shop.views.get_item),
     path("categories", shop.views.get_all_categories),

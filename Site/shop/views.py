@@ -12,6 +12,9 @@ from django.http import Http404
 def test_homepage(request):
     return render(request, "./index.html", {})
 
+def test_covid19page(request):
+    return render(request, "./covid19.html", {})
+
 # GET ./item/${itemid}
 def get_item(request, itemid):
     return JsonResponse(Item.find_item(itemid))
