@@ -70,6 +70,7 @@ class Item(models.Model):
     picture = models.ImageField(upload_to="images/Items")            # An image of this item
     publisher = models.IntegerField(db_index=True)                          # Publisher (user who published this item)
     categoryid = models.IntegerField()                                                 # Category of an item
+    # rating = models.IntegerField()
 
     # Throw Error: Item.DoesNotExist; User.DoesNotExist
     @classmethod
@@ -98,13 +99,13 @@ class Item(models.Model):
         return {
             "id": self.itemid,
             "name": self.itemname,
+            "publisher": publisher['name'],
+            "price": self.price,
             "description": self.itemdescription,
             "stock": self.stock,
-            "price": self.price,
-            "picture": self.picture.url,
-            "publisher": publisher,
             "category": self.categoryid,
-            "rating": rating_response
+            "rating": rating_response,
+            "picture": self.picture.url,
         }
         
     def __str__(self):

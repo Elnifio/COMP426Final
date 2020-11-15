@@ -12,8 +12,26 @@ from django.http import Http404
 def test_homepage(request):
     return render(request, "./index.html", {})
 
-def test_covid19page(request):
+def get_Index(request):
+    return render(request, "./index.html", {})
+
+def get_Covid19Page(request):
     return render(request, "./covid19.html", {})
+
+def get_ItemsPage(request):
+    return render(request, "./items.html", {})
+
+def get_SearchPage(request):
+    return render(request, "./search.html", {})
+
+def get_ShoppingCartPage(request):
+    return render(request, "./shoppingCart.html", {})
+
+def get_UserPage(request):
+    return render(request, "./user.html", {})
+
+def get_AboutPage(request):
+    return render(request, "./about.html", {})
 
 # GET ./item/${itemid}
 def get_item(request, itemid):
