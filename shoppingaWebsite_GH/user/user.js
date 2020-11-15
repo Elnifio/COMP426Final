@@ -1,19 +1,19 @@
-let User = class{
+User = class{
     constructor(obj){
         //  User is the object to encapsulate status of the user
         // it should remember the id, username, and if user has logged in
         if (obj == undefined){
-            this.id = undefined
             this.username = undefined
+            this.email = undefined
             this.loggedIn = false
         } else {
-            this.id = obj.id
             this.username = obj.username
+            this.email = obj.email
             this.loggedIn = true
         }
     }
 
-    getOrders(){
+    async getOrders(){
         // fetch history order of current user from backend
         // for testing purporses pre-defined orders are returned
         let orders = [
@@ -48,7 +48,7 @@ let User = class{
         return orders.map((o)=>new Order(o))
     }
 
-    async login(username, passWord){
+    async login(email, password){
         // when the user desire to log in, send log in request to backend
         // depend on the backend's response, set loggedIn
 
@@ -64,28 +64,29 @@ let User = class{
         this.loggedIn = false
     }
 
-    async changePassword(username, password){
-        let result = await axios({
+    async changePassword(email, password){
+        // let result = await axios({
 
-        })
+        // })
         // send change password request to backend
     }
 
-    async register(username, password){
+    async register(email, username, password){
         // register a new user with backend
 
         // for testing purposes, assume for now that the new user returned from server is {username: 'ghflow', id: 1}
         this.username = 'ghflow'
-        this.id = 1
+        this.email = 'ghflow@live.unc.edu'
         this.loggedIn = true
     }
 
 
 }
-User.fetchUser = function(){
+
+User.fetchUser = async function(){
     // we will first check with backend if the user has logged in
     // the cookies are stored automatically by the browser, so
     // there is no particular things for us to do in the front end
     // if backend recognize the cookie, it should send back Json object with username and id encapsulated
-    return {username: 'ghflow', id: 1}
+    return {username: 'ghflow', email: 'ghflow@live.unc.edu', id: 1}
 }

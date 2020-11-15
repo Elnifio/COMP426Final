@@ -83,10 +83,10 @@ let ItemView = class{
         for (let i = 1; i <= stock; i++){
             div.find('.amount').append(`<option value="${i}">${i}</option>`)
         }
-        div.find('form').on('submit', (event) => {
+        div.find('form').on('submit', async (event) => {
             // when user add item to shoppingcart
             event.preventDefault()
-            this.item.saveToCart(this.curDiv.find(`select[name='amount']`).val())
+            await this.item.saveToCart(this.curDiv.find(`select[name='amount']`).val())
             // grab newest version of item from backend
             // rerender the itemView Div so that the updated information is reflected
             this.item.sync()

@@ -196,6 +196,10 @@ div.autoComplete>input {
 }
 
 .back{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10%;
+    width: 80%;
     border: thin solid gray;
     transition: all 0.25s;
 }
@@ -204,6 +208,10 @@ div.autoComplete>input {
 }
 
 .submit{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10%;
+    width: 80%;
     border: thin solid gray;
     transition: all 0.25s;
 }

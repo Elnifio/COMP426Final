@@ -17,8 +17,8 @@ let UserView = class{
                         <p class='loginTitle'>Welcome to <span>Item Hub<span></p>
                         <p class='loginSubtitle'><i class="fas fa-user"></i>Login</p> 
                         <form class='loginForm'>    
-                        <input class='usernameInput' type="text" placeholder="Username">  
-                        <br>    
+                        <input class='emailInput' type="text" placeholder="Email">  
+                        <br>  
                         <input class='passwordInput' type="Password"  placeholder="Password">    
                         <br>  
                         <div class='errorMessage'></div>
@@ -28,16 +28,19 @@ let UserView = class{
                         <a>forget your password?</a>
                         </form>     
                     </div>`) 
-        if (this.user.username!= undefined){
+        if (this.user.email!= undefined){
             // if the front-end has record of a previously logged in user
             // automatically fill in the username field
-            div.find('.usernameInput').val(this.user.username)
+            div.find('.emailInput').val(this.user.email)
         }
-        div.find('.loginButton').on('click', (e)=>{
-            if (this.curDiv.find('.usernameInput').val() == '' || this.curDiv.find('.passwordInput').val() == ''){
-               this.curDiv.find('.errorMessage').empty().append('<p>You need to fill in both Username and Password!</p>')
+        div.find('.loginButton').on('click', async (e)=>{
+            let re=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (this.curDiv.find('.passwordInput').val() == '' || this.curDiv.find('.emailInput').val() == ''){
+               this.curDiv.find('.errorMessage').empty().append('<p>You need to fill in both Email and Password!</p>')
+            } else if (!re.test(this.curDiv.find('.emailInput').val())){
+                this.curDiv.find('.errorMessage').empty().append('<p>Invalid Email Address!</p>')
             } else {
-                this.user.login(this.curDiv.find('.usernameInput').val(), this.curDiv.find('.passwordInput').val())
+                await this.user.login(this.curDiv.find('.emailInput').val(), this.curDiv.find('.passwordInput').val())
                 if (this.user.loggedIn == true){
                     let newDiv = this.createUserViewDiv()
                     this.curDiv.replaceWith(newDiv)
@@ -72,9 +75,9 @@ let UserView = class{
                         <button class='changePassword'>changePassword</button>
                         <button class='orderHistory'>Order History</button>
                     </div>`) 
-        div.find('.logOut').on('click', (e)=>{
+        div.find('.logOut').on('click', async (e)=>{
             // user logout request
-            this.user.logOut()
+            await this.user.logOut()
             let newDiv = this.createLoginDiv()
             this.curDiv.replaceWith(newDiv)
             this.curDiv = newDiv
@@ -109,7 +112,7 @@ let UserView = class{
                         <p class='loginTitle'>Welcome to <span>Item Hub<span></p>
                         <p class='loginSubtitle'><i class="fas fa-user"></i>Reset Your Password</p> 
                         <form class='loginForm'>    
-                        <input class='usernameInput' type="text" placeholder="Username">  
+                        <input class='emailInput' type="text" placeholder="Email Address">  
                         <br>    
                         <input class='passwordInput firstPassword' type="Password"  placeholder="Password">    
                         <br>  
@@ -120,10 +123,10 @@ let UserView = class{
                         <button class='cancelButton' type='button'>Cancel</button>     
                         </form>     
                     </div>`)
-        if (this.user.username!= undefined){
+        if (this.user.email!= undefined){
             // if the front-end has record of a previously logged in user
             // automatically fill in the username field
-            div.find('.usernameInput').val(this.user.username)
+            div.find('.emailInput').val(this.user.email)
         }
         div.find('.cancelButton').on('click', (e)=>{
             // if user is already logged in, go to the main user view
@@ -137,13 +140,16 @@ let UserView = class{
             this.curDiv.replaceWith(newDiv)
             this.curDiv = newDiv
         })
-        div.find('.createAccountButton').on('click', (e)=>{
-            if (this.curDiv.find('.usernameInput').val() == '' || this.curDiv.find('.firstPassword').val() == '' || this.curDiv.find('.confirmPassword').val() == ''){
+        div.find('.createAccountButton').on('click', async (e)=>{
+            let re=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (this.curDiv.find('.emailInput').val() == '' || this.curDiv.find('.firstPassword').val() == '' || this.curDiv.find('.confirmPassword').val() == ''){
                 this.curDiv.find('.errorMessage').empty().append('<p>You need to fill in both Username and Password!</p>')
             } else if (this.curDiv.find('.firstPassword').val() != this.curDiv.find('.confirmPassword').val()){
                 this.curDiv.find('.errorMessage').empty().append('<p>Password does not match!</p>')
+            } else if (!re.test(this.curDiv.find('.emailInput').val())){
+                this.curDiv.find('.errorMessage').empty().append('<p>Invalid Email Address!</p>')
             } else {
-                this.user.changePassword(this.curDiv.find('.usernameInput').val(), this.curDiv.find('.firstPassword').val())
+                await this.user.changePassword(this.curDiv.find('.emailInput').val(), this.curDiv.find('.firstPassword').val())
                 if (this.user.loggedIn == true){
                     let newDiv = this.createUserViewDiv()
                     this.curDiv.replaceWith(newDiv)
@@ -164,6 +170,8 @@ let UserView = class{
                         <p class='loginSubtitle'><i class="fas fa-user"></i>Create Account</p> 
                         <form class='loginForm'>    
                         <input class='usernameInput' type="text" placeholder="Username">  
+                        <br>
+                        <input class='emailInput' type="text" placeholder="Email Address">  
                         <br>    
                         <input class='passwordInput firstPassword' type="Password"  placeholder="Password">    
                         <br>  
@@ -179,16 +187,19 @@ let UserView = class{
             this.curDiv.replaceWith(newDiv)
             this.curDiv = newDiv
         })
-        div.find('.createAccountButton').on('click', (e)=>{
+        div.find('.createAccountButton').on('click', async (e)=>{
             // create account
             // first check if user has entered username and password, and if password matches
-            if (this.curDiv.find('.usernameInput').val() == '' || this.curDiv.find('.firstPassword').val() == '' || this.curDiv.find('.confirmPassword').val() == ''){
+            let re=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (this.curDiv.find('.usernameInput').val() == '' || this.curDiv.find('.emailInput').val() == '' || this.curDiv.find('.firstPassword').val() == '' || this.curDiv.find('.confirmPassword').val() == ''){
                 this.curDiv.find('.errorMessage').empty().append('<p>You need to fill in both Username and Password!</p>')
             } else if (this.curDiv.find('.firstPassword').val() != this.curDiv.find('.confirmPassword').val()){
                 this.curDiv.find('.errorMessage').empty().append('<p>Password does not match!</p>')
+            } else if (!re.test(this.curDiv.find('.emailInput').val())){
+                this.curDiv.find('.errorMessage').empty().append('<p>Invalid Email Address!</p>')
             } else {
                 // if all good, create user and switch to login page
-                this.user.register(this.curDiv.find('.usernameInput').val(), this.curDiv.find('.firstPassword').val())
+                await this.user.register(this.curDiv.find('.emailInput').val(), this.curDiv.find('.usernameInput').val(), this.curDiv.find('.firstPassword').val())
                 let newDiv = this.createLoginDiv()
                 this.curDiv.replaceWith(newDiv)
                 this.curDiv = newDiv

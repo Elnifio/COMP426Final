@@ -112,6 +112,11 @@ nav a:hover::before{
     margin: 2%;
 }
 
+.emailInput{
+    width: 70%;
+    margin: 2%;
+}
+
 .passwordInput{
     width: 70%;
     margin: 2%;

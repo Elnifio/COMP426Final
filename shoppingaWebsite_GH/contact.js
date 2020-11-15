@@ -32,17 +32,22 @@ Contact = class{
                         <form>
                         <div class='errorMessage'></div>
                     </div>`)
-        div.find('form').on('submit', (e)=>{
+        div.find('form').on('submit', async (e)=>{
             e.preventDefault()
             if (div.find('#name').val() == "" || div.find('#email').val() == ""){
                 div.find('.errorMessage').empty().append('<p>please fill out your Name and Email Address!</p>')
             } else {
+                await this.postContact(this.curDiv.find('#name').val(),this.curDiv.find('#email').val(),this.curDiv.find('#question').val())
                 let newDiv = this.createSuccessDiv()
                 this.curDiv.replaceWith(newDiv)
                 this.curDiv = newDiv
             }
         })
         return div
+    }
+
+    async postContact(name, email, body){
+        
     }
 
 }
