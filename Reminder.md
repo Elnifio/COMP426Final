@@ -250,6 +250,10 @@ Else:
     Return {login: False}
 ```
 
+- - -
+
+### TODO
+
  - find_item - given an id, find a particular item - **Finished**
  - find_all - find all items under a category - *Partly finished*, need to add {csrf_token} to the template
  - find_all_category - find all categories - **Finished**
