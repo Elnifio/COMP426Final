@@ -9,6 +9,9 @@ from django.http import Http404
 
 # Create your views here.
 
+def return404(message):
+    return Http404(message)
+
 def test_homepage(request):
     return render(request, "./index.html", {})
 
@@ -230,11 +233,47 @@ def post_item(request):
 def verify_login(request):
     return JsonResponse({"login":("login" in request.COOKIES)})
 
-# POST ./
-# 
+# POST ./purchase
+# can use Axios
+# data: 
+#     itemid
+#     amount
 def purchase_item(request):
+    if not "login" in request.COOKIES:
+        return return404("Not logged in")
+    userid = -1
+    try:
+        userid = User.findUserID(request.COOKIES.get("login"))
+    except User.DoesNotExist:
+        return return404("User does not exist")
 
-    pass
+    values = json.loads(request.body)
+
+    itemid = values['itemid']
+    try:
+        itemid = int(itemid)
+    except ValueError:
+        return return404("Item id error")
+    
+    if not Item.exists(itemid):
+        return return404("Item does not exist")
+
+    amount = values['amount']
+    try:
+        amount = int(amount)
+    except ValueError:
+        return return404("Amount error")
+    
+    if amount <= 0:
+        return return404("Amount error")
+
+    pitem = PurchasedItem()
+    pitem.itemid = itemid
+    pitem.userid = userid
+    pitem.purchaseCount = amount
+    pitem.save()
+    
+    return JsonResponse({"success":True})
 
 # POST ./save
 # Can use Axios

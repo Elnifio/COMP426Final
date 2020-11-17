@@ -9,7 +9,7 @@ urlpatterns = [
     path('item', shop.views.get_ItemsPage),
     path('search', shop.views.get_SearchPage),
     path('shoppingCart', shop.views.get_ShoppingCartPage),
-    path('user', shop.views.get_UserPage),
+    path('userinfo', shop.views.get_UserPage),
     path('about', shop.views.get_AboutPage),
 
     path("allitems", shop.views.get_all_items),
@@ -22,5 +22,6 @@ urlpatterns = [
     path("postitem", shop.views.post_item),
     path("verifylogin", shop.views.verify_login),
     path("save", shop.views.save_item),
-    path("user", shop.views.get_complete_info)
+    path("user", shop.views.get_complete_info),
+    path("purchase", shop.views.purchase_item)
 ]
