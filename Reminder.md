@@ -2,7 +2,9 @@
 
 ## API
 
-##### find_item: finished
+If not otherwise specified (./postitem), all POST request could (and is expected) to use Axios to make requests. 
+
+### find_item: finished
 
 ```
 GET ./item/<int:itemid>
@@ -26,7 +28,7 @@ Else:
     Http404("Item does not exist")
 ```
 
-##### find_all: Finished
+### find_all: Finished
 
 ```
 GET ./allitems
@@ -38,7 +40,7 @@ Returns:
 {result: [list of items in JSON format]}
 ```
 
-##### find_category: Finished
+### find_category: Finished
 
 ```
 GET ./category/<int:categoryid>
@@ -53,7 +55,7 @@ else:
     {result: []}
 ```
 
-##### find_all_category: Finished, Category functionality not implemented
+### find_all_category: Finished, Category functionality not implemented
 
 ```
 GET ./categories
@@ -64,12 +66,21 @@ Returns:
 {result: [list of categories]}
 ```
 
-##### upload_item: Finished
+### upload_item: Finished
 
 **DO NOT SUPPORT AJAX & Axios Submission!** After a form is submitted, you will automatically be re-directed to ./postitem page. 
 
 Should not change: 
  - \<form\>: 
+   - enctype
+   - action
+   - method
+ - \<inputs\>:
+   - name - the form should contain inputs with the same names
+   - type="file" - for <input> with name="image", its type should be set to "file"
+ - \<button\>: should have a submit button
+
+Other properties of this form could be changed. 
 
 ```
 POST ./postitem
@@ -86,7 +97,158 @@ form structure:
 </form>
 ```
 
+### user_info: Finished
 
+```
+GET ./user
+```
+
+Returns:
+```
+if not login:
+    Http404("Not logged in")
+else if invalid user:
+    Http404("User does not exist")
+else:
+    {
+        "userinfo": {
+            "id": user.userid,
+            "name": user.username,
+            "email": user.useremail,
+            "image": user.userimage.url
+        },
+        "publishedItems": [List of items that user published],
+        "purchasedItems": [List of items that user purchased],
+        "savedItems": [List of items that user saved]
+    }
+```
+
+### purchase_item: Finished, not tested
+
+```
+POST ./purchase
+data: {
+    itemid: int,
+    amount: int
+}
+```
+
+Result:
+```
+If not logged-in:
+    Http404("Not logged in")
+If invalid userid:
+    Http404("User not found")
+If itemid invalid (cannot be parsed as integer, or does not exist):
+    Http404("Item id error")
+If amount invalid (cannot be parsed as integer, or <= 0):
+    Http404("Amount error")
+If item stock <= 0:
+    Http404("Item out of stock")
+else if item.stock < amount:
+    Return {success: False, Remaining: item.stock} with Status Code 403
+else:
+    Return {success: True}
+```
+
+### Save_item: Finished
+
+```
+POST ./save
+data: {
+    itemid: int,
+    amount: int
+}
+```
+
+Result:
+```
+If not logged in:
+    Http404("Not logged in")
+If invalid user:
+    Http404("User not found")
+If itemid invalid:
+    Http404("Item id error")
+If amount invalid:
+    Http404("Amount error")
+else:
+    Return {success: True}
+```
+
+### create_user: Finished
+
+```
+POST ./createuser
+data: {
+    name: string,
+    password: string,
+    email: string,
+}
+```
+
+Result: 
+```
+If logged in: 
+    Http404("Already logged in")
+If email already registered:
+    Return {success: False}
+else:
+    Return {success: True}
+    Local login status updated
+```
+
+### verify_login
+
+```
+POST ./verifyuser
+data: {
+    email: string,
+    password: string
+}
+```
+
+Result:
+```
+if already logged in:
+    Return {success: True, exist: True, loggedin: True}
+if email not recognized:
+    Http404("User does not exist")
+else:
+    if password match record: 
+        Return {success: True, exist: True, loggedin: False}
+        Local login status updated
+    else:
+        Return {success: False, exist: True, loggedin: False}
+```
+
+### Logout - Finished
+
+```
+GET ./logout
+```
+
+Result:
+```
+If not logged in:
+    Http404("Haven't Logged in")
+else:
+    Return {}
+    Local login status updated
+```
+
+### Verify login - Finished
+
+```
+GET ./verifylogin
+```
+
+Result: 
+```
+If logged in:
+    Return {login: True}
+Else:
+    Return {login: False}
+```
 
  - find_item - given an id, find a particular item - **Finished**
  - find_all - find all items under a category - *Partly finished*, need to add {csrf_token} to the template

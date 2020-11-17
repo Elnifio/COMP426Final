@@ -55,9 +55,9 @@ class User(models.Model):
         saved = [Item.find_item(x.itemid) for x in SavedItem.objects.filter(userid=queryid)]
         out = {
             "userinfo": cls.findUser(queryid),
-            "publishedItems": json.dumps(published),
-            "purchasedItems": json.dumps(purchased),
-            "savedItems": json.dumps(saved)
+            "publishedItems": published,
+            "purchasedItems": purchased,
+            "savedItems": saved
         }
         return out
 

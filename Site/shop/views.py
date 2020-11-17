@@ -137,15 +137,16 @@ def verify_user(request):
     out = {"success":False, "exist":False, "loggedin": False}
     
     if not User.identifyRegister(useremail):
+        out['exist'] = True
         if User.check_login(useremail, password):
             out['success'] = True
-            out['exist'] = True
         else:
             out['success'] = False
     else:
         raise Http404("User does not exist")
     response = JsonResponse(out)
-    response.set_cookie("login",useremail)
+    if out["success"]:
+        response.set_cookie("login",useremail)
     return response
 
 # GET ./logout
@@ -303,7 +304,6 @@ def save_item(request):
     except User.DoesNotExist:
         return Http404("User does not exist")
 
-    print(request.POST)
     values = json.loads(request.body)
 
     itemid = values['itemid']
