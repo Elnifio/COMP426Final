@@ -208,7 +208,7 @@ def post_item(request):
     else:
         item.picture = request.FILES['image']
 
-    userid = User.findUserID(useremail)
+    userid = User.findUserID(useremail).userid
     item.publisher = userid
 
     # TODO: Include the category here
@@ -245,12 +245,13 @@ def verify_login(request):
 def purchase_item(request):
     if not "login" in request.COOKIES:
         return return404("Not logged in")
-    userid = -1
+    user = None
     try:
-        userid = User.findUserID(request.COOKIES.get("login"))
+        user = User.findUserID(request.COOKIES.get("login"))
     except User.DoesNotExist:
         return return404("User does not exist")
 
+    userid = user.userid
     values = json.loads(request.body)
 
     itemid = values['itemid']
@@ -278,6 +279,14 @@ def purchase_item(request):
         response = JsonResponse({"success": False, "Remaining": item.stock})
         response.status_code = 403
         return response
+    
+    publisher = None
+    try:
+        publisher = User.findUser(item.publisher)
+    except User.DoesNotExist:
+        return return404("Publisher of this item is no longer available")
+
+    user.manage_transaction(publisher, amount * item.price)
 
     item.stock -= amount
     item.save()
@@ -298,12 +307,13 @@ def purchase_item(request):
 def save_item(request):
     if not "login" in request.COOKIES:
         return Http404("Not Logged in")
-    userid = -1
+    user = None
     try:
-        userid = User.findUserID(request.COOKIES.get("login"))
+        user = User.findUserID(request.COOKIES.get("login"))
     except User.DoesNotExist:
         return Http404("User does not exist")
 
+    userid = user.userid
     values = json.loads(request.body)
 
     itemid = values['itemid']
@@ -342,9 +352,54 @@ def save_item(request):
 def get_complete_info(request):
     if not "login" in request.COOKIES:
         return Http404("Not Logged in")
-    userid = -1
+    user = None
     try:
-        userid = User.findUserID(request.COOKIES.get("login"))
+        user = User.findUserID(request.COOKIES.get("login"))
     except User.DoesNotExist:
         return Http404("User does not exist")
-    return JsonResponse(User.queryInfo(userid))
+    return JsonResponse(User.queryInfo(user.userid))
+
+
+# POST ./deletesaved
+# data: 
+#   itemid
+#   amount
+def deletesaved(request):
+    if not "login" in request.COOKIES:
+        return Http404("Not logged in")
+    user = None
+    try:
+        user = User.findUserID(request.COOKIES.get("login"))
+    except User.DoesNotExist:
+        return Http404("User does not exist")
+    
+    userid = user.userid
+    values = json.loads(request.body)
+
+    itemid = values['itemid']
+    try:
+        itemid = int(itemid)
+    except ValueError:
+        return Http404("Item id error")
+    
+    if not Item.exists(itemid):
+        return Http404("Item does not exist")
+
+    amount = values['amount']
+    try:
+        amount = int(amount)
+    except ValueError:
+        return Http404("Amount error")
+    
+    if amount <= 0:
+        return Http404("Amount error")
+
+    query_result = SavedItem.query_all_saved(itemid, userid)
+    if (len(query_result) == 0):
+        return Http404("Item not saved")
+    else:
+        sitem = query_result[0]
+        sitem.count = 0
+        sitem.save()
+    return JsonResponse({"success": True})
+

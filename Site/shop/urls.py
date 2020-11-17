@@ -23,5 +23,6 @@ urlpatterns = [
     path("verifylogin", shop.views.verify_login),
     path("save", shop.views.save_item),
     path("user", shop.views.get_complete_info),
-    path("purchase", shop.views.purchase_item)
+    path("purchase", shop.views.purchase_item),
+    path("deletesaved", shop.views.deletesaved)
 ]

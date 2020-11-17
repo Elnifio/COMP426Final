@@ -9,6 +9,7 @@ class User(models.Model):
     useremail = models.EmailField(db_index=True)
     userimage = models.ImageField(upload_to="images/Users")
     userpassword = models.TextField()
+    balance = models.FloatField(default=10000.00)
 
     # Throw Error: 
     #           User.DoesNotExist
@@ -19,8 +20,19 @@ class User(models.Model):
             "id": user.userid,
             "name": user.username,
             "email": user.useremail,
-            "image": user.userimage.url
+            "image": user.userimage.url,
+            "balance": user.balance
         }
+
+    def manage_transaction(self, other, amount):
+        if other.balance < amount:
+            raise ValueError("Insufficient balance")
+        else:
+            self.balance = self.balance + amount
+            other.balance = other.balance - amount
+            self.save()
+            other.save()
+            return True
     
     # Check if a user with username and email already registered. 
     # Returns True if not registered
@@ -32,7 +44,7 @@ class User(models.Model):
 
     @classmethod
     def findUserID(cls, email):
-        userid = cls.objects.get(useremail=email).userid
+        userid = cls.objects.get(useremail=email)
         return userid
 
     @classmethod

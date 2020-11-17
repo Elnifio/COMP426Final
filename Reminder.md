@@ -115,7 +115,8 @@ else:
             "id": user.userid,
             "name": user.username,
             "email": user.useremail,
-            "image": user.userimage.url
+            "image": user.userimage.url,
+            "balance": user.balance
         },
         "publishedItems": [List of items that user published],
         "purchasedItems": [List of items that user purchased],
