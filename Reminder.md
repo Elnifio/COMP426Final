@@ -1,6 +1,93 @@
 # Backend
 
-### API
+## API
+
+##### find_item: finished
+
+```
+GET ./item/<int:itemid>
+```
+
+Return:
+```
+If itemid exists: 
+    {
+        "id": self.itemid,
+        "name": self.itemname,
+        "publisher": publisher['name'],
+        "price": self.price,
+        "description": self.itemdescription,
+        "stock": self.stock,
+        "category": self.categoryid,
+        "rating": rating_response,
+        "picture": self.picture.url,
+    }
+Else:
+    Http404("Item does not exist")
+```
+
+##### find_all: Finished
+
+```
+GET ./allitems
+params: {skip = 0, limit = 100} - similar to Tweet
+```
+
+Returns: 
+```
+{result: [list of items in JSON format]}
+```
+
+##### find_category: Finished
+
+```
+GET ./category/<int:categoryid>
+params: {skip=0, limit=100} - similar to Tweet
+```
+
+Returns: 
+```
+if categoryid exists:
+    {result: [list of items in JSON format]}
+else:
+    {result: []}
+```
+
+##### find_all_category: Finished, Category functionality not implemented
+
+```
+GET ./categories
+```
+
+Returns: 
+```
+{result: [list of categories]}
+```
+
+##### upload_item: Finished
+
+**DO NOT SUPPORT AJAX & Axios Submission!** After a form is submitted, you will automatically be re-directed to ./postitem page. 
+
+Should not change: 
+ - \<form\>: 
+
+```
+POST ./postitem
+form structure:
+<form id="postitem" enctype="multipart/form-data" action="/postitem" method="post">
+    <!-- must include this csrf token -->
+    {% csrf_token %}
+    Item name: <input id="itemname" name="name"><br />
+    Item description: <textarea id="itemdescription" name="description"></textarea><br />
+    Item price: <input id="itemprice" type="number" name="price"><br />
+    Item stock: <input id="itemstock" type="number" name="stock"><br />
+    Item image: <input id="itemimage" type="file" name="image"><hr />
+    <button type="submit">Submit</button>
+</form>
+```
+
+
+
  - find_item - given an id, find a particular item - **Finished**
  - find_all - find all items under a category - *Partly finished*, need to add {csrf_token} to the template
  - find_all_category - find all categories - **Finished**

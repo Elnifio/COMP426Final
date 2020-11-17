@@ -38,7 +38,10 @@ def get_AboutPage(request):
 
 # GET ./item/${itemid}
 def get_item(request, itemid):
-    return JsonResponse(Item.find_item(itemid))
+    if Item.exists(itemid):
+        return JsonResponse(Item.find_item(itemid))
+    else:
+        return return404("Item not found")
 
 # GET ./allitems
 # Returns Json encoded list of items with skip and limit
@@ -265,8 +268,19 @@ def purchase_item(request):
         return return404("Amount error")
     
     if amount <= 0:
-        return return404("Amount error")
+        return return404("Illegal Amounts")
 
+    item = Item.find_item(itemid)
+    if item.stock <= 0:
+        return return404("This item is out of stock")
+    elif item.stock <= amount:
+        response = JsonResponse({"success": False, "Remaining": item.stock})
+        response.status_code = 403
+        return response
+
+    item.stock -= amount
+    item.save()
+    
     pitem = PurchasedItem()
     pitem.itemid = itemid
     pitem.userid = userid
