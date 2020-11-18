@@ -82,7 +82,6 @@ class Item(models.Model):
     picture = models.ImageField(upload_to="images/Items")            # An image of this item
     publisher = models.IntegerField(db_index=True)                          # Publisher (user who published this item)
     categoryid = models.IntegerField()                                                 # Category of an item
-    # rating = models.IntegerField()
 
     # Throw Error: Item.DoesNotExist; User.DoesNotExist
     @classmethod
