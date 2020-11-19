@@ -169,11 +169,3 @@ div.autoComplete>input {
   .stateCovidInfo:hover{
       border: solid darkturquoise;
   }
-
-  .rcorners1 {
-    border-radius: 25px;
-    background: #73AD21;
-    padding: 20px; 
-    width: 50px;
-    height: 10px;  
-  }
