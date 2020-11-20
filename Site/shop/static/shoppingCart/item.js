@@ -14,7 +14,7 @@ let Item = class{
         this.category = obj.category
         this.rating = obj.rating
         this.picture = obj.picture
-        this.amount = obj.amount
+        this.amount = 1
     }
 
     async sync(){
@@ -31,12 +31,6 @@ let Item = class{
         this.category = result.category
         this.rating = result.rating
         this.picture = result.picture
-        this.amount = obj.amount
-    }
-
-    async saveToCart(amount){
-        //  save item to shopping cart
-        // provide the amount of items user desired to add to shopping cart
     }
 
     async updateAmount(amount){
@@ -46,20 +40,83 @@ let Item = class{
         this.amount = amount
     }
     
-    async purchase(){
+    async purchase(amount){
+        // POST ./purchase
+        // data: {
+        //     itemid: int,
+        //     amount: int
+        // }
+        // ```
+
+        // Result:
+        // ```
+        // If not logged-in:
+        //     Http404("Not logged in")
+        // If invalid userid:
+        //     Http404("User not found")
+        // If itemid invalid (cannot be parsed as integer, or does not exist):
+        //     Http404("Item id error")
+        // If amount invalid (cannot be parsed as integer, or <= 0):
+        //     Http404("Amount error")
+        // If item stock <= 0:
+        //     Http404("Item out of stock")
+        // else if item.stock < amount:
+        //     Return {success: False, Remaining: item.stock} with Status Code 403
+        // else:
+        //     Return {success: True}
+        try {
+            let result = await axios({
+                method: 'post',
+                url: './purchase',
+                data: {
+                    itemid: this.id,
+                    amount: amount
+                }
+            })
+        } catch {
+        }
+        await this.removeFromCart()
+    }
+    
+    async saveToCart(amount){
         // purchase the items
         // provide the amount of items user want to purchase
-        // note that in the shopping cart section we encapsulate information
-        // of how much item are in the cart in the front end
-        // to reduce the communications with the backend
-        // when we make the final purchase
-        // we just send the request to backend with the amount encapsulated in the object
-
 
         // let result = await axios({
 
         // })
-        // await this.sync()
+        // POST ./save
+        // data: {
+        //     itemid: int,
+        //     amount: int
+        // }
+        // ```
+
+        // Result:
+        // ```
+        // If not logged in:
+        //     Http404("Not logged in")
+        // If invalid user:
+        //     Http404("User not found")
+        // If itemid invalid:
+        //     Http404("Item id error")
+        // If amount invalid:
+        //     Http404("Amount error")
+        // else:
+        //     Return {success: True}
+        // ```
+        try {
+            let result = await axios({
+                method: 'post',
+                url: './save',
+                data: {
+                    itemid: this.id,
+                    amount: amount
+                }
+            })
+        } catch {
+        }
+        await this.sync()
     }
 
     async removeFromCart(){

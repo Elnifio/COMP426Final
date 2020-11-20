@@ -35,30 +35,83 @@ let Item = class{
     }
 
     async purchase(amount){
-        // called when user make a purchase of item
-        // need to provide the amount that user want to purchase
+        // POST ./purchase
+        // data: {
+        //     itemid: int,
+        //     amount: int
+        // }
+        // ```
 
-
-        // let result = await axios({
-
-        // })
-        console.log(amount)
-        // await this.sync()
-        return this
+        // Result:
+        // ```
+        // If not logged-in:
+        //     Http404("Not logged in")
+        // If invalid userid:
+        //     Http404("User not found")
+        // If itemid invalid (cannot be parsed as integer, or does not exist):
+        //     Http404("Item id error")
+        // If amount invalid (cannot be parsed as integer, or <= 0):
+        //     Http404("Amount error")
+        // If item stock <= 0:
+        //     Http404("Item out of stock")
+        // else if item.stock < amount:
+        //     Return {success: False, Remaining: item.stock} with Status Code 403
+        // else:
+        //     Return {success: True}
+        try {
+            let result = await axios({
+                method: 'post',
+                url: './purchase',
+                data: {
+                    itemid: this.id,
+                    amount: amount
+                }
+            })
+        } catch {
+        }
+        await this.sync()
     }
-
+    
     async saveToCart(amount){
-        // called when user save an item to cart
-        // need to provide the amount that the user want to add to cart
+        // purchase the items
+        // provide the amount of items user want to purchase
 
         // let result = await axios({
 
         // })
-        console.log(amount)
-        // await this.sync()
-        return this
-    }
+        // POST ./save
+        // data: {
+        //     itemid: int,
+        //     amount: int
+        // }
+        // ```
 
+        // Result:
+        // ```
+        // If not logged in:
+        //     Http404("Not logged in")
+        // If invalid user:
+        //     Http404("User not found")
+        // If itemid invalid:
+        //     Http404("Item id error")
+        // If amount invalid:
+        //     Http404("Amount error")
+        // else:
+        //     Return {success: True}
+        // ```
+        try {
+            let result = await axios({
+                method: 'post',
+                url: './save',
+                data: {
+                    itemid: this.id,
+                    amount: amount
+                }
+            })
+        } catch {
+        }
+        await this.sync()
+    }
     async removeFromCart(){
         // remove item from cart
     }
@@ -74,7 +127,8 @@ Item.findall = async () => {
             skip: 0
         }
     })
-    return result.data['result'].map((item) => new Item(item))
+    const items = result.data['result'].map((item) => new Item(item))
+    return items
 }
 
 // no longer trying to implement the function for user to generate their own item

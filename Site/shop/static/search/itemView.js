@@ -89,7 +89,6 @@ let ItemView = class{
             await this.item.saveToCart(purchaseDiv.find(`select[name='amount']`).val())
             // grab newest version of item from backend
             // rerender the itemView Div so that the updated information is reflected
-            this.item.sync()
             let newDiv = this.createDetailedView()
             this.curDiv.replaceWith(newDiv)
             this.curDiv=newDiv

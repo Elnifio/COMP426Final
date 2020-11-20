@@ -40,6 +40,6 @@ let ShoppingCart = class{
         })
         // note that after we purchase every item in the cart
         // we also need to empty the cart
-        await this.empty()
+        this.items = []
     }
 }

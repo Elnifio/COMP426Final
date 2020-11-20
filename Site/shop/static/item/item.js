@@ -19,7 +19,7 @@ let Item = class{
     async sync(){
         let result = await axios({
             method: 'get',
-            url: './allitems/'+this.id,
+            url: './items/'+this.id,
         })
         this.id = result.id
         this.name = result.name
@@ -32,21 +32,83 @@ let Item = class{
         this.picture = result.picture
     }
 
-    async saveToCart(amount){
-        //  save item to shopping cart
-        // provide the amount of items user desired to add to shopping cart
+    async purchase(amount){
+        // POST ./purchase
+        // data: {
+        //     itemid: int,
+        //     amount: int
+        // }
+        // ```
+
+        // Result:
+        // ```
+        // If not logged-in:
+        //     Http404("Not logged in")
+        // If invalid userid:
+        //     Http404("User not found")
+        // If itemid invalid (cannot be parsed as integer, or does not exist):
+        //     Http404("Item id error")
+        // If amount invalid (cannot be parsed as integer, or <= 0):
+        //     Http404("Amount error")
+        // If item stock <= 0:
+        //     Http404("Item out of stock")
+        // else if item.stock < amount:
+        //     Return {success: False, Remaining: item.stock} with Status Code 403
+        // else:
+        //     Return {success: True}
+        try {
+            let result = await axios({
+                method: 'post',
+                url: './purchase',
+                data: {
+                    itemid: this.id,
+                    amount: amount
+                }
+            })
+        } catch {
+        }
+        await this.sync()
     }
     
-    async purchase(amount){
+    async saveToCart(amount){
         // purchase the items
         // provide the amount of items user want to purchase
 
         // let result = await axios({
 
         // })
-        console.log(amount)
-        // await this.sync()
-        return this
+        // POST ./save
+        // data: {
+        //     itemid: int,
+        //     amount: int
+        // }
+        // ```
+
+        // Result:
+        // ```
+        // If not logged in:
+        //     Http404("Not logged in")
+        // If invalid user:
+        //     Http404("User not found")
+        // If itemid invalid:
+        //     Http404("Item id error")
+        // If amount invalid:
+        //     Http404("Amount error")
+        // else:
+        //     Return {success: True}
+        // ```
+        try {
+            let result = await axios({
+                method: 'post',
+                url: './save',
+                data: {
+                    itemid: this.id,
+                    amount: amount
+                }
+            })
+        } catch {
+        }
+        await this.sync()
     }
 
     async removeFromCart(){

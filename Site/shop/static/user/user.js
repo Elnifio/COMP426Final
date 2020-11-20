@@ -7,45 +7,15 @@ User = class{
             this.email = undefined
             this.loggedIn = false
         } else {
-            this.username = obj.username
+            this.username = obj.name
             this.email = obj.email
             this.loggedIn = true
         }
     }
 
-    async getOrders(){
+    async getPurchasedItems(){
         // fetch history order of current user from backend
         // for testing purporses pre-defined orders are returned
-        let orders = [
-         {  id: 0,
-            items: [{
-            id: 1,
-            name: 'Iphone 12 Pro',
-            publisher: 'Apple Inc.',
-            price: 1000,
-            description: 'Iphone 12 adfgauyduagduavdas asdgjasgd asdasjd asdasjhdasd adgasgdjasd adgasjgdas asjdasjd asdj',
-            stock: 106,
-            isMine: true,
-            createdAt: 606,
-            updatedAt: 218,
-            rating: 3,
-            amount: 12
-        },
-        {
-            id: 2,
-            name: 'arc',
-            publisher: 'xxx',
-            price: 799,
-            description: 'ddd',
-            stock: 76,
-            isMine: true,
-            createdAt: 606,
-            updatedAt: 218,
-            rating: 3,
-            amount: 24
-        }] }
-        ]
-        return orders.map((o)=>new Order(o))
     }
 
     async login(email, password){
@@ -53,7 +23,45 @@ User = class{
         // depend on the backend's response, set loggedIn
 
         // for testing purposes, assume all login is successful for now
-        this.loggedIn = true
+
+        // POST ./verifyuser
+        //     data: {
+        //         email: string,
+        //         password: string
+        //     }
+        // Result:
+        // ```
+        // if already logged in:
+        //     Return {success: True, exist: True, loggedin: True}
+        //     if email not recognized:
+        //     Http404("User does not exist")
+        // else:
+        //     if password match record: 
+        //     Return {success: True, exist: True, loggedin: False}
+        //     Local login status updated
+        // else:
+        //     Return {success: False, exist: True, loggedin: False}
+        //     ```
+        console.log(email)
+        console.log(password)
+        try{
+            let result = await axios({
+                method: 'post',
+                url: './verifyuser',
+                data: {
+                        email: email,
+                        password: password
+                    }
+            })
+            const success = result.data['success']
+            if (success == true){
+                this.loggedIn = true
+            } else {
+                this.loggedIn = false
+            }
+        } catch {
+                this.loggedIn = false
+        }
     }
 
     async logOut(){
@@ -61,7 +69,27 @@ User = class{
         // depend on the backend's response, set loggedIn.
 
         // for testing purposes, assume all logout is successful for now
-        this.loggedIn = false
+        // ```
+        // GET ./logout
+        // ```
+
+        // Result:
+        // ```
+        // If not logged in:
+        //     Http404("Haven't Logged in")
+        // else:
+        //     Return {}
+        //     Local login status updated
+        // ```
+        try{
+            let result = await axios({
+                method: 'get',
+                url: './logout',
+            }) 
+            this.loggedIn = false
+        } catch {
+            this.loggedIn = false
+        }
     }
 
     async changePassword(email, password){
@@ -75,9 +103,44 @@ User = class{
         // register a new user with backend
 
         // for testing purposes, assume for now that the new user returned from server is {username: 'ghflow', id: 1}
-        this.username = 'ghflow'
-        this.email = 'ghflow@live.unc.edu'
-        this.loggedIn = true
+
+        // POST ./createuser
+        // data: {
+        //     name: string,
+        //     password: string,
+        //     email: string,
+        // }
+        // ```
+
+        // Result: 
+        // ```
+        // If logged in: 
+        //     Http404("Already logged in")
+        // If email already registered:
+        //     Return {success: False}
+        // else:
+        //     Return {success: True}
+        //     Local login status updated
+        // ```
+        try{
+            let result = await axios({
+                method: 'post',
+                url: './createuser',
+                data: {
+                    name: username,
+                    password: password,
+                    email: email
+                }
+            }) 
+            if (result.data['success'] == true){
+                return true
+            } else {
+                return false
+            }
+        } catch {
+            return false
+        }
+
     }
 
 
@@ -88,5 +151,15 @@ User.fetchUser = async function(){
     // the cookies are stored automatically by the browser, so
     // there is no particular things for us to do in the front end
     // if backend recognize the cookie, it should send back Json object with username and id encapsulated
-    return {username: 'ghflow', email: 'ghflow@live.unc.edu', id: 1}
+    try{
+        let result = await axios({
+            method: 'get',
+            url: './User',
+        }) 
+        const u = await result.data['userinfo']
+        console.log(1)
+        return u
+    } catch {
+        return undefined
+    }
 }
