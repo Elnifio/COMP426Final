@@ -27,7 +27,8 @@ let ItemView = class{
                     </div>`);
         // add rating stars to the simple itemView page
         let ratingDiv = div.find('.itemRating')
-        let rating = this.item.rating;
+        let rating = Math.floor(Math.random() * 6);
+        console.log(rating);
         for (let i = 0; i<5; i++){
             if (i<rating){
                 $(ratingDiv).append('&#9733;');
@@ -70,7 +71,7 @@ let ItemView = class{
                     </div>`)
         // fill in the rating stars
         let ratingDiv = div.find('.itemDetailRating')
-        let rating = this.item.rating;
+        let rating = Math.floor(Math.random() * 6);
         for (let i = 0; i<5; i++){
             if (i<rating){
                 $(ratingDiv).append('&#9733;');

@@ -335,18 +335,21 @@ def save_item(request):
         return Http404("Amount error")
 
     query_result = SavedItem.query_all_saved(itemid, userid)
+    request_amt = -1
     if (len(query_result) == 0):
         sitem = SavedItem()
         sitem.userid = userid
         sitem.itemid = itemid
         sitem.count = amount
+        request_amt = sitem.count
         sitem.save()
     else:
         sitem = query_result[0]
         sitem.count = sitem.count + amount
+        request_amt = sitem.count
         sitem.save()
     
-    return JsonResponse({"success":True})
+    return JsonResponse({"success":True, "amount":request_amt})
     
 # GET ./user
 def get_complete_info(request):

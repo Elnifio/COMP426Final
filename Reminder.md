@@ -79,6 +79,7 @@ Should not change:
    - name - the form should contain inputs with the same names
    - type="file" - for <input> with name="image", its type should be set to "file"
  - \<button\>: should have a submit button
+ - csrf token
 
 Other properties of this form could be changed. 
 
