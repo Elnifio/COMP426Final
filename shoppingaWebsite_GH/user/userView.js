@@ -88,20 +88,23 @@ let UserView = class{
             this.curDiv.replaceWith(newDiv)
             this.curDiv = newDiv
         })
-        div.find('.orderHistory').on('click', (e)=>{
+        div.find('.orderHistory').on('click', async (e)=>{
             // user click on order history button
-            this.curDiv.find('.buttons').css('display', 'none')
-            let orders = this.user.getOrders()
-            this.curDiv.find('.orderHistoryDiv').empty
-            orders.forEach((order) => {
-                new OrderView(order, this.curDiv.find('.orderHistoryDiv'))
-            })
-            let closeButton = $('<button>close</button>')
-            closeButton.on('click', (e) =>{
-                this.curDiv.find('.orderHistoryDiv').empty()
-                this.curDiv.find('.buttons').css('display', 'inline')
-            })
-            this.curDiv.find('.orderHistoryDiv').append(closeButton)
+            // this.curDiv.find('.buttons').css('display', 'none')
+            // let orders = this.user.getOrders()
+            // this.curDiv.find('.orderHistoryDiv').empty
+            // orders.forEach((order) => {
+            //     new OrderView(order, this.curDiv.find('.orderHistoryDiv'))
+            // })
+            // let closeButton = $('<button>close</button>')
+            // closeButton.on('click', (e) =>{
+            //     this.curDiv.find('.orderHistoryDiv').empty()
+            //     this.curDiv.find('.buttons').css('display', 'inline')
+            // })
+            // this.curDiv.find('.orderHistoryDiv').append(closeButton)
+            let newDiv = await this.createOrdersHistoryView()
+            this.curDiv.replaceWith(newDiv)
+            this.curDiv = newDiv
             // render div to show order information
         })
         return div  
@@ -208,8 +211,21 @@ let UserView = class{
         return div
     }
 
-    createOrdersView(){
-        let div = $('')
+    createOrdersHistoryView = async function(){
+        let div = $(`<div class="loginView">
+                        <p class='loginTitle'><span>Order History</span></p>
+                        <div class='orders'></div>
+                        <button class='cancelButton'>Cancel</button>
+                    </div>`)
+        const orders = await this.user.getAllPurchasedItems()
+        orders.forEach((item) => {
+            div.find('.orders').append(`<p>${item.name}</p>`)
+        })
+        div.find('.cancelButton').on('click', (e)=>{
+            let newDiv = this.createUserViewDiv()
+            this.curDiv.replaceWith(newDiv)
+            this.curDiv = newDiv
+        })
         return div
     }
 }

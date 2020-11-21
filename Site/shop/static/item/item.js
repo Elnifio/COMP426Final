@@ -58,12 +58,14 @@ let Item = class{
         //     Return {success: True}
         try {
             let result = await axios({
+                
                 method: 'post',
                 url: './purchase',
                 data: {
                     itemid: this.id,
                     amount: amount
-                }
+                },
+                headers:{"X-CSRFToken":$.cookie('csrftoken')}
             })
         } catch {
         }
@@ -104,7 +106,8 @@ let Item = class{
                 data: {
                     itemid: this.id,
                     amount: amount
-                }
+                },
+                headers:{"X-CSRFToken":$.cookie('csrftoken')}
             })
         } catch {
         }

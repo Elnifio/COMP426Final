@@ -7,10 +7,4 @@ $(async function() {
     let u = await User.fetchUser()
     let user = new User(u)
     new UserView(user, $('#root'))
-    let result = await axios({
-            method: 'get',
-            url: 'verifylogin',
-        }) 
-        const login = await result.data['login']
-        console.log(login)
 })

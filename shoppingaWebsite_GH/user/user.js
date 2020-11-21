@@ -13,12 +13,11 @@ User = class{
         }
     }
 
-    async getOrders(){
+    async getAllPurchasedItems(){
         // fetch history order of current user from backend
         // for testing purporses pre-defined orders are returned
-        let orders = [
-         {  id: 0,
-            items: [{
+        let orders = 
+            [{
             id: 1,
             name: 'Iphone 12 Pro',
             publisher: 'Apple Inc.',
@@ -43,9 +42,8 @@ User = class{
             updatedAt: 218,
             rating: 3,
             amount: 24
-        }] }
-        ]
-        return orders.map((o)=>new Order(o))
+        }]
+        return orders
     }
 
     async login(email, password){

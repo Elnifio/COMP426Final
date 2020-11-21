@@ -13,9 +13,32 @@ User = class{
         }
     }
 
-    async getPurchasedItems(){
+    async sync(){
+        try{
+            let result = await axios({
+                method: 'get',
+                url: './user',
+            })
+            const u = await result.data['userinfo']
+            this.username = u.name
+            this.email = u.email
+        } catch {
+        }
+    }
+
+    async getAllPurchasedItems(){
         // fetch history order of current user from backend
         // for testing purporses pre-defined orders are returned
+        try{
+            let result = await axios({
+                method: 'get',
+                url: './user',
+            })
+            const u = await result.data['purchasedItems']
+            return u
+        } catch {
+            return []
+        }
     }
 
     async login(email, password){
@@ -42,8 +65,6 @@ User = class{
         // else:
         //     Return {success: False, exist: True, loggedin: False}
         //     ```
-        console.log(email)
-        console.log(password)
         try{
             let result = await axios({
                 method: 'post',
@@ -51,11 +72,14 @@ User = class{
                 data: {
                         email: email,
                         password: password
-                    }
+                    },
+                headers:{"X-CSRFToken":$.cookie('csrftoken')}
             })
             const success = result.data['success']
             if (success == true){
+                await this.sync()
                 this.loggedIn = true
+
             } else {
                 this.loggedIn = false
             }
@@ -130,7 +154,8 @@ User = class{
                     name: username,
                     password: password,
                     email: email
-                }
+                },
+                headers:{"X-CSRFToken":$.cookie('csrftoken')}
             }) 
             if (result.data['success'] == true){
                 return true
@@ -154,10 +179,9 @@ User.fetchUser = async function(){
     try{
         let result = await axios({
             method: 'get',
-            url: './User',
-        }) 
+            url: './user',
+        })
         const u = await result.data['userinfo']
-        console.log(1)
         return u
     } catch {
         return undefined

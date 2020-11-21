@@ -65,7 +65,8 @@ let Item = class{
                 data: {
                     itemid: this.id,
                     amount: amount
-                }
+                },
+                headers:{"X-CSRFToken":$.cookie('csrftoken')}
             })
         } catch {
         }
@@ -106,7 +107,8 @@ let Item = class{
                 data: {
                     itemid: this.id,
                     amount: amount
-                }
+                },
+                headers:{"X-CSRFToken":$.cookie('csrftoken')}
             })
         } catch {
         }

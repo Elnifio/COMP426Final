@@ -38,9 +38,9 @@ ShoppingCartView = class{
                     detailDiv.find('.quantity').append(`<option value='${i+1}'>${i+1}</option>`)
                 }
             }
-            detailDiv.find('.quantity').on('input', async (e)=>{
+            detailDiv.find('.quantity').on('input', (e)=>{
                 // when user change the number of items in the cart
-                await item.updateAmount(parseInt(detailDiv.find('.quantity').val()))
+                item.updateAmount(parseInt(detailDiv.find('.quantity').val()))
                 const summary = this.shoppingCart.summary()
                 this.curDiv.find('.cartSummary').empty().append(`<p>Total Quantity: ${summary.quantity} <strong>&#124;</strong> Total Price: &#36;${summary.price}</p>`)
 

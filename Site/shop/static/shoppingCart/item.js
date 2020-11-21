@@ -33,14 +33,14 @@ let Item = class{
         this.picture = result.picture
     }
 
-    async updateAmount(amount){
+    updateAmount(amount){
         // a unique property to items in the shopping cart
         // update the amount of items in the front end
         // when purchase the item, 
         this.amount = amount
     }
     
-    async purchase(amount){
+    async purchase(){
         // POST ./purchase
         // data: {
         //     itemid: int,
@@ -70,8 +70,9 @@ let Item = class{
                 url: './purchase',
                 data: {
                     itemid: this.id,
-                    amount: amount
-                }
+                    amount: this.amount
+                },
+                headers:{"X-CSRFToken":$.cookie('csrftoken')}
             })
         } catch {
         }
@@ -112,7 +113,8 @@ let Item = class{
                 data: {
                     itemid: this.id,
                     amount: amount
-                }
+                },
+                headers:{"X-CSRFToken":$.cookie('csrftoken')}
             })
         } catch {
         }
