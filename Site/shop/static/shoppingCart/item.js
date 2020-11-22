@@ -4,7 +4,7 @@ let Item = class{
     // to save the item to shopping cart
     // to purchase the item
     // to fetch the newest version of the item from backend
-    constructor(obj){
+    constructor(obj, amount=1){
         this.id = obj.id
         this.name = obj.name
         this.publisher = obj.publisher
@@ -14,13 +14,13 @@ let Item = class{
         this.category = obj.category
         this.rating = obj.rating
         this.picture = obj.picture
-        this.amount = 1
+        this.amount = amount
     }
 
     async sync(){
         let result = await axios({
             method: 'get',
-            url: './allitems/'+this.id,
+            url: './item/'+this.id,
         })
         this.id = result.id
         this.name = result.name
@@ -64,19 +64,20 @@ let Item = class{
         //     Return {success: False, Remaining: item.stock} with Status Code 403
         // else:
         //     Return {success: True}
-        try {
-            let result = await axios({
-                method: 'post',
-                url: './purchase',
-                data: {
-                    itemid: this.id,
-                    amount: this.amount
-                },
-                headers:{"X-CSRFToken":$.cookie('csrftoken')}
-            })
-        } catch {
-        }
+        let result = await axios({
+            method: 'post',
+            url: './purchase',
+            data: {
+                itemid: this.id,
+                amount: this.amount
+            },
+            headers:{"X-CSRFToken":$.cookie('csrftoken')}
+        }).catch(err => {
+            console.log(err.response.data.error);
+            console.log(333);
+        })
         await this.removeFromCart()
+        return true;
     }
     
     async saveToCart(amount){
@@ -123,6 +124,19 @@ let Item = class{
 
     async removeFromCart(){
         // remove item from cart
+        try {
+            let result = await axios({
+                method:'post',
+                url:'./deletesaved',
+                data: {
+                    itemid:this.id
+                },
+                headers:{"X-CSRFToken":$.cookie('csrftoken')}
+            })
+        } catch {
+
+        }
+        await this.sync()
     }
 
 }

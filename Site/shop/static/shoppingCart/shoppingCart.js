@@ -35,11 +35,15 @@ let ShoppingCart = class{
 
     async purchase(){
         // purchase all items saved in cart
+        let remaining = [];
         this.items.forEach(async (item) => {
-           await item.purchase()
+            let status = await item.purchase();
+            if (!status) {
+                remaining.push(item);
+            }
         })
         // note that after we purchase every item in the cart
         // we also need to empty the cart
-        this.items = []
+        this.items = remaining;
     }
 }

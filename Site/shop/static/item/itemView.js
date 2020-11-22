@@ -22,13 +22,13 @@ let ItemView = class{
                             <div class='itemRating'></div>
                             <p class='itemPublisher'>Seller: ${this.item.publisher}</p>
                             <p class='itemPrice'>&#36;${this.item.price}</p>
+                            <p class="itemStock">Remaining:${this.item.stock}</p>
                         </div>
                         <i class="fas fa-arrow-circle-down fa-2x dropDownButton"></i>
                     </div>`);
         // add rating stars to the simple itemView page
         let ratingDiv = div.find('.itemRating')
         let rating = Math.floor(Math.random() * 6);
-        console.log(rating);
         for (let i = 0; i<5; i++){
             if (i<rating){
                 $(ratingDiv).append('&#9733;');

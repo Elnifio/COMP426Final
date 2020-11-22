@@ -19,8 +19,9 @@ let Item = class{
     async sync(){
         let result = await axios({
             method: 'get',
-            url: './items/'+this.id,
+            url: './item/'+this.id,
         })
+        result = result.data;
         this.id = result.id
         this.name = result.name
         this.publisher = result.publisher
@@ -109,7 +110,8 @@ let Item = class{
                 },
                 headers:{"X-CSRFToken":$.cookie('csrftoken')}
             })
-        } catch {
+        } catch(e) {
+            console.log(e.serialize());
         }
         await this.sync()
     }

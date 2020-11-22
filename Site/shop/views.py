@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Item, User, PurchasedItem, PublishedItem, SavedItem, Category
 from django.http import JsonResponse, HttpResponse
 from django.core.files import File
@@ -13,7 +13,12 @@ def return404(message):
     return Http404(message)
 
 def postitempage(request):
-    return render(request, "./postitem.html", {})
+    login_status = ""
+    if not "login" in request.COOKIES:
+        login_status = "display:block"
+    else:
+        login_status = "display:none"
+    return render(request, "./postitem.html", {"login_status":login_status})
 
 def test_homepage(request):
     return render(request, "./index.html", {})
@@ -232,7 +237,7 @@ def post_item(request):
     returndict['itemid'] = item.itemid
 
     response = JsonResponse(returndict)
-    return response
+    return redirect("./item")
 
 
 # GET ./verifylogin
@@ -292,11 +297,10 @@ def purchase_item(request):
     try:
         user.manage_transaction(publisher, amount * item.price)
     except ValueError as e:
+        print(e)
         response = JsonResponse({"success": False, "error": str(e)})
         response.status_code = 403
         return response
-
-
 
     item.stock -= amount
     item.save()
@@ -398,14 +402,6 @@ def deletesaved(request):
     if not Item.exists(itemid):
         return Http404("Item does not exist")
 
-    amount = values['amount']
-    try:
-        amount = int(amount)
-    except ValueError:
-        return Http404("Amount error")
-    
-    if amount <= 0:
-        return Http404("Amount error")
 
     query_result = SavedItem.query_all_saved(itemid, userid)
     if (len(query_result) == 0):

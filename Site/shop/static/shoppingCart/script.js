@@ -11,7 +11,7 @@ const loadItems = async function(){
             url: './user',
         })
         const u = result.data['savedItems'].map((item)=>{
-            return new Item(item)
+            return new Item(item.item, item.amount)
         })
         return u
     } catch {

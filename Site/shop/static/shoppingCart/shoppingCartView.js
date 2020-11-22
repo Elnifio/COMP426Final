@@ -16,7 +16,7 @@ ShoppingCartView = class{
                     <div>`)
         this.shoppingCart.items.forEach((item) => {
             let detailDiv = $(`<div class='shoppingCartItem'>
-                                <img src='../icons/item1/426.4.PNG' class='itemImg'/>
+                                <img src='${item.picture}' class='itemImg'/>
                                 <div class='itemText'>
                                 <p>${item.name}  &#36;${item.price}</p>
                                 <label for='amount'>Quantity:</label>
@@ -24,7 +24,7 @@ ShoppingCartView = class{
                                 </select>
                                 <button class='removeFromCartButton'>remove</button>
                                 </div>
-                             </div>`)
+                            </div>`)
             for (let i = 0; i < item.stock; i ++){
                 // need to add all the options to let user select which amount of 
                 // item they would eventually purchase
