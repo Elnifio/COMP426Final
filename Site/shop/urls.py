@@ -25,5 +25,6 @@ urlpatterns = [
     path("save", shop.views.save_item),
     path("user", shop.views.get_complete_info),
     path("purchase", shop.views.purchase_item),
-    path("deletesaved", shop.views.deletesaved)
+    path("deletesaved", shop.views.deletesaved),
+    path("changepassword", shop.views.changepassword)
 ]

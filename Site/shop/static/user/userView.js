@@ -36,7 +36,7 @@ let UserView = class{
         div.find('.loginButton').on('click', async (e)=>{
             let re=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             if (this.curDiv.find('.passwordInput').val() == '' || this.curDiv.find('.emailInput').val() == ''){
-               this.curDiv.find('.errorMessage').empty().append('<p>You need to fill in both Email and Password!</p>')
+                this.curDiv.find('.errorMessage').empty().append('<p>You need to fill in both Email and Password!</p>')
             } else if (!re.test(this.curDiv.find('.emailInput').val())){
                 this.curDiv.find('.errorMessage').empty().append('<p>Invalid Email Address!</p>')
             } else {
@@ -152,7 +152,7 @@ let UserView = class{
             } else if (!re.test(this.curDiv.find('.emailInput').val())){
                 this.curDiv.find('.errorMessage').empty().append('<p>Invalid Email Address!</p>')
             } else {
-                await this.user.changePassword(this.curDiv.find('.emailInput').val(), this.curDiv.find('.firstPassword').val())
+                await this.user.changePassword(this.curDiv.find('.firstPassword').val())
                 if (this.user.loggedIn == true){
                     let newDiv = this.createUserViewDiv()
                     this.curDiv.replaceWith(newDiv)

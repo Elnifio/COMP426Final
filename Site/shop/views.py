@@ -423,5 +423,10 @@ def changepassword(request):
     except User.DoesNotExist:
         return Http404("User does not exist")
     
+    values = json.loads(request.body)
+    password = values['password']
+    user.userpassword = password
+    user.save()
+    return JsonResponse({'success':True})
 
 

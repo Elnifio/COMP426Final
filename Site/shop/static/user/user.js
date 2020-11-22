@@ -118,7 +118,16 @@ User = class{
         }
     }
 
-    async changePassword(email, password){
+    async changePassword(password){
+        let result = await axios({
+            method:"post",
+            url:"./changepassword",
+            data: {
+                'password':password
+            },
+            headers:{"X-CSRFToken":$.cookie('csrftoken')}
+        });
+        
         // let result = await axios({
 
         // })
