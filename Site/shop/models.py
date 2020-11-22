@@ -11,6 +11,9 @@ class User(models.Model):
     userpassword = models.TextField()
     balance = models.FloatField(default=10000.00)
 
+    def __str__(self):
+        return "%s: %s, balance: %s" % (self.username, self.useremail, self.balance)
+
     # Throw Error: 
     #           User.DoesNotExist
     @classmethod

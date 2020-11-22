@@ -295,7 +295,7 @@ def purchase_item(request):
         raise return404("Publisher of this item is no longer available")
 
     try:
-        user.manage_transaction(publisher, amount * item.price)
+        publisher.manage_transaction(user, amount * item.price)
     except ValueError as e:
         response = JsonResponse({"success": False, "error": str(e)})
         response.status_code = 403
