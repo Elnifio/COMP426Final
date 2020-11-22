@@ -22,6 +22,7 @@ User = class{
             const u = await result.data['userinfo']
             this.username = u.name
             this.email = u.email
+            console.log(u)
         } catch {
             console.log("Not logged in");
         }
@@ -193,6 +194,7 @@ User.fetchUser = async function(){
             url: './user',
         })
         const u = await result.data['userinfo']
+        console.log(u)
         return u
     } catch {
         return undefined

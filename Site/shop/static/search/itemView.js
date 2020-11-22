@@ -86,7 +86,7 @@ let ItemView = class{
         div.find('form').on('submit', async (event) => {
             // when user save item to cart
             event.preventDefault()
-            await this.item.saveToCart(purchaseDiv.find(`select[name='amount']`).val())
+            await this.item.saveToCart(div.find(`select[name='amount']`).val())
             // grab newest version of item from backend
             // rerender the itemView Div so that the updated information is reflected
             let newDiv = this.createDetailedView()
