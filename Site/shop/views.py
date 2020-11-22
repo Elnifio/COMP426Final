@@ -297,7 +297,6 @@ def purchase_item(request):
     try:
         user.manage_transaction(publisher, amount * item.price)
     except ValueError as e:
-        print(e)
         response = JsonResponse({"success": False, "error": str(e)})
         response.status_code = 403
         return response
@@ -411,4 +410,18 @@ def deletesaved(request):
         sitem.count = 0
         sitem.save()
     return JsonResponse({"success": True})
+
+# POST ./changepassword
+# data:
+#   new_password
+def changepassword(request):
+    if not "login" in request.COOKIES:
+        return Http404("Not logged in")
+    user = None
+    try:
+        user = User.findUserID(request.COOKIES.get("login"))
+    except User.DoesNotExist:
+        return Http404("User does not exist")
+    
+
 

@@ -62,7 +62,6 @@ class User(models.Model):
     # Returns: JSON formatted User Info
     @classmethod
     def queryInfo(cls, queryid):
-        print([x.itemid for x in PublishedItem.objects.filter(userid=queryid)])
         published = [Item.find_item(x.itemid) for x in PublishedItem.objects.filter(userid=queryid)]
         purchased = [{'item':Item.find_item(x.itemid), 'amount':x.purchaseCount, 'date': x.date} for x in PurchasedItem.objects.filter(userid=queryid)]
         saved = [{'item':Item.find_item(x.itemid), 'amount':x.count} for x in SavedItem.objects.filter(userid=queryid) if not x.count == 0]
