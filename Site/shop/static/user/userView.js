@@ -25,7 +25,6 @@ let UserView = class{
                         <button class='loginButton' type='button'>login</button>     
                         <button class='registerButton' type='button'>register</button>  
                         <br>
-                        <a>forget your password?</a>
                         </form>     
                     </div>`) 
         if (this.user.email!= undefined){
@@ -53,12 +52,6 @@ let UserView = class{
         div.find('.registerButton').on('click', (e)=>{
             // click on the register button, switch to registration page
             let newDiv = this.createRegisterDiv()
-            this.curDiv.replaceWith(newDiv)
-            this.curDiv = newDiv
-        })
-        div.find('a').on('click', (e)=>{
-            // click on password reset link, switch to password reset page
-            let newDiv = this.createPasswordResetDiv()
             this.curDiv.replaceWith(newDiv)
             this.curDiv = newDiv
         })
