@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>itemHub</title>
-    <link rel="icon" href="/static/Item_hub_icon.PNG" type="image/PNG">
-    <link href="/static/shoppingCart/style.css" type="text/css" rel="stylesheet">
+    {% load static %}
+    <link rel="icon" href={% static 'Item_hub_icon.PNG' %} type="image/PNG">
+    <link href={% static 'shoppingCart/style.css' %} type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src='/static/shoppingCart/script.js'></script>
-    <script src='/static/shoppingCart/shoppingCart.js'></script>
-    <script src='/static/shoppingCart/shoppingCartView.js'></script>
-    <script src='/static/shoppingCart/item.js'></script>
+    <script src={% static 'shoppingCart/script.js' %}></script>
+    <script src={% static 'shoppingCart/shoppingCart.js' %}></script>
+    <script src={% static 'shoppingCart/shoppingCartView.js' %}></script>
+    <script src={% static 'shoppingCart/item.js' %}></script>
     {% csrf_token %}
 </head>
 
@@ -20,7 +21,7 @@
 <body>
     <header>
         <div class='container'>
-            <img src="/static/Item_hub_icon.PNG" alt='logo' class='logo'>
+            <img src={% static 'Item_hub_icon.PNG' %} alt='logo' class='logo'>
             <nav>
                 <ul>
                     <li><a id='searchButton' href='../search'>Home</a></li>
