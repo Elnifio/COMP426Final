@@ -11,6 +11,7 @@ urlpatterns = [
     path('shoppingCart', shop.views.get_ShoppingCartPage),
     path('userinfo', shop.views.get_UserPage),
     path('about', shop.views.get_AboutPage),
+    path("publishitem", shop.views.postitempage),
 
     path("allitems", shop.views.get_all_items),
     path("item/<int:itemid>", shop.views.get_item),

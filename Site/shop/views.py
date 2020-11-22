@@ -12,6 +12,9 @@ from django.http import Http404
 def return404(message):
     return Http404(message)
 
+def postitempage(request):
+    return render(request, "./postitem.html", {})
+
 def test_homepage(request):
     return render(request, "./index.html", {})
 
@@ -244,12 +247,12 @@ def verify_login(request):
 #     amount
 def purchase_item(request):
     if not "login" in request.COOKIES:
-        return return404("Not logged in")
+        raise return404("Not logged in")
     user = None
     try:
         user = User.findUserID(request.COOKIES.get("login"))
     except User.DoesNotExist:
-        return return404("User does not exist")
+        raise return404("User does not exist")
 
     userid = user.userid
     values = json.loads(request.body)
@@ -258,35 +261,42 @@ def purchase_item(request):
     try:
         itemid = int(itemid)
     except ValueError:
-        return return404("Item id error")
+        raise return404("Item id error")
     
     if not Item.exists(itemid):
-        return return404("Item does not exist")
+        raise return404("Item does not exist")
 
     amount = values['amount']
     try:
         amount = int(amount)
     except ValueError:
-        return return404("Amount error")
+        raise return404("Amount error")
     
     if amount <= 0:
-        return return404("Illegal Amounts")
+        raise return404("Illegal Amounts")
 
-    item = Item.find_item(itemid)
+    item = Item.objects.get(itemid=itemid)
     if item.stock <= 0:
-        return return404("This item is out of stock")
+        raise return404("This item is out of stock")
     elif item.stock <= amount:
-        response = JsonResponse({"success": False, "Remaining": item.stock})
+        response = JsonResponse({"success": False, "error": "Item out of stock"})
         response.status_code = 403
         return response
     
     publisher = None
     try:
-        publisher = User.findUser(item.publisher)
+        publisher = User.objects.get(userid=item.publisher)
     except User.DoesNotExist:
-        return return404("Publisher of this item is no longer available")
+        raise return404("Publisher of this item is no longer available")
 
-    user.manage_transaction(publisher, amount * item.price)
+    try:
+        user.manage_transaction(publisher, amount * item.price)
+    except ValueError as e:
+        response = JsonResponse({"success": False, "error": str(e)})
+        response.status_code = 403
+        return response
+
+
 
     item.stock -= amount
     item.save()
@@ -306,12 +316,12 @@ def purchase_item(request):
 #     amount
 def save_item(request):
     if not "login" in request.COOKIES:
-        return Http404("Not Logged in")
+        raise Http404("Not Logged in")
     user = None
     try:
         user = User.findUserID(request.COOKIES.get("login"))
     except User.DoesNotExist:
-        return Http404("User does not exist")
+        raise Http404("User does not exist")
 
     userid = user.userid
     values = json.loads(request.body)
@@ -320,19 +330,19 @@ def save_item(request):
     try:
         itemid = int(itemid)
     except ValueError:
-        return Http404("Item id error")
+        raise Http404("Item id error")
     
     if not Item.exists(itemid):
-        return Http404("Item does not exist")
+        raise Http404("Item does not exist")
 
     amount = values['amount']
     try:
         amount = int(amount)
     except ValueError:
-        return Http404("Amount error")
+        raise Http404("Amount error")
     
     if amount <= 0:
-        return Http404("Amount error")
+        raise Http404("Amount error")
 
     query_result = SavedItem.query_all_saved(itemid, userid)
     request_amt = -1
@@ -354,12 +364,12 @@ def save_item(request):
 # GET ./user
 def get_complete_info(request):
     if not "login" in request.COOKIES:
-        return Http404("Not Logged in")
+        raise Http404("Not Logged in")
     user = None
     try:
         user = User.findUserID(request.COOKIES.get("login"))
     except User.DoesNotExist:
-        return Http404("User does not exist")
+        raise Http404("User does not exist")
     return JsonResponse(User.queryInfo(user.userid))
 
 

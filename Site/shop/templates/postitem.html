@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>itemHub</title>
+    {% load static %}
+    <link rel="icon" href={% static './Item_hub_icon.png' %} type="image/PNG">
+    <link href={% static './postitem/style.css' %} type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/node_modules/bulma/css/bulma.css" />
+    <script src="/static/node_modules/jquery/dist/jquery.js"></script>
+    <script src="/static/node_modules/axios/dist/axios.js"></script>
+    <script src="https://kit.fontawesome.com/3b0ed6553a.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<!--This is the Nav bar-->
+<header>
+    <div class='container'>
+        <img src={% static './Item_hub_icon.png' %} alt='logo' class='logo'>
+        <nav>
+            <ul>
+                <li><a id='itemsButton' href='../item'>Items</a></li>
+                <li><a id='searchButton' href='../search'>search</a></li>
+                <li><a id='managementButton' href='../shoppingCart'>Shopping Cart</a></li>
+                <li><a id='userButton' href='../user'>User</a></li>
+                <li><a id='aboutButton' href='../'>About</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section class="hero is-fullheight">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <div class="columns is-12 is-variable ">
+                <div class="column is-two-thirds has-text-left">
+                    <h1 class="title is-1">Post Item</h1>
+                    <p class="is-size-5">Want to sell your items? Post it here!</p>
+                </div>
+                <div class="column is-one-third has-text-left">
+                    <form id="postitem" enctype="multipart/form-data" action="/postitem" method="post">
+                        <!-- must include this csrf token -->
+                        {% csrf_token %}
+                        Item name: <input class="input is-medium" id="itemname" name="name"><br />
+                        Item description: <textarea class="textarea is-medium" id="itemdescription" name="description"></textarea><br />
+                        Item price: <input class="input is-medium" id="itemprice" type="number" name="price"><br />
+                        Item stock: <input class="input is-medium" id="itemstock" type="number" name="stock"><br />
+                        Item image: <input class="input is-medium" id="itemimage" type="file" name="image"><br />
+                        <button type="submit" class="button is-link is-fullwidth has-text-weight-medium is-medium">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</body>
+</html>

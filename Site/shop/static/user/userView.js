@@ -219,7 +219,7 @@ let UserView = class{
                     </div>`)
         const orders = await this.user.getAllPurchasedItems()
         orders.forEach((item) => {
-            div.find('.orders').append(`<p>${item.name}</p>`)
+            div.find('.orders').append(`<p>${item.item.name}: ${item.amount} bought on ${item.date}</p>`)
         })
         div.find('.cancelButton').on('click', (e)=>{
             let newDiv = this.createUserViewDiv()

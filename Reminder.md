@@ -199,7 +199,7 @@ else:
     Local login status updated
 ```
 
-### verify_login
+### register
 
 ```
 POST ./verifyuser

@@ -63,8 +63,8 @@ class User(models.Model):
     @classmethod
     def queryInfo(cls, queryid):
         published = [Item.find_item(x.itemid) for x in PublishedItem.objects.filter(userid=queryid)]
-        purchased = [Item.find_item(x.itemid) for x in PurchasedItem.objects.filter(userid=queryid)]
-        saved = [Item.find_item(x.itemid) for x in SavedItem.objects.filter(userid=queryid)]
+        purchased = [{'item':Item.find_item(x.itemid), 'amount':x.purchaseCount, 'date': x.date} for x in PurchasedItem.objects.filter(userid=queryid)]
+        saved = [{'item':Item.find_item(x.itemid), 'amount':x.count} for x in SavedItem.objects.filter(userid=queryid)]
         out = {
             "userinfo": cls.findUser(queryid),
             "publishedItems": published,

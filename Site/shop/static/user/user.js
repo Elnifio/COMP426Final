@@ -23,6 +23,7 @@ User = class{
             this.username = u.name
             this.email = u.email
         } catch {
+            console.log("Not logged in");
         }
     }
 
@@ -37,6 +38,7 @@ User = class{
             const u = await result.data['purchasedItems']
             return u
         } catch {
+            console.log("not logged in");
             return []
         }
     }
